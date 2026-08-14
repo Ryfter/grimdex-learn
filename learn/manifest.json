@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "moduleId": "git-and-github",
+  "title": "Git and GitHub field guide",
+  "description": "Audience-generic capability reference for Git and GitHub: transferable git concepts with GitHub as one forge dialect. First conforming D32 module, built manually as the pipeline shakedown.",
+  "learnPackVersion": "0.1.0-fall2026-draft",
+  "contentAdmissionVersion": "D29-v1",
+  "ownedPaths": ["learn/"],
+  "pagesPath": "learn/git-and-github/capabilities/",
+  "modules": [
+    {
+      "moduleId": "git-and-github",
+      "title": "Git and GitHub field guide",
+      "pagesPath": "learn/git-and-github/capabilities/"
+    },
+    {
+      "moduleId": "prompt-engineering",
+      "title": "Working with coding agents",
+      "pagesPath": "learn/prompt-engineering/capabilities/"
+    }
+  ],
+  "pointerStanzas": [{ "file": "GRIMDEX.md" }],
+  "refresh": { "schedule": "manual-until-pipeline-shakedown-complete", "policyVersion": "1" },
+  "neverShip": [
+    "config/fleet.json",
+    "config/learn-progress.json",
+    "config/quota.json",
+    "config/settings.json"
+  ],
+  "studentRoots": ["projects/**"],
+  "generatedRoots": ["logs/", ".index/"],
+  "lifecycle": {
+    "install":  { "student": "never-touch" },
+    "update":   { "student": "never-touch" },
+    "graduate": { "student": "never-touch" },
+    "remove":   { "student": "never-touch" }
+  }
+}

@@ -1,0 +1,540 @@
+# Normalized claims baseline — git-and-github
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD). The future refresh pipeline compares fresh extractions
+# against this file; until then it is maintained manually alongside the pages.
+claims:
+  - id: commits-and-history-001
+    page: capabilities/commits-and-history.md
+    claim: "A commit records a snapshot of the staged content plus author, timestamp, message, and parent commit identity."
+    source: https://git-scm.com/docs/git-commit
+    last_verified: 2026-08-01
+  - id: commits-and-history-002
+    page: capabilities/commits-and-history.md
+    claim: "git commit -m \"<message>\" creates a commit from the staging area; content must be staged with git add before it can be committed."
+    source: https://git-scm.com/docs/git-commit
+    last_verified: 2026-08-01
+  - id: commits-and-history-003
+    page: capabilities/commits-and-history.md
+    claim: "git log shows commit history, git log --oneline condenses it to one line per commit, and git show <commit> displays a single commit's metadata and changes."
+    source: https://git-scm.com/docs/git-log
+    last_verified: 2026-08-01
+  - id: commits-and-history-004
+    page: capabilities/commits-and-history.md
+    claim: "git diff compares the working tree to the staging area; git diff --staged compares the staging area to the most recent commit."
+    source: https://git-scm.com/docs/git-diff
+    last_verified: 2026-08-01
+  - id: commits-and-history-005
+    page: capabilities/commits-and-history.md
+    claim: "HEAD names the currently checked-out commit, and a repository's history is the chain of commits reachable by following parent links from HEAD."
+    source: https://git-scm.com/docs/user-manual
+    last_verified: 2026-08-01
+  - id: commits-and-history-006
+    page: capabilities/commits-and-history.md
+    claim: "git commit --amend replaces the most recent commit with a new one under a new identity (a history rewrite); commits that have already been pushed or shared should never be amended, and a mistaken amend can be recovered via git reflog."
+    source: https://git-scm.com/docs/git-reflog
+    last_verified: 2026-08-01
+  - id: commits-and-history-007
+    page: capabilities/commits-and-history.md
+    claim: "Good commit messages phrase the summary line in the imperative mood; commits are the unit of history that other people and tools read back later."
+    source: https://git-scm.com/docs/SubmittingPatches
+    last_verified: 2026-08-01
+  - id: git-and-github-001
+    page: capabilities/git-and-github.md
+    claim: "Git is a free and open source distributed version control system (a command-line tool) designed to track project history efficiently."
+    source: https://git-scm.com/
+    last_verified: 2026-08-01
+  - id: git-and-github-002
+    page: capabilities/git-and-github.md
+    claim: "GitHub is a platform built around Git that hosts Git repositories in the cloud and adds planning and collaboration tools such as issues, code review, and pull requests."
+    source: https://docs.github.com/en/get-started/start-your-journey/what-is-github
+    last_verified: 2026-08-01
+  - id: git-and-github-003
+    page: capabilities/git-and-github.md
+    claim: "A repository encompasses a project's files and folders together with each file's revision history as commits, and because Git is distributed every clone is a self-contained full copy of that history."
+    source: https://docs.github.com/en/get-started/using-git/about-git
+    last_verified: 2026-08-01
+  - id: git-and-github-004
+    page: capabilities/git-and-github.md
+    claim: "A remote is a named location where another copy of a repository is stored (for example on GitHub or another server), and the default remote after a clone is usually called origin."
+    source: https://docs.github.com/en/get-started/git-basics/about-remote-repositories
+    last_verified: 2026-08-01
+  - id: git-and-github-005
+    page: capabilities/git-and-github.md
+    claim: "Git hosting services such as GitLab and GitHub are part of Git's ecosystem; other forges speak the same Git protocol for clone, fetch, and push while offering their own collaboration interfaces."
+    source: https://git-scm.com/about
+    last_verified: 2026-08-01
+  - id: git-and-github-006
+    page: capabilities/git-and-github.md
+    claim: "git init creates a new local repository; git clone creates a local copy of an existing remote project including files, history, and branches."
+    source: https://docs.github.com/en/get-started/using-git/about-git
+    last_verified: 2026-08-01
+  - id: git-and-github-007
+    page: capabilities/git-and-github.md
+    claim: "A pull request is a hosting-platform collaboration feature for proposing and discussing changes before integration; it is not the same as the Git command git pull, which updates a local branch from its remote counterpart."
+    source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+    last_verified: 2026-08-01
+  - id: git-and-github-008
+    page: capabilities/git-and-github.md
+    claim: "Local Git operations such as committing do not by themselves change a remote; publishing or retrieving commits requires explicit interaction with a configured remote."
+    source: https://docs.github.com/en/get-started/git-basics/about-remote-repositories
+    last_verified: 2026-08-01
+  - id: setup-configuration-and-authentication-001
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "Git stores configuration in layered scopes—system, global, and local—where a more specific scope overrides the same key from a less specific scope."
+      source: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-002
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "user.name and user.email determine the author and committer identity recorded in new commits; git config --global sets them for the user, while a per-repository setting without --global overrides them for that repository only."
+      source: https://git-scm.com/docs/git-config
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-003
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "For HTTPS remotes, Git obtains usernames and passwords or tokens via prompts or credential helpers; credential.helper configures helpers that cache or store those credentials."
+      source: https://git-scm.com/docs/gitcredentials
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-004
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "Command-line access to GitHub uses two authentication paths: HTTPS (personal access token or credential manager) and SSH (public/private key pair with the public key registered on the host)."
+      source: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-005
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "gh auth login authenticates the GitHub CLI with a GitHub host, can select the Git protocol (https or ssh), and stores an authentication token in the system credential store when available."
+      source: https://cli.github.com/manual/gh_auth_login
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-006
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "Personal access tokens authenticate to GitHub for the API and command line in place of a password and are limited by scopes or fine-grained permissions granted to the token."
+      source: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-007
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "Credentials, tokens, and secrets must not be committed into a repository; use a credential helper, environment variables, or host-side secret storage instead."
+      source: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+      last_verified: 2026-08-01
+    - id: setup-configuration-and-authentication-008
+      page: capabilities/setup-configuration-and-authentication.md
+      claim: "If a secret is committed, revoke or rotate it first because the leaked value may still grant access; removing it from history is an involved rewrite that requires coordination and does not replace rotation."
+      source: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+      last_verified: 2026-08-01
+  - id: creating-and-cloning-repositories-001
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "git init creates an empty Git repository (a .git directory with objects, refs, and templates) and an initial branch with no commits yet."
+      source: https://git-scm.com/docs/git-init
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-002
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "Running git init in an existing repository is safe and does not overwrite things that are already there."
+      source: https://git-scm.com/docs/git-init
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-003
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "git clone copies a repository into a new directory, creates remote-tracking branches for each remote branch, sets up origin (remote.origin.url and remote.origin.fetch) by default, and checks out an initial branch from the remote's currently active branch."
+      source: https://git-scm.com/docs/git-clone
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-004
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "A local-first workflow initializes with git init, registers a host with git remote add origin <url>, and publishes history with git push to that remote."
+      source: https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-005
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "A host-first workflow creates a repository on the host and obtains a full local copy with git clone of that repository's URL."
+      source: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-006
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "A gitignore file specifies intentionally untracked files that Git should ignore; files already tracked by Git are not affected by ignore patterns."
+      source: https://git-scm.com/docs/gitignore
+      last_verified: 2026-08-01
+    - id: creating-and-cloning-repositories-007
+      page: capabilities/creating-and-cloning-repositories.md
+      claim: "A fork is a separate forge-side repository copied from an upstream repository with its own settings and permissions, which is distinct from git clone making a local copy of a repository URL."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks
+      last_verified: 2026-08-01
+  - id: working-tree-staging-and-status-001
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "A Git project has three main sections: the working tree, the staging area (index), and the Git directory that holds committed history."
+      source: https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-002
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "git status displays paths that differ between the index and HEAD, paths that differ between the working tree and the index, and untracked working-tree paths that are not ignored."
+      source: https://git-scm.com/docs/git-status
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-003
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "git add copies contents of new or changed files into the index, which is the staging area used to prepare the next commit."
+      source: https://git-scm.com/docs/git-add
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-004
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "git add -A (or --all) updates the index so that it matches the working tree by adding, modifying, and removing index entries as needed."
+      source: https://git-scm.com/docs/git-add
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-005
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "git restore --staged restores specified paths in the index from HEAD by default, which unstages those paths without restoring the working tree."
+      source: https://git-scm.com/docs/git-restore
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-006
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "An untracked path is present in the working tree, not ignored, and not recorded in the index, so it will not be committed until it is added."
+      source: https://git-scm.com/docs/git-status
+      last_verified: 2026-08-01
+    - id: working-tree-staging-and-status-007
+      page: capabilities/working-tree-staging-and-status.md
+      claim: "With no arguments, git diff compares the working tree to the index; git diff --staged compares the index to HEAD."
+      source: https://git-scm.com/docs/git-diff
+      last_verified: 2026-08-01
+  - id: branches-and-switching-001
+      page: capabilities/branches-and-switching.md
+      claim: "A branch in Git is a lightweight movable pointer (ref) to a commit and is cheap to create because it does not copy the project tree."
+      source: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+      last_verified: 2026-08-01
+    - id: branches-and-switching-002
+      page: capabilities/branches-and-switching.md
+      claim: "With no arguments, git branch lists local branches and marks the current branch with an asterisk; git branch <name> creates a branch pointing at HEAD without switching to it."
+      source: https://git-scm.com/docs/git-branch
+      last_verified: 2026-08-01
+    - id: branches-and-switching-003
+      page: capabilities/branches-and-switching.md
+      claim: "git switch <branch> moves HEAD to that branch and updates the working tree and index to match its tip; git switch -c <new-branch> creates the branch and switches to it."
+      source: https://git-scm.com/docs/git-switch
+      last_verified: 2026-08-01
+    - id: branches-and-switching-004
+      page: capabilities/branches-and-switching.md
+      claim: "Switching does not require a clean working tree: uncommitted changes are carried across when they do not conflict with the target, and the switch is aborted when it would overwrite local modifications."
+      source: https://git-scm.com/docs/git-switch
+      last_verified: 2026-08-01
+    - id: branches-and-switching-005
+      page: capabilities/branches-and-switching.md
+      claim: "Local branch names exist only in the current repository until they are pushed to a remote."
+      source: https://git-scm.com/docs/gitglossary
+      last_verified: 2026-08-01
+    - id: branches-and-switching-006
+      page: capabilities/branches-and-switching.md
+      claim: "Checking out a commit directly detaches HEAD so it points at that commit rather than a branch name; git switch - returns to the previously checked-out branch."
+      source: https://git-scm.com/docs/git-checkout
+      last_verified: 2026-08-01
+    - id: branches-and-switching-007
+      page: capabilities/branches-and-switching.md
+      claim: "On GitHub, the default branch is the primary branch shown for the repository, checked out on clone, and used as the usual base for new pull requests; new repositories default to the name main."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches
+      last_verified: 2026-08-01
+    - id: branches-and-switching-008
+      page: capabilities/branches-and-switching.md
+      claim: "git checkout is the older overloaded command that both switches branches and restores paths; git switch is the dedicated command for changing branches."
+      source: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+      last_verified: 2026-08-01
+  - id: remotes-fetch-and-pull-001
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "A remote is a named shortname for a repository URL; the conventional default name after clone is origin, and git remote -v lists each remote with its fetch and push URLs."
+      source: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-002
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "Remote-tracking branches such as origin/main are local refs that record the last-known tips of branches on a remote and are updated by fetch; they are not a live view of the remote."
+      source: https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-003
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "git fetch downloads objects and refs from a remote and updates remote-tracking branches without modifying the working tree or local branch tips."
+      source: https://git-scm.com/docs/git-fetch
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-004
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "git pull first runs git fetch and then integrates the fetched remote branch into the current branch, with merge as the default integration path and rebase available via git pull --rebase."
+      source: https://git-scm.com/docs/git-pull
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-005
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "After fetch, a revision range such as main..origin/main lists commits reachable from origin/main that are not reachable from main, which is useful for reviewing remote updates before integrating."
+      source: https://git-scm.com/docs/gitrevisions
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-006
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "A pull request is a forge collaboration feature for proposing that one branch be merged into another and is not the git pull command."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-007
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "git remote add registers a named remote for a URL so that git fetch can create and update remote-tracking branches of the form name/branch for that remote."
+      source: https://git-scm.com/docs/git-remote
+      last_verified: 2026-08-01
+    - id: remotes-fetch-and-pull-008
+      page: capabilities/remotes-fetch-and-pull.md
+      claim: "Git associates a remote URL with a name, and the default remote is usually called origin."
+      source: https://docs.github.com/en/get-started/git-basics/about-remote-repositories
+      last_verified: 2026-08-01
+  - id: push-and-upstream-branches-001
+      page: capabilities/push-and-upstream-branches.md
+      claim: "git push updates remote refs and sends the objects the remote does not already have, publishing local commits to a remote branch."
+      source: https://git-scm.com/docs/git-push
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-002
+      page: capabilities/push-and-upstream-branches.md
+      claim: "git push -u origin <branch> (or --set-upstream) sets upstream tracking so argument-less git push and git pull default to that remote branch."
+      source: https://git-scm.com/docs/git-push
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-003
+      page: capabilities/push-and-upstream-branches.md
+      claim: "When a local branch has an upstream, git status can report how far the branch is ahead of or behind that upstream."
+      source: https://git-scm.com/docs/git-status
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-004
+      page: capabilities/push-and-upstream-branches.md
+      claim: "Pushing a local branch name that does not yet exist on the remote creates that branch on the remote."
+      source: https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-005
+      page: capabilities/push-and-upstream-branches.md
+      claim: "By default git push refuses a non-fast-forward update when the remote ref is not an ancestor of the commit being pushed."
+      source: https://git-scm.com/docs/git-push
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-006
+      page: capabilities/push-and-upstream-branches.md
+      claim: "After a non-fast-forward rejection, the safe recovery path is to fetch remote updates, inspect and integrate them into the local branch, then push again rather than force-pushing blindly."
+      source: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-007
+      page: capabilities/push-and-upstream-branches.md
+      claim: "git push --force-with-lease overwrites a remote ref only if it still matches the expected remote-tracking value, while git push --force overwrites unconditionally and can discard remote commits."
+      source: https://git-scm.com/docs/git-push
+      last_verified: 2026-08-01
+    - id: push-and-upstream-branches-008
+      page: capabilities/push-and-upstream-branches.md
+      claim: "GitHub branch protection rules can block force pushes and other updates to protected branches."
+      source: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+      last_verified: 2026-08-01
+  - id: pull-requests-and-review-001
+      page: capabilities/pull-requests-and-review.md
+      claim: "A pull request on GitHub is a forge collaboration feature for proposing that one branch be merged into another with discussion and review; it is not the Git command git pull."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-002
+      page: capabilities/pull-requests-and-review.md
+      claim: "In a pull request, the base branch is the branch that receives the merge, and the head branch (also called the compare branch) is the branch that carries the proposed commits."
+      source: https://docs.github.com/en/get-started/learning-about-github/github-glossary
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-003
+      page: capabilities/pull-requests-and-review.md
+      claim: "The standard collaboration flow is to create a branch, commit, push the branch, open a pull request, review and discuss, push more commits to the head branch as needed, and merge on the forge."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-004
+      page: capabilities/pull-requests-and-review.md
+      claim: "Draft pull requests on GitHub cannot be merged and are useful for sharing work-in-progress without formally requesting the full review path until marked ready for review."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-005
+      page: capabilities/pull-requests-and-review.md
+      claim: "A formal pull request review is submitted as Comment, Approve, or Request changes, and those decisions are part of the recorded review conversation on the pull request."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-006
+      page: capabilities/pull-requests-and-review.md
+      claim: "Merging a pull request updates the base branch on the host; collaborators must still fetch or pull in their own clones to obtain that updated history locally."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-007
+      page: capabilities/pull-requests-and-review.md
+      claim: "GitHub CLI provides gh pr create to open a pull request, gh pr view to display pull request details, and gh pr checkout to check out a pull request's head branch locally."
+      source: https://cli.github.com/manual/gh_pr
+      last_verified: 2026-08-01
+    - id: pull-requests-and-review-008
+      page: capabilities/pull-requests-and-review.md
+      claim: "Other Git forges implement the same propose-review-merge collaboration idea under different names, such as merge request on GitLab, while still using Git for clone, fetch, and push."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+      last_verified: 2026-08-01
+  - id: merge-commit-squash-and-rebase-001
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "Except in a pure fast-forward, git merge joins diverged histories by creating a merge commit with two parents so both prior lines remain reachable in the commit graph."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-002
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "When the current branch tip is an ancestor of the commit being merged, a default git merge may fast-forward by moving the branch pointer without creating a merge commit."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-003
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "git merge --squash prepares the combined tree in the index and working tree without creating a commit or recording MERGE_HEAD, so a following ordinary commit is a single-parent commit on the base rather than a two-parent merge."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-004
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "git rebase replays the unique commits of the current branch onto another tip one by one as new commits with new identities, producing a linear history and abandoning the original pre-rebase commit chain as the branch tip."
+      source: https://git-scm.com/docs/git-rebase
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-005
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "GitHub pull requests offer three merge methods that match those history shapes: merge commit (with --no-ff-style join), squash and merge (one commit on the base), and rebase and merge (linear history with new commit SHAs)."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-006
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "Which merge method a repository uses is a team and host policy choice about desired history shape, not a single mandatory Git rule that every project must share."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges
+      last_verified: 2026-08-01
+    - id: merge-commit-squash-and-rebase-007
+      page: capabilities/merge-commit-squash-and-rebase.md
+      claim: "Rebasing commits that have already been published rewrites their identities; doing so on shared history without coordination forces collaborators to diverge, while git rebase --abort, git merge --abort, ORIG_HEAD, and git reflog provide safe mid-operation exit and local recovery paths for unfinished or mistaken rewrites."
+      source: https://git-scm.com/docs/git-rebase
+      last_verified: 2026-08-01
+  - id: merge-conflicts-001
+      page: capabilities/merge-conflicts.md
+      claim: "A merge conflict occurs when both sides changed the same region of a file since their common ancestor, so Git cannot automatically choose one side and stops for a human resolution."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-conflicts-002
+      page: capabilities/merge-conflicts.md
+      claim: "During a conflicted merge, Git leaves HEAD unchanged, records the other tip as MERGE_HEAD, marks conflicted paths as unmerged in the index, and writes conflict markers into the working-tree files."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-conflicts-003
+      page: capabilities/merge-conflicts.md
+      claim: "Default conflict markers use <<<<<<<, =======, and >>>>>>> to separate the current-branch (ours) side from the incoming (theirs) side of a conflicting hunk."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-conflicts-004
+      page: capabilities/merge-conflicts.md
+      claim: "To finish a conflicted merge, edit each file to the intended result, remove the markers, git add each resolved path, then git commit or git merge --continue."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-conflicts-005
+      page: capabilities/merge-conflicts.md
+      claim: "git merge --abort aborts conflict resolution and tries to reconstruct the pre-merge state, which is the safe exit when a merge should not be completed."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+    - id: merge-conflicts-006
+      page: capabilities/merge-conflicts.md
+      claim: "git checkout --ours and git checkout --theirs replace an unmerged path with only stage 2 or stage 3, discarding the other side's content for that path from the working tree."
+      source: https://git-scm.com/docs/git-checkout
+      last_verified: 2026-08-01
+    - id: merge-conflicts-007
+      page: capabilities/merge-conflicts.md
+      claim: "During a rebase, conflicts can stop the process at each replayed commit; resolve and stage, then git rebase --continue, or use git rebase --abort to return to the pre-rebase branch state."
+      source: https://git-scm.com/docs/git-rebase
+      last_verified: 2026-08-01
+    - id: merge-conflicts-008
+      page: capabilities/merge-conflicts.md
+      claim: "Setting merge.conflictStyle to diff3 (or zdiff3) adds a base section marked with ||||||| so the common-ancestor text is visible between the two conflicting sides."
+      source: https://git-scm.com/docs/git-merge
+      last_verified: 2026-08-01
+  - id: post-merge-synchronization-and-cleanup-001
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git branch -d (or --delete) deletes a local branch only when that branch is fully merged into its upstream branch, or into HEAD if no upstream was set."
+      source: https://git-scm.com/docs/git-branch
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-002
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git branch -D is a shortcut for --delete --force and deletes a branch irrespective of its merged status."
+      source: https://git-scm.com/docs/git-branch
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-003
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git push --delete (or an empty source refspec such as origin :<branch>) deletes the listed branch ref from the remote repository."
+      source: https://git-scm.com/docs/git-push
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-004
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git fetch --prune removes remote-tracking references that no longer exist on the remote before updating from the fetch."
+      source: https://git-scm.com/docs/git-fetch
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-005
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "GitHub can automatically delete head branches after pull requests are merged when that repository setting is enabled."
+      source: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-006
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "Squash and merge on GitHub combines the pull request commits into a single new commit on the base branch rather than preserving the head branch tip as a parent of a merge commit."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-007
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git reflog records where HEAD and branch tips have pointed so a previous tip can be recovered after a local reference change while the reflog entry remains."
+      source: https://git-scm.com/docs/git-reflog
+      last_verified: 2026-08-01
+    - id: post-merge-synchronization-and-cleanup-008
+      page: capabilities/post-merge-synchronization-and-cleanup.md
+      claim: "git pull fetches from the remote and integrates into the current branch, which is how a local default branch learns about commits that already landed on the host after a pull request merge."
+      source: https://git-scm.com/docs/git-pull
+      last_verified: 2026-08-01
+  - id: undoing-and-recovering-work-001
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "git revert creates one or more new commits that reverse the effect of earlier commits while leaving the original commits in history."
+      source: https://git-scm.com/docs/git-revert
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-002
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "git reset with a commit argument moves the current branch tip (HEAD) to that commit, and before the operation records the previous tip in ORIG_HEAD."
+      source: https://git-scm.com/docs/git-reset
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-003
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "git reset --soft moves only the branch tip; --mixed (the default) also resets the index to match the target while leaving the working tree unchanged; --hard resets tip, index, and working tree to match the target and discards uncommitted changes to tracked paths."
+      source: https://git-scm.com/docs/git-reset
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-004
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "git restore <path> restores working-tree files from the index by default (discarding uncommitted edits to those paths), and git restore --staged <path> restores index content from HEAD without requiring a working-tree restore."
+      source: https://git-scm.com/docs/git-restore
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-005
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "Reflogs record when the tips of branches and other references were updated in the local repository, so previous HEAD or branch positions can be named (for example HEAD@{n}) and recovered with reset or by creating a branch while the reflog entry remains."
+      source: https://git-scm.com/docs/git-reflog
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-006
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "Official Git documentation distinguishes the three tools: revert makes a new commit that reverses other commits; restore restores working-tree (and optionally index) files without updating the branch; reset updates the branch tip and can change commit history."
+      source: https://git-scm.com/docs/git
+      last_verified: 2026-08-01
+    - id: undoing-and-recovering-work-007
+      page: capabilities/undoing-and-recovering-work.md
+      claim: "Committed work remains in the object database and is usually recoverable via the reflog while entries remain, but uncommitted working-tree changes discarded by git reset --hard or a discarding git restore are not recoverable by Git."
+      source: https://git-scm.com/docs/git-reset
+      last_verified: 2026-08-01
+  - id: glossary-001
+      page: capabilities/glossary.md
+      claim: "A Git repository is a collection of refs together with an object database containing all objects reachable from those refs."
+      source: https://git-scm.com/docs/gitglossary
+      last_verified: 2026-08-01
+    - id: glossary-002
+      page: capabilities/glossary.md
+      claim: "git pull fetches from a remote and integrates the result into the current branch, and is not the same thing as a pull request on a hosting platform."
+      source: https://git-scm.com/docs/git-pull
+      last_verified: 2026-08-01
+    - id: glossary-003
+      page: capabilities/glossary.md
+      claim: "On GitHub, a pull request is a proposal to merge one branch into another for review and discussion before the host updates the target branch."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+      last_verified: 2026-08-01
+    - id: glossary-004
+      page: capabilities/glossary.md
+      claim: "A fork on GitHub is a separate host-side repository that starts as a copy of another repository called the upstream repository, with its own settings and permissions while remaining connected to that upstream."
+      source: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks
+      last_verified: 2026-08-01
+    - id: glossary-005
+      page: capabilities/glossary.md
+      claim: "A fast-forward is a merge where the other branch's tip is a descendant of the current tip, so Git updates the branch pointer without creating a new merge commit."
+      source: https://git-scm.com/docs/gitglossary
+      last_verified: 2026-08-01
+    - id: glossary-006
+      page: capabilities/glossary.md
+      claim: "Detached HEAD is the state in which HEAD points at a commit directly rather than at a branch name, so new commits do not advance a branch tip until a branch names them."
+      source: https://git-scm.com/docs/gitglossary
+      last_verified: 2026-08-01
+    - id: glossary-007
+      page: capabilities/glossary.md
+      claim: "An upstream branch is the default remote branch a local branch is configured to merge with or rebase onto, via branch.<name>.remote and branch.<name>.merge."
+      source: https://git-scm.com/docs/gitglossary
+      last_verified: 2026-08-01
+    - id: glossary-008
+      page: capabilities/glossary.md
+      claim: "A reflog records the local history of where a ref such as HEAD or a branch tip pointed in this repository, independent of the commit graph alone."
+      source: https://git-scm.com/docs/git-reflog
+      last_verified: 2026-08-01

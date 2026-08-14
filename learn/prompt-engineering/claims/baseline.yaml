@@ -1,0 +1,62 @@
+# Normalized claims baseline — prompt-engineering
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD). The future refresh pipeline compares fresh extractions
+# against this file; until then it is maintained manually alongside the pages.
+claims:
+  - id: context-and-working-memory-001
+    page: capabilities/context-and-working-memory.md
+    claim: "The context window is the amount of text a model can reference when generating a response, acting as the model's working memory for that interaction."
+    source: https://platform.claude.com/docs/en/about-claude/glossary
+    last_verified: 2026-08-02
+  - id: context-and-working-memory-002
+    page: capabilities/context-and-working-memory.md
+    claim: "The context window progressively accumulates tokens from each user message and each assistant response across turns."
+    source: https://platform.claude.com/docs/en/build-with-claude/context-windows
+    last_verified: 2026-08-02
+  - id: context-and-working-memory-003
+    page: capabilities/context-and-working-memory.md
+    claim: "Each turn has an input phase (prior history plus the current message) and an output phase."
+    source: https://platform.claude.com/docs/en/build-with-claude/context-windows
+    last_verified: 2026-08-02
+  - id: context-and-working-memory-004
+    page: capabilities/context-and-working-memory.md
+    claim: "The messages API is stateless: conversation history is re-sent with each request rather than stored server-side."
+    source: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
+    last_verified: 2026-08-02
+  - id: clear-and-direct-instructions-001
+    page: capabilities/clear-and-direct-instructions.md
+    claim: "Before prompt engineering, you need a clear definition of success criteria, a way to test empirically against them, and a first draft prompt."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-08-02
+  - id: clear-and-direct-instructions-002
+    page: capabilities/clear-and-direct-instructions.md
+    claim: "Be clear and direct: state the desired output rather than assuming it is implied."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-08-02
+  - id: clear-and-direct-instructions-003
+    page: capabilities/clear-and-direct-instructions.md
+    claim: "Giving the reason behind an instruction improves compliance compared with a bare prohibition."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-08-02
+  - id: clear-and-direct-instructions-004
+    page: capabilities/clear-and-direct-instructions.md
+    claim: "Scope constraints reduce over-engineering such as adding features, docs, defensive code, or abstractions beyond what was asked."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-08-02
+  - id: tools-and-agent-actions-001
+    page: capabilities/tools-and-agent-actions.md
+    claim: "When a coding agent can read files, edit them, and run commands, wrong assumptions can change real project state on the machine, not only text in the chat."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-08-02
+  - id: verifying-agent-work-001
+    page: capabilities/verifying-agent-work.md
+    claim: "Success criteria and empirical testing are prerequisites for improving prompts."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-08-02
+  - id: verifying-agent-work-002
+    page: capabilities/verifying-agent-work.md
+    claim: "Empirical testing is a useful approach for judging agent output."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-08-02
