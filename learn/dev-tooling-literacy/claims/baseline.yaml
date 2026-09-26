@@ -1,0 +1,34 @@
+# Normalized claims baseline — dev-tooling-literacy
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD).
+#
+# Claim extraction for this module has not been done yet. The list is empty on purpose
+# rather than seeded with guessed claims: every entry must be a sentence the cited
+# source actually states. Pages still awaiting extraction are listed below.
+claims: []
+pending_extraction:
+  - capabilities/api-auth-and-permissions.md
+  - capabilities/apis-endpoints-rest.md
+  - capabilities/config-file-formats.md
+  - capabilities/containers-and-sandboxes.md
+  - capabilities/database-connections.md
+  - capabilities/database-migrations.md
+  - capabilities/dependencies-and-package-managers.md
+  - capabilities/dotenv-and-secrets.md
+  - capabilities/environment-variables.md
+  - capabilities/exit-codes.md
+  - capabilities/file-permissions.md
+  - capabilities/formatters-and-linters.md
+  - capabilities/http-requests-responses.md
+  - capabilities/install-build-run.md
+  - capabilities/license-files.md
+  - capabilities/localhost-and-ports.md
+  - capabilities/logs-and-severity-levels.md
+  - capabilities/manifests-vs-lockfiles.md
+  - capabilities/processes-and-servers.md
+  - capabilities/reproducing-a-bug.md
+  - capabilities/runtime-versions-lifecycle.md
+  - capabilities/semantic-versioning.md
+  - capabilities/terminal-shell-commands.md
+  - capabilities/virtual-environments.md
+  - capabilities/working-directories-and-paths.md

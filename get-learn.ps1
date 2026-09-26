@@ -20,7 +20,7 @@ $ErrorActionPreference = 'Stop'
 
 # Public release repo (Q7 decided). HTTPS clone URL, no trailing slash, no .git.
 $script:PublicReleaseRepoUrl = 'https://github.com/Ryfter/grimdex-learn'
-$script:ReleaseTag = 'v0.1.0-fall2026-draft'
+$script:ReleaseTag = 'v0.2.0-fall2026-draft'
 
 function Test-PathBTagReady {
     -not [string]::Equals(

@@ -1,0 +1,12 @@
+# Normalized claims baseline — debugging-recovery
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD).
+#
+# Claim extraction for this module has not been done yet. The list is empty on purpose
+# rather than seeded with guessed claims: every entry must be a sentence the cited
+# source actually states. Pages still awaiting extraction are listed below.
+claims: []
+pending_extraction:
+  - capabilities/ask-for-help.md
+  - capabilities/bisect-and-blame.md
+  - capabilities/read-error-messages.md

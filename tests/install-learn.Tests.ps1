@@ -153,7 +153,7 @@ Describe 'Install documentation' {
         $p = Join-Path $script:RepoRoot 'QUICKSTART.md'
         $p | Should -Exist
         $text = [string](Get-Content -LiteralPath $p -Raw)
-        $text | Should -Match 'git clone --branch v0\.1\.0-fall2026-draft'
+        $text | Should -Match 'git clone --branch v0\.2\.0-fall2026-draft'
         $text | Should -Match 'https://github.com/Ryfter/grimdex-learn'
         $text | Should -Match 'bootstrap\.ps1'
         $text | Should -Match '-InstallRoot'

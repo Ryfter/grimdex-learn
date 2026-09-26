@@ -2,11 +2,13 @@
   "schemaVersion": 1,
   "moduleId": "git-and-github",
   "title": "Git and GitHub field guide",
-  "description": "Audience-generic capability reference for Git and GitHub: transferable git concepts with GitHub as one forge dialect. First conforming D32 module, built manually as the pipeline shakedown.",
-  "learnPackVersion": "0.1.0-fall2026-draft",
+  "description": "Audience-generic Learn pack for Grimdex users: essentials-depth capability pages across Git/GitHub, working with coding agents, agentic development practice, automation, the agent ecosystem, developer tooling, debugging, and testing. Each page stops at what/why plus a bit of how, then links to official documentation.",
+  "learnPackVersion": "0.2.0-fall2026-draft",
   "contentAdmissionVersion": "D29-v1",
-  "ownedPaths": ["learn/"],
-  "pagesPath": "learn/git-and-github/capabilities/",
+  "ownedPaths": [
+    "learn/"
+  ],
+  "pagesPath": "learn/",
   "modules": [
     {
       "moduleId": "git-and-github",
@@ -17,22 +19,77 @@
       "moduleId": "prompt-engineering",
       "title": "Working with coding agents",
       "pagesPath": "learn/prompt-engineering/capabilities/"
+    },
+    {
+      "moduleId": "grimdex-harness",
+      "title": "The Grimdex coding harness",
+      "pagesPath": "learn/grimdex-harness/capabilities/"
+    },
+    {
+      "moduleId": "agentic-ai-development",
+      "title": "Agentic AI development practices",
+      "pagesPath": "learn/agentic-ai-development/capabilities/"
+    },
+    {
+      "moduleId": "agentic-automation",
+      "title": "Agentic automation: loops, hooks, and scheduling",
+      "pagesPath": "learn/agentic-automation/capabilities/"
+    },
+    {
+      "moduleId": "agent-ecosystem",
+      "title": "Under the hood: the agent ecosystem",
+      "pagesPath": "learn/agent-ecosystem/capabilities/"
+    },
+    {
+      "moduleId": "dev-tooling-literacy",
+      "title": "Developer tooling literacy",
+      "pagesPath": "learn/dev-tooling-literacy/capabilities/"
+    },
+    {
+      "moduleId": "debugging-recovery",
+      "title": "Debugging and recovering safely",
+      "pagesPath": "learn/debugging-recovery/capabilities/"
+    },
+    {
+      "moduleId": "testing-basics",
+      "title": "Testing basics for non-CS majors",
+      "pagesPath": "learn/testing-basics/capabilities/"
     }
   ],
-  "pointerStanzas": [{ "file": "GRIMDEX.md" }],
-  "refresh": { "schedule": "manual-until-pipeline-shakedown-complete", "policyVersion": "1" },
+  "pointerStanzas": [
+    {
+      "file": "GRIMDEX.md"
+    }
+  ],
+  "refresh": {
+    "schedule": "manual-until-pipeline-shakedown-complete",
+    "policyVersion": "1"
+  },
   "neverShip": [
     "config/fleet.json",
     "config/learn-progress.json",
     "config/quota.json",
     "config/settings.json"
   ],
-  "studentRoots": ["projects/**"],
-  "generatedRoots": ["logs/", ".index/"],
+  "studentRoots": [
+    "projects/**"
+  ],
+  "generatedRoots": [
+    "logs/",
+    ".index/"
+  ],
   "lifecycle": {
-    "install":  { "student": "never-touch" },
-    "update":   { "student": "never-touch" },
-    "graduate": { "student": "never-touch" },
-    "remove":   { "student": "never-touch" }
+    "install": {
+      "student": "never-touch"
+    },
+    "update": {
+      "student": "never-touch"
+    },
+    "graduate": {
+      "student": "never-touch"
+    },
+    "remove": {
+      "student": "never-touch"
+    }
   }
 }

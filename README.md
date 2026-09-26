@@ -27,7 +27,7 @@ Humans follow [`QUICKSTART.md`](QUICKSTART.md). Agents follow
 
 The taught path is two commands. Clone a release tag, not `main`:
 
-    git clone --branch v0.1.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
+    git clone --branch v0.2.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
     pwsh <source>/bootstrap.ps1 -InstallRoot <install>
 
 A one-liner path (Path B) is documented in `QUICKSTART.md`. It is a convenience,

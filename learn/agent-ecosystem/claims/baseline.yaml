@@ -1,0 +1,24 @@
+# Normalized claims baseline — agent-ecosystem
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD).
+#
+# Claim extraction for this module has not been done yet. The list is empty on purpose
+# rather than seeded with guessed claims: every entry must be a sentence the cited
+# source actually states. Pages still awaiting extraction are listed below.
+claims: []
+pending_extraction:
+  - capabilities/agent-ecosystem-map.md
+  - capabilities/api-keys-static-credential.md
+  - capabilities/choosing-the-right-component.md
+  - capabilities/cli-tools-as-agent-capabilities.md
+  - capabilities/mcp-host-client-server.md
+  - capabilities/mcp-servers-standardized-connectors.md
+  - capabilities/mcp-vs-cli-tradeoffs.md
+  - capabilities/name-that-component-practicum.md
+  - capabilities/oauth-delegated-scoped-access.md
+  - capabilities/oauth-mcp-and-agent-login.md
+  - capabilities/oauth-scopes-read-before-allow.md
+  - capabilities/plugins-are-packaging-not-rivals.md
+  - capabilities/revocation-lives-with-provider.md
+  - capabilities/skills-packaged-know-how.md
+  - capabilities/token-expiry-recognition.md

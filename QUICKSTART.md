@@ -19,7 +19,7 @@ The major version must be 7 or more. Use the single quotes exactly as written.
 
 Two commands. Clone a release tag, not `main`, so everyone gets the same bytes.
 
-    git clone --branch v0.1.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
+    git clone --branch v0.2.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
     pwsh <source>/bootstrap.ps1 -InstallRoot <install>
 
 Optional, changes nothing — run this first if you want to see the plan:
@@ -64,11 +64,11 @@ does not remove the clone.
 
 Review the bootstrapper first (this prints the script; it does not run it):
 
-    irm https://github.com/Ryfter/grimdex-learn/raw/v0.1.0-fall2026-draft/get-learn.ps1
+    irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1
 
 Run it only if you accept that trust hop:
 
-    iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.1.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
+    iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
 
 What you will see, and how to tell it worked, are the same as the taught
 path after the announcement: `INSTALLED`, `<install>/learn/manifest.json`

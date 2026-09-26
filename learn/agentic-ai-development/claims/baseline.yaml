@@ -1,0 +1,28 @@
+# Normalized claims baseline — agentic-ai-development
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD).
+#
+# Claim extraction for this module has not been done yet. The list is empty on purpose
+# rather than seeded with guessed claims: every entry must be a sentence the cited
+# source actually states. Pages still awaiting extraction are listed below.
+claims: []
+pending_extraction:
+  - capabilities/agent-evals.md
+  - capabilities/agent-to-agent-handoff.md
+  - capabilities/background-agents-and-ci.md
+  - capabilities/checkpoints-and-rollback-for-agent-work.md
+  - capabilities/codebase-retrieval-hybrid-search.md
+  - capabilities/context-engineering-and-window-management.md
+  - capabilities/hitl-interruption-and-steering.md
+  - capabilities/model-routing-and-cost-tiers.md
+  - capabilities/multi-agent-orchestration-tradeoffs.md
+  - capabilities/persistent-agent-memory.md
+  - capabilities/prompt-injection-and-lethal-trifecta.md
+  - capabilities/reading-agent-traces.md
+  - capabilities/repo-instruction-files.md
+  - capabilities/reviewing-agent-generated-code.md
+  - capabilities/sandboxing-and-least-privilege.md
+  - capabilities/secrets-and-data-hygiene-for-agent-context.md
+  - capabilities/spec-driven-plan-first-development.md
+  - capabilities/tool-and-schema-design.md
+  - capabilities/verification-first-loops.md

@@ -1,0 +1,178 @@
+# Grimdex-edu curriculum backlog — lessons the Learn module should ship.
+# Course content lives in the class wiki (D41); this is harness education only.
+# Audit: scripts/curriculum-audit.ps1  Roadmap: docs/curriculum-roadmap.md
+
+schema_version: 1
+audiences:
+  - gimm
+  - it-management
+  - business-non-programmer
+
+modules:
+  - id: git-and-github
+    title: Git and GitHub field guide
+    status: shipped
+    pages_path: learn/git-and-github/capabilities/
+    notes: >
+      41/41 pages shipped (14 original + 27 extension lessons shipped
+      2026-09-20). Extension lessons drafted via openrouter-glm, grounded in
+      Context7-verified git-scm.com/docs.github.com/cli.github.com facts,
+      contract-checked, and fact-checked against the grounding notes before
+      commit. One formatting bug (nested markdown code fence) caught and
+      fixed in markdown-for-prs-issues.md during review.
+
+  - id: prompt-engineering
+    title: Working with coding agents
+    status: shipped
+    pages_path: learn/prompt-engineering/capabilities/
+    notes: >
+      7/7 pages shipped (4 original + 3 extension lessons shipped 2026-09-20:
+      defining-goals-and-success-criteria, vibe-coding-practices,
+      iterating-on-a-prompt). Drafted via openrouter-glm, grounded in
+      Context7-verified platform.claude.com facts, cross-checked against the
+      other shipped pages to avoid duplication. One fabricated URL
+      (/test-and-evaluate/grade-your-evaluations -- doesn't exist; that
+      content is a section of develop-tests, not its own page) caught and
+      removed from iterating-on-a-prompt.md during fact-check.
+
+  - id: grimdex-harness
+    title: The Grimdex coding harness
+    status: shipped
+    pages_path: learn/grimdex-harness/capabilities/
+    notes: 4/4 pages shipped 2026-09-18/20 (what-is-grimdex, learn-module-verbosity, student-zone-layout, install-and-bootstrap) -- drafted via openrouter-glm, fact-checked against D28/D36/D41/D42 and QUICKSTART.md.
+
+  # verification-and-evidence -- REMOVED 2026-09-20. Its 3 lessons (why-verify,
+  # read-verify-output, evidence-export: verify-profile/oracle/evidence.json/
+  # ledger/milestone) described a Canvas auto-grading pipeline that exists only
+  # in docs/grimdex_edu_spec.md and docs/grimdex_edu_plan.md -- both explicitly
+  # "Optional only (Gemini sketches -- not approved)" per CLAUDE.md, and Canvas
+  # auto-grading is course-delivery scope, already ruled out by D41 ("Course
+  # content is out of scope"; pilot table: "Canvas auto-grading is a
+  # nice-to-have only"). No such mechanism exists in this repo or the base
+  # Grimdex engine repo (verified by search of both before removal). Kevin
+  # confirmed drop rather than repoint-or-mark-speculative (2026-09-20).
+
+  - id: agentic-ai-development
+    title: Agentic AI development practices
+    status: shipped
+    pages_path: learn/agentic-ai-development/capabilities/
+    notes: >
+      19/19 pages shipped 2026-09-20. Researched via a non-Claude fan-out
+      (openrouter-glm, gemini-antigravity; grok-cli timed out twice and was
+      not used), synthesized by openrouter-glm, drafted via openrouter-glm.
+      Three items ship labeled "emerging practice, no canonical source"
+      (reviewing-agent-generated-code, persistent-agent-memory,
+      agent-to-agent-handoff) per this product's honest-provenance
+      discipline. During fact-check: fixed one page missing its front matter
+      entirely (wrapped in a stray code fence), added real citations to 5
+      pages that GLM correctly left uncited rather than fabricate a source,
+      and caught one stale/wrong domain (docs.anthropic.com -> the current
+      code.claude.com) plus one unverified Cursor-specific claim, flagged
+      accordingly. Full sourcing: docs/research/2026-09-20-mastery-and-agentic-ai-dev/
+      and docs/superpowers/specs/2026-09-20-mastery-levels-design.md sec. 5.
+
+  - id: agentic-automation
+    title: "Agentic automation: loops, hooks, and scheduling"
+    status: shipped
+    pages_path: learn/agentic-automation/capabilities/
+    notes: >
+      20/20 pages shipped 2026-09-20. Drafted via openrouter-glm, grounded in
+      git-scm.com (hooks), code.claude.com (Claude Code hooks/headless mode),
+      and docs.github.com (Actions scheduling/concurrency/timeouts) --
+      reusing this session's earlier verified research rather than
+      re-researching. Cursor/Codex-CLI hook-and-schedule feature parity is
+      explicitly flagged unverified in every page that could have made a
+      cross-tool claim, per the standing caution. One page (server-side-git-
+      hooks) needed a retry after hitting GLM's reasoning-token cap; one URL
+      inconsistency (front matter vs. body Official sources listing different
+      URLs) caught and fixed in schedule-reality-checks.md. Known minor
+      imperfection, not fixed (cosmetic, not a broken link or fabrication):
+      several pages' "Related capabilities" bullets use descriptive
+      paraphrases or invented-looking slugs instead of the exact sibling
+      lesson IDs -- the prose itself is accurate, just not a clean
+      cross-reference. Worth a cleanup pass later, not blocking.
+
+  - id: agent-ecosystem
+    title: "Under the hood: the agent ecosystem"
+    status: shipped
+    pages_path: learn/agent-ecosystem/capabilities/
+    notes: >
+      15/15 pages shipped 2026-09-20. Drafted via openrouter-glm, cross-checked
+      against Context7 for the "confident but verify" items flagged by the
+      original research: confirmed MCP is real and core-API-level (Anthropic's
+      own Messages API has a real mcp_servers/mcp_toolset connector), confirmed
+      Skills are real directories with SKILL.md discovered from local paths in
+      Claude Code, confirmed the /plugin marketplace add + /plugin install flow
+      is real and documented -- but could NOT pin the exact full list of what a
+      plugin can bundle to one current reference page, so that page
+      (plugins-are-packaging-not-rivals) explicitly tells the reader to verify
+      the live plugins reference rather than treating any enumeration as
+      exhaustive. MCP's exact OAuth-authorization spec revision date is
+      similarly flagged rather than cited precisely. Known minor imperfection
+      (same as agentic-automation): some "Related capabilities" bullets use
+      paraphrased/invented-looking slugs instead of exact sibling lesson IDs.
+
+  - id: dev-tooling-literacy
+    title: Developer tooling literacy
+    status: shipped
+    pages_path: learn/dev-tooling-literacy/capabilities/
+    notes: >
+      25/25 pages shipped 2026-09-20. Drafted via openrouter-glm, grounded in
+      real vendor/spec docs (GNU bash/coreutils, npm, Python packaging, Docker,
+      MDN, PostgreSQL, Prisma, OWASP, SPDX, OpenTelemetry, semver.org) reused
+      from this session's earlier verified research. Explicitly NOT
+      programming-language fundamentals (variables/loops/data types/OOP) --
+      that is course content, out of scope per D41. Recognition level
+      throughout, cross-referencing debugging-recovery rather than
+      duplicating it for exit-codes and reproducing-a-bug.
+
+  - id: debugging-recovery
+    title: Debugging and recovering safely
+    status: shipped
+    pages_path: learn/debugging-recovery/capabilities/
+    notes: >
+      3/3 pages shipped 2026-09-20. Drafted via openrouter-glm. bisect-and-blame
+      grounded in Context7-verified git-scm.com git-bisect docs; read-error-messages
+      and ask-for-help are generic cross-language/cross-tool practice, anchored to
+      one real illustrative source each (Python's errors tutorial; the OWASP
+      secrets cheat sheet already used elsewhere) rather than a defining vendor
+      doc. Cross-references undoing-and-recovering-work (git-and-github) and
+      secrets-and-data-hygiene-for-agent-context (agentic-ai-development) rather
+      than duplicating them.
+
+  - id: testing-basics
+    title: Testing basics for non-CS majors
+    status: shipped
+    pages_path: learn/testing-basics/capabilities/
+    notes: >
+      3/3 pages shipped 2026-09-20. Drafted via openrouter-glm. run-tests-locally
+      grounded in Context7-verified pytest and Pester docs (real exit codes,
+      real -Output Detailed / Invoke-Pester summary format); why-tests-exist and
+      fix-one-failure anchor to pytest's own docs as one worked example while
+      being honest that the underlying concepts (save-point framing, one-failure-
+      at-a-time attribution) are generic, cross-tool practice. Cross-references
+      iterating-on-a-prompt (prompt-engineering) for the change-one-thing-at-a-
+      time discipline rather than repeating it.
+
+  - id: further-depth
+    title: Further depth and wiki handoff
+    status: planned
+    pages_path: learn/further-depth/capabilities/
+    priority: low
+    lessons:
+      - id: further-depth-stanza
+        title: The Further depth pass-through (when wiki exists)
+        terms: [further-depth, wiki, handoff]
+      - id: official-sources-discipline
+        title: Official sources vs tutorials
+        terms: [provenance, canonical, tier]
+
+cross_cutting_terms:
+  - commit
+  - branch
+  - pull-request
+  - agent
+  - context
+  - verification
+  - evidence
+  - student-zone

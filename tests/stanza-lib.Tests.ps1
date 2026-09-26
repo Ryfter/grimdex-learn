@@ -58,6 +58,21 @@ Describe 'Get-LearnStanzaContent' {
         $c.IndexOf([char]96) | Should -Be -1
         $c | Should -Not -Match 'grimdex-learn:'
     }
+    It 'lists every declared module with its title and pages path' {
+        $m = New-FixtureManifestObject
+        $m.modules = @(
+            @{ moduleId = 'git-and-github'; title = 'Git field guide'; pagesPath = 'learn/git-and-github/capabilities/' }
+            @{ moduleId = 'testing-basics'; title = 'Testing basics'; pagesPath = 'learn/testing-basics/capabilities/' }
+        )
+        $c = Get-LearnStanzaContent -Manifest $m
+        $c | Should -Match 'Modules installed:'
+        $c | Should -Match '  - Git field guide: learn/git-and-github/capabilities/'
+        $c | Should -Match '  - Testing basics: learn/testing-basics/capabilities/'
+    }
+    It 'omits the module list when the manifest declares no modules' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Not -Match 'Modules installed:'
+    }
     It 'throws when the manifest has no pagesPath' {
         $m = New-FixtureManifestObject
         $m.Remove('pagesPath')

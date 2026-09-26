@@ -1,0 +1,29 @@
+# Normalized claims baseline — agentic-automation
+# One entry per claim: id, page, claim (complete sentence), source (direct official URL),
+# last_verified (YYYY-MM-DD).
+#
+# Claim extraction for this module has not been done yet. The list is empty on purpose
+# rather than seeded with guessed claims: every entry must be a sentence the cited
+# source actually states. Pages still awaiting extraction are listed below.
+claims: []
+pending_extraction:
+  - capabilities/agent-lifecycle-hooks.md
+  - capabilities/agentic-loop-vs-code-loop.md
+  - capabilities/cost-and-observability.md
+  - capabilities/cron-five-fields.md
+  - capabilities/git-hooks-101.md
+  - capabilities/give-every-loop-an-exit.md
+  - capabilities/headless-noninteractive-mode.md
+  - capabilities/hook-feedback-loop-risk.md
+  - capabilities/hooks-as-gates.md
+  - capabilities/human-approval-gates.md
+  - capabilities/idempotency-safe-to-rerun.md
+  - capabilities/loop-hook-schedule-triggers.md
+  - capabilities/manual-one-off-triggers.md
+  - capabilities/overlap-and-concurrency.md
+  - capabilities/runaway-loop-and-timeouts.md
+  - capabilities/schedule-reality-checks.md
+  - capabilities/scheduled-workflows-github-actions.md
+  - capabilities/server-side-git-hooks.md
+  - capabilities/shared-hooks-and-hookspath.md
+  - capabilities/the-kill-switch.md

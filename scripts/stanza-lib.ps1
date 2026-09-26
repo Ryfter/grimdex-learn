@@ -82,6 +82,20 @@ function Get-LearnStanzaContent {
         ''
         "- Capability pages live under: $pagesPath"
     )
+    # A multi-module pack names every module so the agent reading GRIMDEX.md can
+    # find all of them, not just the first. Manifest order is kept (deterministic).
+    $modules = $null
+    if ($Manifest -is [System.Collections.IDictionary]) {
+        if ($Manifest.ContainsKey('modules')) { $modules = $Manifest['modules'] }
+    } elseif ($null -ne $Manifest -and $null -ne $Manifest.PSObject.Properties['modules']) {
+        $modules = $Manifest.modules
+    }
+    if ($null -ne $modules -and @($modules).Count -gt 0) {
+        $lines += '- Modules installed:'
+        foreach ($mod in @($modules)) {
+            $lines += "  - $($mod.title): $($mod.pagesPath)"
+        }
+    }
     # An unpinned pack claims no base version rather than printing a placeholder
     # into the student's GRIMDEX.md.
     if ($pin) { $lines += "- Explanations are matched to base Grimdex pin: $pin" }

@@ -16,11 +16,18 @@ function Test-NeverShipPath {
     # trailing spaces/dots from a path segment, so a manifest could name
     # "config/settings.json " (trailing space) and defeat an -eq / -contains
     # string check while still resolving onto the real protected file.
+    # macOS/Linux do not strip, so strip trailing spaces/dots per segment
+    # explicitly on every platform: over-matching fails closed, which is the
+    # right direction for a secrets guard.
+    $normalize = {
+        param([string]$p)
+        (($p -replace '\\', '/') -split '/' | ForEach-Object { $_.TrimEnd(' ', '.') }) -join '/'
+    }
     $rootFull      = [System.IO.Path]::GetFullPath($InstallRoot)
-    $candidateFull = [System.IO.Path]::GetFullPath((Join-Path $rootFull $Rel))
+    $candidateFull = & $normalize ([System.IO.Path]::GetFullPath((Join-Path $rootFull $Rel)))
     foreach ($n in @($NeverShip)) {
         $nRel  = ([string]$n) -replace '\\', '/'
-        $nFull = [System.IO.Path]::GetFullPath((Join-Path $rootFull $nRel))
+        $nFull = & $normalize ([System.IO.Path]::GetFullPath((Join-Path $rootFull $nRel)))
         if ([string]::Equals($candidateFull, $nFull, [System.StringComparison]::OrdinalIgnoreCase)) {
             return $true
         }
