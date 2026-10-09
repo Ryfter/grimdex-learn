@@ -1,6 +1,7 @@
 ---
 title: Containers, sandboxes, and isolation boundaries
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - containers-and-sandboxes
 context7_library:

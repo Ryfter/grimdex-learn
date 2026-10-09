@@ -1,6 +1,7 @@
 ---
 title: What Grimdex is (and is not)
 module_id: grimdex-harness
+level: 1
 capabilities:
   - what-is-grimdex
 context7_library:

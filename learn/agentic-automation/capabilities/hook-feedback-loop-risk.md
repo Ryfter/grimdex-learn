@@ -1,6 +1,7 @@
 ---
 title: Avoiding hooks that trigger themselves forever
 module_id: agentic-automation
+level: 5
 capabilities:
   - hook-feedback-loop-risk
 context7_library: /websites/platform_claude_en

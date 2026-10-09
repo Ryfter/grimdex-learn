@@ -1,6 +1,7 @@
 ---
 title: Server-side git hooks
 module_id: agentic-automation
+level: 5
 capabilities:
   - server-side-git-hooks
 context7_library: /websites/git-scm

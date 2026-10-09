@@ -1,6 +1,7 @@
 ---
 title: Push and upstream branches
 module_id: git-and-github
+level: 2
 capabilities:
   - push-and-upstream-branches
 context7_library: /websites/git-scm

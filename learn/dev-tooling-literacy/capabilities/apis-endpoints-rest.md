@@ -1,6 +1,7 @@
 ---
 title: APIs, endpoints, and REST
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - apis-endpoints-rest
 context7_library:

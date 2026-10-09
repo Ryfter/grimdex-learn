@@ -1,6 +1,7 @@
 ---
 title: GitHub Codespaces basics (recognition level)
 module_id: git-and-github
+level: 3
 capabilities:
   - github-codespaces-basics
 context7_library: /websites/github_en

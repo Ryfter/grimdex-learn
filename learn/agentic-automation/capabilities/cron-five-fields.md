@@ -1,6 +1,7 @@
 ---
 title: Cron syntax in ten minutes
 module_id: agentic-automation
+level: 5
 capabilities:
   - cron-five-fields
 context7_library: /websites/github_en_actions

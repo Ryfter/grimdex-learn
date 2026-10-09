@@ -1,6 +1,7 @@
 ---
 title: Reading and debugging an agent's trace
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - reading-agent-traces
 context7_library: /websites/platform_claude_en

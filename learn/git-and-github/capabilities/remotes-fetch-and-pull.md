@@ -1,6 +1,7 @@
 ---
 title: Remotes, fetch, and pull
 module_id: git-and-github
+level: 2
 capabilities:
   - remotes-fetch-and-pull
 context7_library: /websites/git-scm

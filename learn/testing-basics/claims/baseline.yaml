@@ -1,12 +1,89 @@
 # Normalized claims baseline — testing-basics
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/fix-one-failure.md
-  - capabilities/run-tests-locally.md
-  - capabilities/why-tests-exist.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: fix-one-failure-001
+    page: capabilities/fix-one-failure.md
+    claim: "Pytest's usage documentation covers invoking pytest against a specific test target, providing a real anchor for running a single test."
+    source: https://docs.pytest.org/en/stable/how-to/usage.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: fix-one-failure-002
+    page: capabilities/fix-one-failure.md
+    claim: "Pytest's documented exit codes let you and any automation tell at a glance whether the current cycle succeeded, with 0 meaning all passed and 1 meaning some failed."
+    source: https://docs.pytest.org/en/stable/how-to/usage.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: fix-one-failure-003
+    page: capabilities/fix-one-failure.md
+    claim: "When several tests fail, fix and re-run one failure at a time rather than changing many things at once, so you know exactly which change fixed or broke which test."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: fix-one-failure-004
+    page: capabilities/fix-one-failure.md
+    claim: "In TDD, write a failing test first, then write just enough code to pass it; the failing-first step proves the test actually checks something."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: run-tests-locally-001
+    page: capabilities/run-tests-locally.md
+    claim: "pytest's documented exit codes include 0 for all tests passed, 1 for some tests failed, 2 for user interruption, 3 for internal error, 4 for command line usage error, 5 for no tests collected, and 6 for max warnings exceeded."
+    source: https://docs.pytest.org/en/stable/reference/exit-codes.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: run-tests-locally-002
+    page: capabilities/run-tests-locally.md
+    claim: "Pester's Invoke-Pester supports the -Output Detailed flag, which gives verbose per-test results."
+    source: https://pester.dev/docs/commands/Invoke-Pester
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: run-tests-locally-003
+    page: capabilities/run-tests-locally.md
+    claim: "Pester documents a -CI switch and EnableExit/exit-code behavior so pipeline steps can fail correctly when tests fail."
+    source: https://pester.dev/docs/commands/Invoke-Pester
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: run-tests-locally-004
+    page: capabilities/run-tests-locally.md
+    claim: "Exit code 5 (no tests collected) is a common trap: if test files aren't matched by collection conventions, pytest passes vacuously, so check the collected count, not just the exit code."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: why-tests-exist-001
+    page: capabilities/why-tests-exist.md
+    claim: "A test is a small, automated, repeatable check that a specific piece of behavior still works, and can be run again and again without a human manually re-checking anything."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: why-tests-exist-002
+    page: capabilities/why-tests-exist.md
+    claim: "An assertion is a single checkable statement inside a test, and if any assertion fails, the test fails."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: why-tests-exist-003
+    page: capabilities/why-tests-exist.md
+    claim: "Running a test suite locally executes each test's assertions against the current code and reports pass/fail per test."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: why-tests-exist-004
+    page: capabilities/why-tests-exist.md
+    claim: "When a change breaks something that previously worked, that break is called a regression, and re-running an existing test suite is the standard way to detect regressions quickly."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

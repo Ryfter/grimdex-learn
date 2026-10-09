@@ -1,6 +1,7 @@
 ---
 title: Student zone vs generated vs config
 module_id: grimdex-harness
+level: 2
 capabilities:
   - student-zone-layout
 context7_library:

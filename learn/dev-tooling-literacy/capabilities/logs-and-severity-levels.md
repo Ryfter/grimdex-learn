@@ -1,6 +1,7 @@
 ---
 title: Application logs and severity levels
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - logs-and-severity-levels
 context7_library:

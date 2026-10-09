@@ -1,6 +1,7 @@
 ---
 title: HTTP requests and responses
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - http-requests-responses
 context7_library:

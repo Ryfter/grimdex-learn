@@ -241,3 +241,20 @@ Describe 'promotion-readout.ps1' {
         $LASTEXITCODE | Should -Be 1
     }
 }
+
+Describe 'Graduation leaves the surfacing ledger with the student' {
+    It 'keeps learn-progress/surfacing.json byte-identical under <_> retention' -ForEach @('Keep', 'Remove') {
+        $root = New-FixtureInstall "g-ledger-$_"
+        $m = Get-Content -LiteralPath (Join-Path $root 'learn/manifest.json') -Raw | ConvertFrom-Json -AsHashtable
+        $m.studentRoots = @('projects/**', 'learn-progress/**')
+        $m | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $root 'learn/manifest.json')
+        New-Item -ItemType Directory -Path (Join-Path $root 'learn-progress') | Out-Null
+        $ledgerPath = Join-Path $root 'learn-progress/surfacing.json'
+        Set-Content -LiteralPath $ledgerPath -Value '{"schemaVersion":1,"level":3}'
+        $before = [IO.File]::ReadAllText($ledgerPath)
+        $r = Invoke-Graduation -InstallRoot $root -ManifestPath (Join-Path $root 'learn/manifest.json') `
+            -Retention $_ -WorkDir (Join-Path $TestDrive "g-ledger-$_-work")
+        $r.outcome | Should -Be 'graduated'
+        [IO.File]::ReadAllText($ledgerPath) | Should -BeExactly $before
+    }
+}

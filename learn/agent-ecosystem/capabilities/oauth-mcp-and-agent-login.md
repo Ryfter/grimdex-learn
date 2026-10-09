@@ -1,6 +1,7 @@
 ---
 title: "Where it meets: OAuth, MCP, and your agent's own login"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - oauth-mcp-and-agent-login
 context7_library: /websites/platform_claude_en

@@ -1,6 +1,7 @@
 ---
 title: Merge conflicts
 module_id: git-and-github
+level: 2
 capabilities:
   - merge-conflicts
 context7_library: /websites/git-scm

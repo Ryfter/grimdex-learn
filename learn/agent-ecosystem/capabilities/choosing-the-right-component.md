@@ -1,6 +1,7 @@
 ---
 title: "Which one when: a routing table for CLI/MCP/Skill/plugin"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - choosing-the-right-component
 context7_library: /websites/platform_claude_en

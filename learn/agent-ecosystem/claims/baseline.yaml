@@ -1,24 +1,409 @@
 # Normalized claims baseline — agent-ecosystem
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/agent-ecosystem-map.md
-  - capabilities/api-keys-static-credential.md
-  - capabilities/choosing-the-right-component.md
-  - capabilities/cli-tools-as-agent-capabilities.md
-  - capabilities/mcp-host-client-server.md
-  - capabilities/mcp-servers-standardized-connectors.md
-  - capabilities/mcp-vs-cli-tradeoffs.md
-  - capabilities/name-that-component-practicum.md
-  - capabilities/oauth-delegated-scoped-access.md
-  - capabilities/oauth-mcp-and-agent-login.md
-  - capabilities/oauth-scopes-read-before-allow.md
-  - capabilities/plugins-are-packaging-not-rivals.md
-  - capabilities/revocation-lives-with-provider.md
-  - capabilities/skills-packaged-know-how.md
-  - capabilities/token-expiry-recognition.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: agent-ecosystem-map-001
+    page: capabilities/agent-ecosystem-map.md
+    claim: "A request to Anthropic's Messages API can declare mcp_servers entries with type, url, name, and authorization_token, plus an mcp_toolset tool type, gated behind a beta header."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-ecosystem-map-002
+    page: capabilities/agent-ecosystem-map.md
+    claim: "In Claude Code, a Skill is a directory containing a SKILL.md file that is discovered automatically from the local filesystem and invoked by the model when relevant to the task."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-ecosystem-map-003
+    page: capabilities/agent-ecosystem-map.md
+    claim: "In MCP's architecture, the agent's host application runs one MCP client per configured server, and users only ever configure servers, never install a separate MCP client."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-ecosystem-map-004
+    page: capabilities/agent-ecosystem-map.md
+    claim: "When an established CLI like gh is already installed and permitted, letting the agent shell out to it is often simpler than wrapping the same capability in a new MCP server."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-keys-static-credential-001
+    page: capabilities/api-keys-static-credential.md
+    claim: "An API key is a static credential with no built-in expiry, consent step, or per-use negotiation, and whoever holds the key acts as the key's owner with the owner's full permissions."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-keys-static-credential-002
+    page: capabilities/api-keys-static-credential.md
+    claim: "When a program presents an API key, the service treats the caller as the key's owner, and every action is attributed to the key's owner rather than to a delegated application."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-keys-static-credential-003
+    page: capabilities/api-keys-static-credential.md
+    claim: "API keys are the right credential for authenticating your own machine-to-machine access to a service you own or directly pay for, such as an API key for the Claude API for your own application."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-keys-static-credential-004
+    page: capabilities/api-keys-static-credential.md
+    claim: "Keep API keys in environment variables or a secrets manager, never in files an agent can read such as shell history, dotfiles, or committed configs, because an agent with shell access can read anything its user can."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: choosing-the-right-component-001
+    page: capabilities/choosing-the-right-component.md
+    claim: "A Skill is a directory containing a SKILL.md that the agent loads on its own when the task matches, making it model-invoked rather than user-invoked like a slash command."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: choosing-the-right-component-002
+    page: capabilities/choosing-the-right-component.md
+    claim: "In MCP's architecture the host application runs one client per configured server, so a user only ever configures servers and does not install a separate client."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: choosing-the-right-component-003
+    page: capabilities/choosing-the-right-component.md
+    claim: "Expired OAuth tokens are a common cause when a component suddenly stops working, because token revocation and expiry live with the third-party provider rather than with the agent tool or plugin."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: choosing-the-right-component-004
+    page: capabilities/choosing-the-right-component.md
+    claim: "Check whether an installed CLI like gh already covers the need before adding an MCP server, since reaching for an MCP server when a CLI would do adds configuration and credential spread for no benefit."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cli-tools-as-agent-capabilities-001
+    page: capabilities/cli-tools-as-agent-capabilities.md
+    claim: "Plugins are fundamentally a packaging mechanism, and installing one can bundle several capabilities together."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cli-tools-as-agent-capabilities-002
+    page: capabilities/cli-tools-as-agent-capabilities.md
+    claim: "When a coding agent has shell access, every command-line program installed on the machine becomes an agent capability, with no per-tool integration work required."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cli-tools-as-agent-capabilities-003
+    page: capabilities/cli-tools-as-agent-capabilities.md
+    claim: "Safety for shell access lives in permissions, not in the tools themselves; configure permission prompts and allowlists deliberately rather than treating CLI access as inherently safe or unsafe."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cli-tools-as-agent-capabilities-004
+    page: capabilities/cli-tools-as-agent-capabilities.md
+    claim: "Because CLI output is unstructured text, an agent can misread it; for high-stakes steps, have the agent show the relevant output before acting on it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-host-client-server-001
+    page: capabilities/mcp-host-client-server.md
+    claim: "The MCP host runs one client per configured server, so configuring three servers means the host starts three clients automatically and invisibly."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-host-client-server-002
+    page: capabilities/mcp-host-client-server.md
+    claim: "The MCP client is internal plumbing inside the host that manages the connection to one server; it is not a separate program a user installs."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-host-client-server-003
+    page: capabilities/mcp-host-client-server.md
+    claim: "Each client connects to its server via stdio for a local process or HTTP for a remote URL, and discovers the tools and any resources or prompts the server exposes."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-host-client-server-004
+    page: capabilities/mcp-host-client-server.md
+    claim: "If a tool does not appear, debug the server's configuration or connection rather than looking for a client to install, since the client layer is not user-manageable."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-servers-standardized-connectors-001
+    page: capabilities/mcp-servers-standardized-connectors.md
+    claim: "A Messages API request can declare an mcp_servers field (with fields like type, url, name, and authorization_token) and use an mcp_toolset tool type, gated behind a beta header."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-servers-standardized-connectors-002
+    page: capabilities/mcp-servers-standardized-connectors.md
+    claim: "MCP supports two documented transports: local servers launched over stdio and remote servers reached over HTTP/URL."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-servers-standardized-connectors-003
+    page: capabilities/mcp-servers-standardized-connectors.md
+    claim: "The host runs one internal MCP client per configured server; users configure servers and never need to install an MCP client."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-servers-standardized-connectors-004
+    page: capabilities/mcp-servers-standardized-connectors.md
+    claim: "When a mature CLI already exists for a capability, shelling out may be simpler than wrapping the same capability in a new MCP server; neither approach universally wins."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-vs-cli-tradeoffs-001
+    page: capabilities/mcp-vs-cli-tradeoffs.md
+    claim: "The Model Context Protocol (MCP) is a separate, documented standard for giving an agent structured access to external tools and data, whose typed, self-described tools the agent's client discovers and calls."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-vs-cli-tradeoffs-002
+    page: capabilities/mcp-vs-cli-tradeoffs.md
+    claim: "In the Anthropic Messages API, the MCP connector lets a request declare mcp_servers and an mcp_toolset tool, and is gated behind a beta header."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-vs-cli-tradeoffs-003
+    page: capabilities/mcp-vs-cli-tradeoffs.md
+    claim: "MCP's specification added OAuth-based authorization for remote servers, so connecting can surface a consent flow like any third-party connection and keeps scoped credentials out of local config files entirely."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: mcp-vs-cli-tradeoffs-004
+    page: capabilities/mcp-vs-cli-tradeoffs.md
+    claim: "Prefer a mature CLI over wrapping the same capability in a new MCP server, since the wrapper adds maintenance for little gain; neither tool always wins."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: name-that-component-practicum-001
+    page: capabilities/name-that-component-practicum.md
+    claim: "A Skill is a directory containing a SKILL.md file on the local filesystem, discovered from disk and loaded by the model when it judges the skill relevant."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: name-that-component-practicum-002
+    page: capabilities/name-that-component-practicum.md
+    claim: "An MCP server entry means the agent's host runs a client that connects to that server locally over stdio or remotely over HTTP, and remote servers can surface OAuth consent flows."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: name-that-component-practicum-003
+    page: capabilities/name-that-component-practicum.md
+    claim: "On any OAuth consent flow, including ones surfaced by remote MCP servers, the scope list is the privacy decision, so prefer the narrowest scope that works."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: name-that-component-practicum-004
+    page: capabilities/name-that-component-practicum.md
+    claim: "Removing local config or uninstalling a plugin stops future use but does not revoke OAuth grants at third-party providers; revoke those at the provider's authorized-apps settings pages."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: name-that-component-practicum-005
+    page: capabilities/name-that-component-practicum.md
+    claim: "Before installing a plugin, find out what it bundles, since each bundled piece carries its own trust profile and the trust question applies to the bundle as a whole."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-delegated-scoped-access-001
+    page: capabilities/oauth-delegated-scoped-access.md
+    claim: "OAuth issues short-lived access tokens, and a longer-lived refresh token obtains new access tokens without re-prompting the user for consent each time."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-delegated-scoped-access-002
+    page: capabilities/oauth-delegated-scoped-access.md
+    claim: "OAuth is the standard mechanism for delegated, scoped, revocable third-party access, letting an application act on a user's behalf without the user handing over their password or a full-access key."
+    source: https://datatracker.ietf.org/doc/html/rfc6749
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-delegated-scoped-access-003
+    page: capabilities/oauth-delegated-scoped-access.md
+    claim: "Grant the narrowest scope that still works, and treat requests for full account access with more scrutiny than narrow ones like reading a single repository."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-delegated-scoped-access-004
+    page: capabilities/oauth-delegated-scoped-access.md
+    claim: "Revocation happens at the third-party provider's settings page, not in the agent tool; uninstalling a plugin or deleting a local config line does not revoke a previously granted connection."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-mcp-and-agent-login-001
+    page: capabilities/oauth-mcp-and-agent-login.md
+    claim: "MCP's specification added OAuth-based authorization for remote (HTTP) MCP servers, so connecting an agent to a remote server can go through a browser consent flow with scopes and short-lived access tokens backed by refresh tokens."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-mcp-and-agent-login-002
+    page: capabilities/oauth-mcp-and-agent-login.md
+    claim: "For remote MCP servers, the OAuth authorization is defined in the MCP specification itself for HTTP-based transports; the current spec at modelcontextprotocol.io should be consulted for the precise requirements."
+    source: https://modelcontextprotocol.io
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-mcp-and-agent-login-003
+    page: capabilities/oauth-mcp-and-agent-login.md
+    claim: "OAuth 2.0's core framework is standardized in RFC 6749, and oauth.net/2/ provides a friendlier overview of the same standard."
+    source: https://datatracker.ietf.org/doc/html/rfc6749
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-mcp-and-agent-login-004
+    page: capabilities/oauth-mcp-and-agent-login.md
+    claim: "Uninstalling a plugin, deleting a local config line, or removing an MCP server from your config does not revoke a previously granted third-party connection; revocation must be done at the provider's authorized-apps page."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-mcp-and-agent-login-005
+    page: capabilities/oauth-mcp-and-agent-login.md
+    claim: "When a connection fails, read the error class first (expired token vs revoked connection vs insufficient scope) before changing configuration, because all three look like \"the agent is broken\" from the outside."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-scopes-read-before-allow-001
+    page: capabilities/oauth-scopes-read-before-allow.md
+    claim: "OAuth access tokens are typically short-lived by design, and a longer-lived refresh token lets an application get a new access token without re-prompting the user for consent each time."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-scopes-read-before-allow-002
+    page: capabilities/oauth-scopes-read-before-allow.md
+    claim: "OAuth 2.0 is standardized in RFC 6749, which defines the delegated, scoped, revocable authorization framework."
+    source: https://datatracker.ietf.org/doc/html/rfc6749
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-scopes-read-before-allow-003
+    page: capabilities/oauth-scopes-read-before-allow.md
+    claim: "The Claude API and Claude Code have mechanisms such as the skills container feature and Skill loading that are unrelated to OAuth scoping and should not be conflated with third-service authorization."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-scopes-read-before-allow-004
+    page: capabilities/oauth-scopes-read-before-allow.md
+    claim: "Read each scope line on a consent screen before clicking Allow, and prefer the narrowest scope that still accomplishes the task over broad scopes like full account access."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: oauth-scopes-read-before-allow-005
+    page: capabilities/oauth-scopes-read-before-allow.md
+    claim: "Revocation of a granted third-party connection happens at the provider's settings page, not by uninstalling the plugin or deleting local configuration."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: plugins-are-packaging-not-rivals-001
+    page: capabilities/plugins-are-packaging-not-rivals.md
+    claim: "Claude Code plugins are installed via the documented commands `/plugin marketplace add <org>/<repo>` and `/plugin install <plugin>@<marketplace>`."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: plugins-are-packaging-not-rivals-002
+    page: capabilities/plugins-are-packaging-not-rivals.md
+    claim: "A plugin is a packaging mechanism that bundles capabilities such as skills or MCP server configurations into a single installable unit, not a competing capability to them."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: plugins-are-packaging-not-rivals-003
+    page: capabilities/plugins-are-packaging-not-rivals.md
+    claim: "After installation, the plugin's bundled capabilities behave exactly as they would if you had configured them yourself, with skills model-invoked and MCP tools discovered by the client."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: plugins-are-packaging-not-rivals-004
+    page: capabilities/plugins-are-packaging-not-rivals.md
+    claim: "When evaluating a plugin, examine what the package bundles, since the bundle composition determines what permissions and connections, including OAuth grants to third-party services, its use will involve."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: revocation-lives-with-provider-001
+    page: capabilities/revocation-lives-with-provider.md
+    claim: "When an agent tool connects to a third-party service such as GitHub, Google Drive, or Slack via OAuth, the user grants that connection through a consent screen presented by the provider."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: revocation-lives-with-provider-002
+    page: capabilities/revocation-lives-with-provider.md
+    claim: "Uninstalling a plugin or deleting a local config line removes the agent's local reference to the connection but does not contact the provider and does not invalidate the grant."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: revocation-lives-with-provider-003
+    page: capabilities/revocation-lives-with-provider.md
+    claim: "OAuth access tokens are typically short-lived, and a refresh token obtains new access tokens without re-prompting for consent."
+    source: https://datatracker.ietf.org/doc/html/rfc6749
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: revocation-lives-with-provider-004
+    page: capabilities/revocation-lives-with-provider.md
+    claim: "When auditing or cleaning up agent-tool connections, check the provider-side settings pages directly rather than assuming local cleanup is sufficient, since the provider's list of authorized applications is the authoritative record of live grants."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: skills-packaged-know-how-001
+    page: capabilities/skills-packaged-know-how.md
+    claim: "In Claude Code, a Skill is a directory containing a SKILL.md file, and the directory may also hold supporting material the skill needs."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: skills-packaged-know-how-002
+    page: capabilities/skills-packaged-know-how.md
+    claim: "Skills are discovered automatically from local filesystem paths in Claude Code, with no separate registration or install step required."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: skills-packaged-know-how-003
+    page: capabilities/skills-packaged-know-how.md
+    claim: "Skills are model-invoked: the agent itself decides to load a skill when the task makes it relevant, unlike slash commands, which are user-invoked."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: skills-packaged-know-how-004
+    page: capabilities/skills-packaged-know-how.md
+    claim: "The Claude API separately supports a \"skills\" container feature for bundling skills into a single API request, which is distinct from Claude Code's filesystem-based skill loading."
+    source: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: token-expiry-recognition-001
+    page: capabilities/token-expiry-recognition.md
+    claim: "OAuth access tokens are typically short-lived by design, and the service also issues a longer-lived refresh token that lets the application obtain a new access token without re-prompting the user for consent every time."
+    source: https://oauth.net/2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: token-expiry-recognition-002
+    page: capabilities/token-expiry-recognition.md
+    claim: "OAuth 2.0's core specification, RFC 6749, is where the access-token/refresh-token model is formally defined, and the design favors expiring credentials over static ones."
+    source: https://datatracker.ietf.org/doc/html/rfc6749
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: token-expiry-recognition-003
+    page: capabilities/token-expiry-recognition.md
+    claim: "When the access token expires and refresh fails or is not happening, the next request the agent makes fails with an authentication-style error, which is the most common cause of an agent suddenly being unable to connect."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: token-expiry-recognition-004
+    page: capabilities/token-expiry-recognition.md
+    claim: "Uninstalling a plugin or deleting a local config line does not revoke a previously granted third-party connection; the grant stays live at the provider until revoked there."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

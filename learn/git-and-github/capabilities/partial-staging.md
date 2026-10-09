@@ -1,6 +1,7 @@
 ---
 title: Staging part of a file with git add -p
 module_id: git-and-github
+level: 3
 capabilities:
   - partial-staging
 context7_library: /websites/git-scm

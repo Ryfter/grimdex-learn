@@ -1,6 +1,7 @@
 ---
 title: Install, build, and run are different steps
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - install-build-run
 context7_library:

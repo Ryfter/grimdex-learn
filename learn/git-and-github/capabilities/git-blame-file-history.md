@@ -1,6 +1,7 @@
 ---
 title: Finding who changed a line with git blame
 module_id: git-and-github
+level: 3
 capabilities:
   - git-blame-file-history
 context7_library: /websites/git-scm

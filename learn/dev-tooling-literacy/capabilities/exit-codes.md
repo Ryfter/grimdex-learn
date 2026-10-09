@@ -1,6 +1,7 @@
 ---
 title: "Exit codes: how commands signal outcomes"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - exit-codes
 context7_library:

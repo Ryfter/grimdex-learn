@@ -3,7 +3,7 @@
   "moduleId": "git-and-github",
   "title": "Git and GitHub field guide",
   "description": "Audience-generic Learn pack for Grimdex users: essentials-depth capability pages across Git/GitHub, working with coding agents, agentic development practice, automation, the agent ecosystem, developer tooling, debugging, and testing. Each page stops at what/why plus a bit of how, then links to official documentation.",
-  "learnPackVersion": "0.2.0-fall2026-draft",
+  "learnPackVersion": "0.3.0-fall2026-draft",
   "contentAdmissionVersion": "D29-v1",
   "ownedPaths": [
     "learn/"
@@ -69,10 +69,12 @@
     "config/fleet.json",
     "config/learn-progress.json",
     "config/quota.json",
-    "config/settings.json"
+    "config/settings.json",
+    "learn-progress/surfacing.json"
   ],
   "studentRoots": [
-    "projects/**"
+    "projects/**",
+    "learn-progress/**"
   ],
   "generatedRoots": [
     "logs/",

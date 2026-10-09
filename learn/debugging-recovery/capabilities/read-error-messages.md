@@ -1,6 +1,7 @@
 ---
 title: Reading stack traces and agent error output
 module_id: debugging-recovery
+level: 2
 capabilities:
   - read-error-messages
 context7_library:

@@ -3,6 +3,8 @@ BeforeAll {
     . (Join-Path $PSScriptRoot '..' 'scripts' 'verify-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'stanza-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'lifecycle-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'learn-index-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'surfacing-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'install-lib.ps1')
 
     $script:RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path

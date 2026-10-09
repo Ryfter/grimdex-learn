@@ -1,6 +1,7 @@
 ---
 title: Commit identity and email privacy
 module_id: git-and-github
+level: 2
 capabilities:
   - commit-identity-email-privacy
 context7_library: /websites/github_en

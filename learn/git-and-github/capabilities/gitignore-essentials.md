@@ -1,6 +1,7 @@
 ---
 title: .gitignore essentials
 module_id: git-and-github
+level: 1
 capabilities:
   - gitignore-essentials
 context7_library: /websites/git-scm

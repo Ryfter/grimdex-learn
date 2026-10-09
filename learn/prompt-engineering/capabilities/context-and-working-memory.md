@@ -1,6 +1,7 @@
 ---
 title: Context and working memory
 module_id: prompt-engineering
+level: 1
 capabilities:
   - context-and-working-memory
 context7_library: /websites/platform_claude_en

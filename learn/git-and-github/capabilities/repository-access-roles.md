@@ -1,6 +1,7 @@
 ---
 title: Repository access roles and permissions
 module_id: git-and-github
+level: 3
 capabilities:
   - repository-access-roles
 context7_library: /websites/github_en

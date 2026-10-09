@@ -1,6 +1,7 @@
 ---
 title: Glossary
 module_id: git-and-github
+level: 1
 capabilities:
   - glossary
 context7_library: /websites/git-scm

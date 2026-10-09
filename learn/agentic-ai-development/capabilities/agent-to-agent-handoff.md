@@ -1,6 +1,7 @@
 ---
 title: Agent-to-agent handoff protocols (recognition level)
 module_id: agentic-ai-development
+level: 7
 capabilities:
   - agent-to-agent-handoff
 context7_library: /websites/platform_claude_en

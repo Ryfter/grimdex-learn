@@ -18,6 +18,8 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'verify-lib.ps1')
 . (Join-Path $PSScriptRoot 'stanza-lib.ps1')
 . (Join-Path $PSScriptRoot 'lifecycle-lib.ps1')
+. (Join-Path $PSScriptRoot 'learn-index-lib.ps1')
+. (Join-Path $PSScriptRoot 'surfacing-lib.ps1')
 . (Join-Path $PSScriptRoot 'install-lib.ps1')
 
 # $invokeArgs, never $args - $args is an automatic variable.

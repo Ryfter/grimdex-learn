@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starting a project safely</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1b2230;--muted:#5d6676;--accent:#d9480f;--accent-2:#1971c2;--rule:#e4ddd0;--code-bg:#1b2230;--code-ink:#f1f3f5;--shadow:0 18px 50px rgba(27,34,48,.14)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f131a;--card:#171d27;--ink:#e9edf2;--muted:#9aa5b4;--accent:#ff8a3d;--accent-2:#5aa9ff;--rule:#283141;--code-bg:#0a0d12;--code-ink:#e9edf2;--shadow:0 18px 50px rgba(0,0,0,.45)}}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.45}
+.slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3vh 3vw}
+.frame{position:relative;width:min(94vw,calc(84vh*16/9));aspect-ratio:16/9;background:radial-gradient(135% 110% at 100% 0%,color-mix(in srgb,var(--accent-2) 7%,var(--card)) 0%,var(--card) 55%),var(--card);border-radius:20px;box-shadow:var(--shadow);padding:4.5% 6% 5%;overflow:hidden;font-size:clamp(13px,1.9vw,30px);display:flex;flex-direction:column;justify-content:safe center;gap:.4em}
+.frame::before{content:"";position:absolute;inset:0 0 auto 0;height:.45em;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.frame::after{content:"";position:absolute;right:-12%;bottom:-18%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 9%,transparent),transparent 72%);pointer-events:none}
+.kicker{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2{margin:0;line-height:1.08;letter-spacing:-.015em;font-size:1.85em}
+.lead .frame,.slide:first-child .frame{justify-content:safe center;background:radial-gradient(120% 140% at 0% 0%,color-mix(in srgb,var(--accent) 16%,var(--card)) 0%,var(--card) 55%)}
+.lead h1,.slide:first-child h1{font-size:2.6em}
+.subtitle{font-size:1.1em;color:var(--muted);margin:0;max-width:30em}
+ul{margin:0;padding-left:1.15em}
+li{margin:.28em 0}
+li::marker{color:var(--accent)}
+li ul{font-size:.82em;color:var(--muted);margin-top:.15em}
+p{margin:.4em 0}
+code{font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;font-size:.9em;background:color-mix(in srgb,var(--accent-2) 14%,transparent);padding:.05em .3em;border-radius:.3em}
+pre{margin:0;background:var(--code-bg);color:var(--code-ink);padding:.7em 1em;border-radius:12px;font-size:.68em;line-height:1.5;overflow:auto}
+pre code{background:none;padding:0;font-size:1em}
+.visual{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.visual img{max-width:100%;max-height:100%;object-fit:contain}
+a{color:var(--accent-2)}
+.num{position:absolute;right:3.2%;bottom:3.4%;font-size:.5em;color:var(--muted);font-variant-numeric:tabular-nums}
+.notes{width:min(94vw,calc(84vh*16/9));margin-top:1.4vh;background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:.55em 1.1em;font-size:15px}
+.notes summary{cursor:pointer;font-weight:650;color:var(--accent-2)}
+.notes .short{font-size:1.05em}
+.notes .deep{margin:.4em 0;padding-left:.8em;border-left:3px solid var(--rule)}
+.notes .graphic{color:var(--muted)}
+.notes .lessons{margin:.3em 0 .2em;padding-left:1.1em}
+.notes .lessons span{color:var(--muted);font-size:.85em}
+@media print{html{scroll-snap-type:none;background:#fff}.notes{display:none}.slide{min-height:0;padding:0;break-after:page}.frame{width:100%;box-shadow:none;border:1px solid #ccc}@page{size:landscape;margin:8mm}}
+</style>
+</head>
+<body>
+<main class="deck">
+<section class="slide" id="s1" aria-label="Slide 1 of 14">
+<div class="frame">
+<h1>Starting a project safely</h1>
+<p class="subtitle">A short guide for non-programmers working with an AI coding agent: how to set up a project so it runs, stays organized, and keeps its secrets safe.</p>
+<p class="num">1 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Welcome. This deck is about the setup steps that come before any real coding, and how to review an AI agent&#39;s work at each step.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Most beginners think coding starts with writing code. In practice, a project&#39;s safety and success depend on the unglamorous setup: knowing where you are, tracking your files, and keeping secrets out. Ask the room: how many of you have let an AI tool &quot;just do it&quot; without knowing what it was doing? That&#39;s the habit we&#39;re changing.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A friendly title illustration: a laptop showing a terminal window, with a small robot assistant beside it and a checklist floating between them.</p>
+</details>
+</section>
+<section class="slide" id="s2" aria-label="Slide 2 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Know your layers: terminal, shell, command</h2>
+<ul>
+<li>The <strong>terminal</strong> is the window where text appears.</li>
+<li>The <strong>shell</strong> is the program inside it that reads what you type and runs it.</li>
+<li>The <strong>command</strong> is the program the shell starts, plus its <strong>options</strong> and <strong>arguments</strong>.</li>
+<li>A command&#39;s shape: <code>program-name --option value target</code>.</li>
+<li>You don&#39;t need to write scripts — just learn to read: &quot;that&#39;s the program, those are options, that&#39;s the target.&quot;</li>
+<li>If you can&#39;t identify the program and the target, ask the agent what the command does before approving it.</li>
+</ul>
+<p class="num">2 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">When the agent runs something, it&#39;s asking a shell to start a program. Reading the parts of a command is the whole skill here.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A common mistake is treating the terminal window as &quot;the shell&quot; — but knowing which layer complained helps you ask good questions. &quot;Command not found&quot; is the shell; a crash is usually the program. Also, options are not universal: the same flag can mean different things to different programs. Ask the room: in <code>npm install --save-dev some-package</code>, which word is the program?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Three nested boxes labeled Terminal (outer window), Shell (interpreter inside), and Program (what actually runs), with a sample command annotated underneath.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/terminal-shell-commands.md">Terminal, shell, and commands</a> <span>(dev-tooling-literacy/terminal-shell-commands)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s3" aria-label="Slide 3 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Where am I? Working directories and paths</h2>
+<ul>
+<li>Every command runs from a folder — the <strong>current working directory</strong>.</li>
+<li>An <strong>absolute path</strong> is a full address from the root of the file system.</li>
+<li>A <strong>relative path</strong> is an address from wherever the command is standing.</li>
+<li>The same relative path can point to different files from different folders.</li>
+<li>&quot;File not found&quot; usually means &quot;not found <strong>from here</strong>&quot; — not that the file is gone.</li>
+<li>First question when an agent loses a file: <strong>what directory was it working from?</strong></li>
+</ul>
+<p class="num">3 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Paths are addresses. Absolute addresses work from anywhere; relative ones depend on where the command is standing.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>This explains a huge share of confusing agent moments: the agent says a file &quot;doesn&#39;t exist,&quot; or writes a file somewhere unexpected. It was standing in the wrong folder. Also watch for agents resetting to a default directory mid-task, and for absolute paths in shared projects — they may not exist on another machine. Ask: if the agent proposes writing to a path, what should you check first? (Whether it&#39;s inside your project folder.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A simple folder tree with a stick figure standing in one folder; arrows showing a relative path from there versus an absolute path from the root.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/working-directories-and-paths.md">Working directories and paths</a> <span>(dev-tooling-literacy/working-directories-and-paths)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s4" aria-label="Slide 4 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Create a repository, or clone one</h2>
+<ul>
+<li>A <strong>repository</strong> is a project folder plus a hidden store (<code>.git</code>) that records every saved change as a <strong>commit</strong>.</li>
+<li><code>git init</code> creates a new repository in the current folder — it commits nothing by itself.</li>
+<li><code>git clone</code> makes a full local copy of an existing repository, including its history.</li>
+<li>A <strong>remote</strong> is a named link to a copy of the project on a host; after a clone, the default remote name is <code>origin</code>.</li>
+<li>A <strong>fork</strong> is a separate host-side copy of a repository — cloning is not forking.</li>
+</ul>
+<pre><code>git init -b main
+git remote add origin &lt;url&gt;
+git push -u origin main</code></pre>
+<p class="num">4 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Two ways to start: create the repository locally and push it up, or create it on the host and clone it down. Both end in the same place.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The most common beginner surprise: after <code>git init</code>, nothing has been saved yet — files stay untracked until they are added and committed. Also, if the host repository was created with a README, a first push can fail because the histories diverge; prefer an empty remote for the first push. Ask: why does <code>git init</code> alone not put anything online? (It never talks to the network.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two paths drawn side by side: &quot;local first&quot; (folder → git init → add remote → push) and &quot;host first&quot; (create on host → clone down), both ending at the same picture of a local repo connected to a remote.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/creating-and-cloning-repositories.md">Creating and cloning repositories</a> <span>(git-and-github/creating-and-cloning-repositories)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s5" aria-label="Slide 5 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Tell Git who you are, and prove it to the host</h2>
+<ul>
+<li><strong>Identity</strong>: <code>user.name</code> and <code>user.email</code> are the name and email stamped on every commit you make.</li>
+<li><strong>Authentication</strong> is separate: it&#39;s how a host accepts or rejects your connection when you push or clone.</li>
+<li>On GitHub, <strong>HTTPS</strong> uses a <strong>personal access token</strong> (not your account password); a <strong>credential helper</strong> can remember it.</li>
+<li>Over <strong>SSH</strong>, a private key stays on your machine and only the public key is registered with the host.</li>
+<li>Never commit credentials, tokens, or private keys — once committed, they are part of history.</li>
+</ul>
+<pre><code>git config --global user.name &quot;&lt;name&gt;&quot;
+git config --global user.email &quot;&lt;email&gt;&quot;</code></pre>
+<p class="num">5 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Identity is whose name goes on commits; authentication is whether the host lets you in. Set identity once, globally.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Config comes in layers too — system, global, and local — with the most specific winning; this exercise sets identity at local scope so it never leaks into other repos. A classic failure: the HTTPS password prompt is not your account password — hosts that require tokens will reject it. And tokens are as sensitive as passwords: scope them narrowly, let them expire, and never paste them into chat or screenshots. If a secret ever gets committed, treat it as compromised and rotate it first — deleting the file later does not un-leak it. Ask: why are these two jobs separate? (One is local labeling; the other is network trust.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two separate doors: one labeled &quot;Identity&quot; (a name tag on a commit) and one labeled &quot;Authentication&quot; (a key/token at a host&#39;s gate), with a note that they are different jobs.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/setup-configuration-and-authentication.md">Setup, configuration, and authentication</a> <span>(git-and-github/setup-configuration-and-authentication)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s6" aria-label="Slide 6 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Write .gitignore before your first commit</h2>
+<ul>
+<li>**<code>.gitignore</code>** is a file listing patterns for files Git should leave alone — build output, logs, local settings.</li>
+<li>Each line is a pattern; <code>#</code> starts a comment; <code>!</code> re-includes a file a previous pattern excluded.</li>
+<li>Ignore rules apply <strong>only to untracked files</strong> — they do not untrack files already committed.</li>
+<li>To stop tracking an already-tracked file: add the pattern, then <code>git rm --cached &lt;file&gt;</code> (keeps the file on disk), then commit.</li>
+<li><code>git check-ignore &lt;path&gt;</code> tests whether a rule actually catches a path.</li>
+<li>A <code>.gitignore</code> rule does not remove a secret that was already pushed — rotate it.</li>
+</ul>
+<pre><code>git rm --cached &lt;file&gt;
+git check-ignore &lt;path&gt;</code></pre>
+<p class="num">6 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Write the ignore file before the first commit, so noise and secrets never enter history in the first place.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The number-one confusion: &quot;my ignore rule doesn&#39;t work!&quot; The file is almost always already tracked — the rule only prevents future tracking. Untrack it deliberately with <code>git rm --cached</code>, then the rule takes effect. Also warn against over-broad patterns like a bare <code>*.dat</code> that accidentally exclude wanted files; test with <code>git check-ignore</code>. Ask: why can&#39;t ignoring hide a file from past commits? (History is already written.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A bouncer at a club door labeled &quot;commit&quot;: files with a .gitignore badge walk in, a file marked &quot;secrets.log&quot; is turned away — with a footnote that files already inside stay inside.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/gitignore-essentials.md">.gitignore essentials</a> <span>(git-and-github/gitignore-essentials)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s7" aria-label="Slide 7 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Configuration lives in environment variables</h2>
+<ul>
+<li><strong>Environment variables</strong> are named settings that programs read from their surroundings — outside the source files.</li>
+<li>Names are conventionally ALL-CAPS, like <code>PORT</code> or <code>DATABASE_URL</code>.</li>
+<li>Setting one is a shell action, not a code edit; a running program usually needs restarting to pick up a change.</li>
+<li>A variable set in one terminal does not exist in another — a classic &quot;works here, not there&quot; symptom.</li>
+<li>A prefixed command like <code>PORT=4000 npm run dev</code> (macOS/Linux shell syntax) supplies a variable to that one command only; PowerShell&#39;s syntax for the same idea is different.</li>
+</ul>
+<pre><code>PORT=4000 npm run dev</code></pre>
+<p class="num">7 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Environment variables let the same files behave differently in different places — nothing in the code changed; the surroundings did.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>This is one of the first things to consider when a project &quot;mysteriously&quot; differs between two terminals, machines, or deployments. A common mistake: the agent says &quot;I set the variable,&quot; but the already-running program holds the old values until restarted — so the fix appears not to work. Also, variables can point the project somewhere unexpected (like a different database), worth confirming before approving consequential actions. Ask: why does a new terminal not see the variable?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The same app box drawn twice, fed by two different dials labeled PORT=3000 and PORT=4000 — identical code, different behavior, because the environment differs.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/environment-variables.md">Environment variables</a> <span>(dev-tooling-literacy/environment-variables)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s8" aria-label="Slide 8 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Keep secrets in a .env file, never in code</h2>
+<ul>
+<li>A **<code>.env</code>** file is a plain text file of <code>NAME=value</code> pairs that tools load as environment variables.</li>
+<li><strong>Hard-coding</strong> a secret into source code means the credential travels with every copy, commit, and demo.</li>
+<li>A <code>.env</code> file is a convention, not a standard — and it is <strong>not</strong> a secure vault; it&#39;s unencrypted text on disk.</li>
+<li>Projects pair the private <code>.env</code> with a committed **<code>.env.example</code>** template with placeholder values.</li>
+<li>Never paste real credentials into chat, email, or screenshots — put the value in the file yourself.</li>
+</ul>
+<pre><code># .env
+WEATHER_API_KEY=replace-me-not-a-real-key</code></pre>
+<p class="num">8 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The shape of good practice: move the secret out of the code and into configuration the program reads at runtime.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Both versions run identically — the difference appears when the code is shared or committed. A common mistake is assuming &quot;.env&quot; means secure: it only keeps secrets out of source control, not away from anyone who can read the disk. Another trap: copying <code>.env.example</code> as your real <code>.env</code> and forgetting to replace the placeholders, so the app &quot;runs but does nothing useful.&quot; Ask: what should you do if an agent asks you to paste an API key into a source file? (Question it.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Side-by-side comparison: a code file with a key pasted inside (marked with a warning) versus a .env file beside the code holding the key, with the code reading it by name.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/dotenv-and-secrets.md">.env files and keeping secrets out of code</a> <span>(dev-tooling-literacy/dotenv-and-secrets)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s9" aria-label="Slide 9 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Push protection: the backstop when a secret slips</h2>
+<ul>
+<li><strong>Secret scanning</strong> detects known-format secrets (tokens, passwords, keys) that were committed to a repository.</li>
+<li><strong>Push protection</strong> goes a step earlier: it blocks a push containing a detected secret before it reaches the host.</li>
+<li>When blocked, you can remove the secret and push again — or <strong>bypass</strong> with a stated reason, which generates an alert for review.</li>
+<li>These features can be enabled at the repository, organization, or personal-account level.</li>
+<li>Deleting a secret in a later commit does not remove it — it stays in git history; <strong>rotation</strong> is the reliable fix.</li>
+</ul>
+<p class="num">9 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Push protection is your safety net: even if a secret almost gets committed, the host can block it before it lands.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Two cautions. First, a bypass is not a silent loophole — the reason is recorded and an alert is created, so don&#39;t bypass casually to &quot;get unblocked.&quot; Second, don&#39;t rely on the backstop alone: a very large push with many already-alerted secrets may not be blocked, and a bypassed push means the secret is on the host and should be treated as exposed until verified. Ask: if a push gets blocked, what are your two options, and which is safer?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A checkpoint gate between your laptop and the host server: a push carrying a secret is stopped at the gate; a clean push passes through.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/secret-scanning-push-protection.md">Responding to secret-scanning and push-protection alerts</a> <span>(git-and-github/secret-scanning-push-protection)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s10" aria-label="Slide 10 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>The whole checklist, start to finish</h2>
+<ul>
+<li>Safety steps come first: repository, identity, <code>.gitignore</code>, then secrets.</li>
+<li>Only after that: dependencies, install, build, run, and the license.</li>
+<li>Each rung is <strong>checkable</strong> before you move to the next one.</li>
+</ul>
+<div class="visual"><img src="infographic.svg" alt="The starting-a-project-safely workflow, from an empty folder to a running, licensed project"></div>
+<p class="num">10 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Here is the entire path on one page — an empty folder becomes a tracked, configured, secret-safe, running project.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Pause here and let the room absorb the sequence. Notice how the early steps (repository, .gitignore, secrets) come <strong>before</strong> any dependencies or running code — setup order matters, because a secret committed in step three is far harder to fix than one prevented in step two. Ask: which step do you think people skip most often, and what does that cost later?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The provided infographic itself: a step-by-step path from an empty folder through repository setup, ignore rules, secrets hygiene, dependencies, and finally a running, licensed project.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/creating-and-cloning-repositories.md">Creating and cloning repositories</a> <span>(git-and-github/creating-and-cloning-repositories)</span></li>
+<li><a href="../../../git-and-github/capabilities/gitignore-essentials.md">.gitignore essentials</a> <span>(git-and-github/gitignore-essentials)</span></li>
+<li><a href="../../../dev-tooling-literacy/capabilities/dotenv-and-secrets.md">.env files and keeping secrets out of code</a> <span>(dev-tooling-literacy/dotenv-and-secrets)</span></li>
+<li><a href="../../../dev-tooling-literacy/capabilities/install-build-run.md">Install, build, and run are different steps</a> <span>(dev-tooling-literacy/install-build-run)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s11" aria-label="Slide 11 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Dependencies: someone else&#39;s code</h2>
+<ul>
+<li>A <strong>dependency</strong> is third-party software your project uses but did not write — a library for dates, databases, or styling.</li>
+<li>A <strong>package manager</strong> finds, downloads, and organizes dependencies — npm for JavaScript, pip for Python.</li>
+<li>Packages come from a public <strong>registry</strong> — a shared online collection; the registry does not vouch for any package.</li>
+<li>Installing a package is adding external software, with its own authors, versions, and licenses — not &quot;enabling a feature.&quot;</li>
+<li>A project may not run at all until its dependencies are installed — a normal first-run experience.</li>
+</ul>
+<pre><code>npm install date-fns</code></pre>
+<p class="num">11 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">When the agent &quot;installs a package,&quot; it&#39;s fetching real external software and wiring it into your project — routine, but a real change.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The wrong mental model is &quot;enabling a feature&quot; of a language; packages are outside code with their own update cadence and license terms. A real failure mode is a mistyped or ambiguous package name — a quick sanity check of the name against its registry page is reasonable due diligence. Ask: when an agent adds several packages at once, what should you ask about each one? (Which package, and why.)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A shopping cart metaphor: your project&#39;s cart receiving labeled packages from a large public marketplace shelf, each package with its own author tag.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/dependencies-and-package-managers.md">Dependencies and package managers</a> <span>(dev-tooling-literacy/dependencies-and-package-managers)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s12" aria-label="Slide 12 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Manifest vs. lockfile: the list and the receipt</h2>
+<ul>
+<li>A <strong>manifest</strong> (like <code>package.json</code>) records what the project <strong>asks for</strong> — often with flexible version ranges like <code>^4.2.1</code> (&quot;compatible with 4.2.1&quot;).</li>
+<li>A <strong>lockfile</strong> (like <code>package-lock.json</code>) records what was <strong>actually installed</strong> — exact versions for the whole dependency tree.</li>
+<li>Mental model: the manifest is the shopping list; the lockfile is the receipt.</li>
+<li>One install legitimately changes <strong>both</strong> files — that&#39;s the system working, not the agent being sloppy.</li>
+<li>Commit both files; if either is missing, collaborators may install different exact versions.</li>
+<li>Don&#39;t edit a lockfile by hand — the package manager maintains it.</li>
+</ul>
+<p class="num">12 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The manifest states intent; the lockfile records resolution. Seeing both change together during an install is a good sign.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>This distinction explains why an agent touches more than one file when adding a dependency — and gives you a review habit: check that both changed together, and ask the agent to explain the manifest change in plain language. A common mistake is assuming the manifest&#39;s version range is what got installed; the lockfile is the authoritative record. Also, a regenerated lockfile does not mean the app was tested. Ask: what breaks if a teammate commits the manifest but not the lockfile?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two documents side by side: a handwritten shopping list (&quot;flour&quot;) next to a printed receipt (&quot;this exact brand and bag size&quot;), connected by an arrow.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/manifests-vs-lockfiles.md">Dependency manifests vs. lockfiles</a> <span>(dev-tooling-literacy/manifests-vs-lockfiles)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s13" aria-label="Slide 13 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Virtual environments: one room per project</h2>
+<ul>
+<li>A <strong>virtual environment</strong> is a project-specific, isolated space for dependencies — instead of installing onto the whole machine.</li>
+<li>Two projects can use different versions of the same package without conflicting.</li>
+<li><strong>Activating</strong> an environment points the terminal at that room, so installs land in the right place.</li>
+<li>&quot;Module not found&quot; after a successful-looking install often means the package went into a different (or no) environment.</li>
+<li>An agent creating or activating an environment is doing deliberate, conventional setup — not padding the task.</li>
+<li>The environment folder itself is excluded from version control; the dependency <strong>list</strong> is shared, and the environment is rebuilt.</li>
+</ul>
+<p class="num">13 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Isolation keeps projects from interfering with each other and with the machine. Activation is what makes installs land in the right room.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The most common symptom of an environment mismatch: the install succeeds but the project still can&#39;t find the package — it went somewhere the project doesn&#39;t look. Activation is per-terminal, per-session, so a new terminal may mean the environment is no longer active — a frequent source of &quot;it worked yesterday&quot; confusion. And don&#39;t confuse isolation with safety: a venv limits interference, not what an agent can do, so it&#39;s not a reason to auto-approve actions. Ask: why not just install everything globally?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two separate rooms side by side, each holding its own stack of package boxes labeled with different version numbers, with a door labeled &quot;activate&quot; leading into one room.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/virtual-environments.md">Virtual environments: keeping dependencies separate</a> <span>(dev-tooling-literacy/virtual-environments)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s14" aria-label="Slide 14 of 14">
+<div class="frame">
+<p class="kicker">Starting a project safely</p>
+<h2>Install, build, run — and read the license</h2>
+<ul>
+<li><strong>Install</strong>, <strong>build</strong>, and <strong>run</strong> are three separate steps, each able to succeed or fail on its own.</li>
+<li>A successful build means artifacts were generated — it is <strong>not</strong> proof the app is running.</li>
+<li>&quot;The app is running&quot; is only confirmed by actually reaching the address it reports (like a localhost URL on a port).</li>
+<li>A <strong>license file</strong> (<code>LICENSE</code>, <code>COPYING</code>, <code>NOTICE</code>) states the conditions for using someone else&#39;s code.</li>
+<li><strong>Permissive</strong> licenses (MIT, Apache-2.0) typically require keeping attribution; <strong>copyleft</strong> licenses (GPL family) can impose sharing obligations.</li>
+<li>&quot;Easy to install&quot; is not &quot;free of conditions&quot; — and an agent installing code does not remove your obligation to check.</li>
+</ul>
+<p class="num">14 / 14</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Ask which step the agent is describing before drawing conclusions — and remember every dependency arrives with a license attached.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The most common misread is assuming build success means a working app; a clean build with nothing running produces nothing you can open. Verify the run claim by actually visiting the reported address. On licensing: approving an install is not a license review, and obligations travel through the whole dependency tree — code copied from tutorials or AI suggestions can carry licenses too. Ask: if the agent says &quot;installed and built,&quot; what question should you ask next? (Is it running, and where?)</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A three-stage assembly line (Install → Build → Run) with a &quot;running?&quot; checkpoint light at the end, plus a small license tag attached to every incoming package box.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/install-build-run.md">Install, build, and run are different steps</a> <span>(dev-tooling-literacy/install-build-run)</span></li>
+<li><a href="../../../dev-tooling-literacy/capabilities/license-files.md">License files and third-party obligations</a> <span>(dev-tooling-literacy/license-files)</span></li>
+</ul>
+</details>
+</section>
+</main>
+</body>
+</html>

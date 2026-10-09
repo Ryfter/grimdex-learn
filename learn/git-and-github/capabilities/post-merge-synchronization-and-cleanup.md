@@ -1,6 +1,7 @@
 ---
 title: Post-merge synchronization and cleanup
 module_id: git-and-github
+level: 3
 capabilities:
   - post-merge-synchronization-and-cleanup
 context7_library: /websites/git-scm

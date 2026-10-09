@@ -1,6 +1,7 @@
 ---
 title: File permissions and access
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - file-permissions
 context7_library:

@@ -1,6 +1,7 @@
 ---
 title: "Repo instruction files: AGENTS.md, CLAUDE.md, and rules files"
 module_id: agentic-ai-development
+level: 4
 capabilities:
   - repo-instruction-files
 context7_library: /websites/platform_claude_en

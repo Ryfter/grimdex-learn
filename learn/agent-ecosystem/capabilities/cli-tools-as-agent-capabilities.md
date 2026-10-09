@@ -1,6 +1,7 @@
 ---
 title: "CLI tools: capabilities your agent already has"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - cli-tools-as-agent-capabilities
 context7_library: /websites/platform_claude_en

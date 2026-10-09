@@ -1,6 +1,7 @@
 ---
 title: Commits and history
 module_id: git-and-github
+level: 1
 capabilities:
   - commits-and-history
 context7_library: /websites/git-scm

@@ -1,6 +1,7 @@
 ---
 title: Linking issues to PRs with closing keywords
 module_id: git-and-github
+level: 2
 capabilities:
   - linking-issues-to-prs
 context7_library: /websites/github_en

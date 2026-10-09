@@ -1,6 +1,7 @@
 ---
 title: Human-in-the-loop interruption and steering
 module_id: agentic-ai-development
+level: 7
 capabilities:
   - hitl-interruption-and-steering
 context7_library: /websites/platform_claude_en

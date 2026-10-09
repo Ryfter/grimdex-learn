@@ -1,6 +1,7 @@
 ---
 title: Agent lifecycle hooks (PreToolUse/PostToolUse/Stop)
 module_id: agentic-automation
+level: 5
 capabilities:
   - agent-lifecycle-hooks
 context7_library: /websites/platform_claude_en

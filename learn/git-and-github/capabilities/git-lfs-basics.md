@@ -1,6 +1,7 @@
 ---
 title: Large files and Git LFS (recognition level)
 module_id: git-and-github
+level: 3
 capabilities:
   - git-lfs-basics
 context7_library: /websites/github_en

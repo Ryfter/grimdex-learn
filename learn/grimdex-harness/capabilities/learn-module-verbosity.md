@@ -1,6 +1,7 @@
 ---
 title: How the Learn module changes responses
 module_id: grimdex-harness
+level: 2
 capabilities:
   - learn-module-verbosity
 context7_library:
@@ -43,6 +44,8 @@ These are the module's only two functions. Everything else about the harness wor
 ## Current syntax
 
 There are no new commands for this capability. Verbosity and pass-through are behavior, not syntax: after installation, responses are simply longer and include link-outs where deeper material exists.
+
+When a response draws on a specific Learn lesson, it ends with a line like `Learn: <module-id>/<lesson-id>`. That marker is for the student's own records — it does not change the response. Running `scripts/learn-surfacing.ps1` against saved session logs counts those markers and updates the student's own progress; it is optional and separate from this module's verbosity behavior.
 
 ## What happens (local and remote)
 

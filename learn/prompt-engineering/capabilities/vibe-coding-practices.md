@@ -1,6 +1,7 @@
 ---
 title: Session habits for agentic coding
 module_id: prompt-engineering
+level: 2
 capabilities:
   - vibe-coding-practices
 context7_library: /websites/platform_claude_en

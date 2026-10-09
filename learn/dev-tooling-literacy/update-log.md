@@ -2,6 +2,13 @@
 
 Chronological, newest first. Entries state before/after facts in complete sentences.
 
+## 2026-09-26 — claims baseline extended
+
+Normalized claims were added to `claims/baseline.yaml` for every page that had none.
+They were extracted by a non-Claude model from the fact-checked pages and mechanically
+checked (cited source, wording grounded in the page); each is marked
+`verification: page-restatement` until a refresh pass confirms it against its source.
+
 ## 2026-09-20 — module authored
 
 The module was created with 25 capability pages during the 2026-09-20

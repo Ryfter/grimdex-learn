@@ -1,6 +1,7 @@
 ---
 title: Working tree, staging, and status
 module_id: git-and-github
+level: 1
 capabilities:
   - working-tree-staging-and-status
 context7_library: /websites/git-scm

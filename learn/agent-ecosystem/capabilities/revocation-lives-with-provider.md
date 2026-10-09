@@ -1,6 +1,7 @@
 ---
 title: Revocation lives with the provider, not the agent
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - revocation-lives-with-provider
 context7_library: /websites/platform_claude_en

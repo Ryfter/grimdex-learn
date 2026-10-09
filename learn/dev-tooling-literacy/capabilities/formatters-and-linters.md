@@ -1,6 +1,7 @@
 ---
 title: "Formatters and linters: different kinds of cleanup"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - formatters-and-linters
 context7_library:

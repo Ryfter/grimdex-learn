@@ -1,0 +1,1375 @@
+{
+  "schemaVersion": 1,
+  "lessons": [
+    {
+      "id": "agent-ecosystem-map",
+      "module": "agent-ecosystem",
+      "title": "One map: CLIs, MCP, Skills, and plugins",
+      "level": 4,
+      "capabilities": [
+        "agent-ecosystem-map"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/agent-ecosystem-map.md"
+    },
+    {
+      "id": "api-keys-static-credential",
+      "module": "agent-ecosystem",
+      "title": "API keys: the static master key",
+      "level": 4,
+      "capabilities": [
+        "api-keys-static-credential"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/api-keys-static-credential.md"
+    },
+    {
+      "id": "choosing-the-right-component",
+      "module": "agent-ecosystem",
+      "title": "Which one when: a routing table for CLI/MCP/Skill/plugin",
+      "level": 4,
+      "capabilities": [
+        "choosing-the-right-component"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/choosing-the-right-component.md"
+    },
+    {
+      "id": "cli-tools-as-agent-capabilities",
+      "module": "agent-ecosystem",
+      "title": "CLI tools: capabilities your agent already has",
+      "level": 4,
+      "capabilities": [
+        "cli-tools-as-agent-capabilities"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/cli-tools-as-agent-capabilities.md"
+    },
+    {
+      "id": "mcp-host-client-server",
+      "module": "agent-ecosystem",
+      "title": "Host, client, server: who talks to whom in MCP",
+      "level": 4,
+      "capabilities": [
+        "mcp-host-client-server"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/mcp-host-client-server.md"
+    },
+    {
+      "id": "mcp-servers-standardized-connectors",
+      "module": "agent-ecosystem",
+      "title": "MCP servers: standardized connectors",
+      "level": 4,
+      "capabilities": [
+        "mcp-servers-standardized-connectors"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/mcp-servers-standardized-connectors.md"
+    },
+    {
+      "id": "mcp-vs-cli-tradeoffs",
+      "module": "agent-ecosystem",
+      "title": "MCP vs. shelling out: when each wins",
+      "level": 4,
+      "capabilities": [
+        "mcp-vs-cli-tradeoffs"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/mcp-vs-cli-tradeoffs.md"
+    },
+    {
+      "id": "name-that-component-practicum",
+      "module": "agent-ecosystem",
+      "title": "Practicum: name that component from a real config",
+      "level": 4,
+      "capabilities": [
+        "name-that-component-practicum"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/name-that-component-practicum.md"
+    },
+    {
+      "id": "oauth-delegated-scoped-access",
+      "module": "agent-ecosystem",
+      "title": "OAuth: borrowed, scoped, revocable access",
+      "level": 4,
+      "capabilities": [
+        "oauth-delegated-scoped-access"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/oauth-delegated-scoped-access.md"
+    },
+    {
+      "id": "oauth-mcp-and-agent-login",
+      "module": "agent-ecosystem",
+      "title": "Where it meets: OAuth, MCP, and your agent's own login",
+      "level": 4,
+      "capabilities": [
+        "oauth-mcp-and-agent-login"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/oauth-mcp-and-agent-login.md"
+    },
+    {
+      "id": "oauth-scopes-read-before-allow",
+      "module": "agent-ecosystem",
+      "title": "Scopes: read before you click Allow",
+      "level": 4,
+      "capabilities": [
+        "oauth-scopes-read-before-allow"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/oauth-scopes-read-before-allow.md"
+    },
+    {
+      "id": "plugins-are-packaging-not-rivals",
+      "module": "agent-ecosystem",
+      "title": "Plugins: packaging, not a rival to MCP",
+      "level": 4,
+      "capabilities": [
+        "plugins-are-packaging-not-rivals"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/plugins-are-packaging-not-rivals.md"
+    },
+    {
+      "id": "revocation-lives-with-provider",
+      "module": "agent-ecosystem",
+      "title": "Revocation lives with the provider, not the agent",
+      "level": 4,
+      "capabilities": [
+        "revocation-lives-with-provider"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/revocation-lives-with-provider.md"
+    },
+    {
+      "id": "skills-packaged-know-how",
+      "module": "agent-ecosystem",
+      "title": "Skills: packaged know-how the agent loads on demand",
+      "level": 4,
+      "capabilities": [
+        "skills-packaged-know-how"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/skills-packaged-know-how.md"
+    },
+    {
+      "id": "token-expiry-recognition",
+      "module": "agent-ecosystem",
+      "title": "When tokens expire (and how it looks)",
+      "level": 4,
+      "capabilities": [
+        "token-expiry-recognition"
+      ],
+      "path": "learn/agent-ecosystem/capabilities/token-expiry-recognition.md"
+    },
+    {
+      "id": "agent-evals",
+      "module": "agentic-ai-development",
+      "title": "Agent evals: measuring non-deterministic quality over time",
+      "level": 5,
+      "capabilities": [
+        "agent-evals"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/agent-evals.md"
+    },
+    {
+      "id": "agent-to-agent-handoff",
+      "module": "agentic-ai-development",
+      "title": "Agent-to-agent handoff protocols (recognition level)",
+      "level": 7,
+      "capabilities": [
+        "agent-to-agent-handoff"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/agent-to-agent-handoff.md"
+    },
+    {
+      "id": "background-agents-and-ci",
+      "module": "agentic-ai-development",
+      "title": "Background and autonomous agents in CI (issue-to-PR patterns)",
+      "level": 7,
+      "capabilities": [
+        "background-agents-and-ci"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/background-agents-and-ci.md"
+    },
+    {
+      "id": "checkpoints-and-rollback-for-agent-work",
+      "module": "agentic-ai-development",
+      "title": "Checkpoints, diffs, and rollback for agent work",
+      "level": 5,
+      "capabilities": [
+        "checkpoints-and-rollback-for-agent-work"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/checkpoints-and-rollback-for-agent-work.md"
+    },
+    {
+      "id": "codebase-retrieval-hybrid-search",
+      "module": "agentic-ai-development",
+      "title": "Codebase retrieval -- hybrid search vs. naive RAG",
+      "level": 7,
+      "capabilities": [
+        "codebase-retrieval-hybrid-search"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/codebase-retrieval-hybrid-search.md"
+    },
+    {
+      "id": "context-engineering-and-window-management",
+      "module": "agentic-ai-development",
+      "title": "Context engineering and window management",
+      "level": 4,
+      "capabilities": [
+        "context-engineering-and-window-management"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/context-engineering-and-window-management.md"
+    },
+    {
+      "id": "hitl-interruption-and-steering",
+      "module": "agentic-ai-development",
+      "title": "Human-in-the-loop interruption and steering",
+      "level": 7,
+      "capabilities": [
+        "hitl-interruption-and-steering"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/hitl-interruption-and-steering.md"
+    },
+    {
+      "id": "model-routing-and-cost-tiers",
+      "module": "agentic-ai-development",
+      "title": "Model routing and cost-tier optimization",
+      "level": 5,
+      "capabilities": [
+        "model-routing-and-cost-tiers"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/model-routing-and-cost-tiers.md"
+    },
+    {
+      "id": "multi-agent-orchestration-tradeoffs",
+      "module": "agentic-ai-development",
+      "title": "Multi-agent orchestration -- the honest tradeoffs",
+      "level": 5,
+      "capabilities": [
+        "multi-agent-orchestration-tradeoffs"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/multi-agent-orchestration-tradeoffs.md"
+    },
+    {
+      "id": "persistent-agent-memory",
+      "module": "agentic-ai-development",
+      "title": "Persistent agent memory vs. working context",
+      "level": 7,
+      "capabilities": [
+        "persistent-agent-memory"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/persistent-agent-memory.md"
+    },
+    {
+      "id": "prompt-injection-and-lethal-trifecta",
+      "module": "agentic-ai-development",
+      "title": "Indirect prompt injection and the \"lethal trifecta\"",
+      "level": 6,
+      "capabilities": [
+        "prompt-injection-and-lethal-trifecta"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/prompt-injection-and-lethal-trifecta.md"
+    },
+    {
+      "id": "reading-agent-traces",
+      "module": "agentic-ai-development",
+      "title": "Reading and debugging an agent's trace",
+      "level": 5,
+      "capabilities": [
+        "reading-agent-traces"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/reading-agent-traces.md"
+    },
+    {
+      "id": "repo-instruction-files",
+      "module": "agentic-ai-development",
+      "title": "Repo instruction files: AGENTS.md, CLAUDE.md, and rules files",
+      "level": 4,
+      "capabilities": [
+        "repo-instruction-files"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/repo-instruction-files.md"
+    },
+    {
+      "id": "reviewing-agent-generated-code",
+      "module": "agentic-ai-development",
+      "title": "Reviewing agent-generated code and staying accountable",
+      "level": 6,
+      "capabilities": [
+        "reviewing-agent-generated-code"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/reviewing-agent-generated-code.md"
+    },
+    {
+      "id": "sandboxing-and-least-privilege",
+      "module": "agentic-ai-development",
+      "title": "Sandboxing and least privilege for agents",
+      "level": 6,
+      "capabilities": [
+        "sandboxing-and-least-privilege"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/sandboxing-and-least-privilege.md"
+    },
+    {
+      "id": "secrets-and-data-hygiene-for-agent-context",
+      "module": "agentic-ai-development",
+      "title": "Secrets and data hygiene for agent context",
+      "level": 6,
+      "capabilities": [
+        "secrets-and-data-hygiene-for-agent-context"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/secrets-and-data-hygiene-for-agent-context.md"
+    },
+    {
+      "id": "spec-driven-plan-first-development",
+      "module": "agentic-ai-development",
+      "title": "Spec-driven and plan-first development",
+      "level": 5,
+      "capabilities": [
+        "spec-driven-plan-first-development"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/spec-driven-plan-first-development.md"
+    },
+    {
+      "id": "tool-and-schema-design",
+      "module": "agentic-ai-development",
+      "title": "Tool and schema design: tool descriptions are prompts",
+      "level": 6,
+      "capabilities": [
+        "tool-and-schema-design"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/tool-and-schema-design.md"
+    },
+    {
+      "id": "verification-first-loops",
+      "module": "agentic-ai-development",
+      "title": "Verification-first loops: sensors and closed-loop harnesses",
+      "level": 5,
+      "capabilities": [
+        "verification-first-loops"
+      ],
+      "path": "learn/agentic-ai-development/capabilities/verification-first-loops.md"
+    },
+    {
+      "id": "agent-lifecycle-hooks",
+      "module": "agentic-automation",
+      "title": "Agent lifecycle hooks (PreToolUse/PostToolUse/Stop)",
+      "level": 5,
+      "capabilities": [
+        "agent-lifecycle-hooks"
+      ],
+      "path": "learn/agentic-automation/capabilities/agent-lifecycle-hooks.md"
+    },
+    {
+      "id": "agentic-loop-vs-code-loop",
+      "module": "agentic-automation",
+      "title": "An agentic \"loop\" is not a for/while loop",
+      "level": 5,
+      "capabilities": [
+        "agentic-loop-vs-code-loop"
+      ],
+      "path": "learn/agentic-automation/capabilities/agentic-loop-vs-code-loop.md"
+    },
+    {
+      "id": "cost-and-observability",
+      "module": "agentic-automation",
+      "title": "Cost and observability of unattended runs",
+      "level": 5,
+      "capabilities": [
+        "cost-and-observability"
+      ],
+      "path": "learn/agentic-automation/capabilities/cost-and-observability.md"
+    },
+    {
+      "id": "cron-five-fields",
+      "module": "agentic-automation",
+      "title": "Cron syntax in ten minutes",
+      "level": 5,
+      "capabilities": [
+        "cron-five-fields"
+      ],
+      "path": "learn/agentic-automation/capabilities/cron-five-fields.md"
+    },
+    {
+      "id": "git-hooks-101",
+      "module": "agentic-automation",
+      "title": "Git hooks 101 (client-side)",
+      "level": 5,
+      "capabilities": [
+        "git-hooks-101"
+      ],
+      "path": "learn/agentic-automation/capabilities/git-hooks-101.md"
+    },
+    {
+      "id": "give-every-loop-an-exit",
+      "module": "agentic-automation",
+      "title": "Give every loop an exit condition",
+      "level": 5,
+      "capabilities": [
+        "give-every-loop-an-exit"
+      ],
+      "path": "learn/agentic-automation/capabilities/give-every-loop-an-exit.md"
+    },
+    {
+      "id": "headless-noninteractive-mode",
+      "module": "agentic-automation",
+      "title": "Headless mode: the building block of automation",
+      "level": 5,
+      "capabilities": [
+        "headless-noninteractive-mode"
+      ],
+      "path": "learn/agentic-automation/capabilities/headless-noninteractive-mode.md"
+    },
+    {
+      "id": "hook-feedback-loop-risk",
+      "module": "agentic-automation",
+      "title": "Avoiding hooks that trigger themselves forever",
+      "level": 5,
+      "capabilities": [
+        "hook-feedback-loop-risk"
+      ],
+      "path": "learn/agentic-automation/capabilities/hook-feedback-loop-risk.md"
+    },
+    {
+      "id": "hooks-as-gates",
+      "module": "agentic-automation",
+      "title": "Hooks as gates -- allowing and blocking agent actions",
+      "level": 5,
+      "capabilities": [
+        "hooks-as-gates"
+      ],
+      "path": "learn/agentic-automation/capabilities/hooks-as-gates.md"
+    },
+    {
+      "id": "human-approval-gates",
+      "module": "agentic-automation",
+      "title": "Human approval gates before autonomy",
+      "level": 5,
+      "capabilities": [
+        "human-approval-gates"
+      ],
+      "path": "learn/agentic-automation/capabilities/human-approval-gates.md"
+    },
+    {
+      "id": "idempotency-safe-to-rerun",
+      "module": "agentic-automation",
+      "title": "Idempotency: designing tasks safe to run again",
+      "level": 5,
+      "capabilities": [
+        "idempotency-safe-to-rerun"
+      ],
+      "path": "learn/agentic-automation/capabilities/idempotency-safe-to-rerun.md"
+    },
+    {
+      "id": "loop-hook-schedule-triggers",
+      "module": "agentic-automation",
+      "title": "Hook, schedule, or loop: choosing the right trigger",
+      "level": 5,
+      "capabilities": [
+        "loop-hook-schedule-triggers"
+      ],
+      "path": "learn/agentic-automation/capabilities/loop-hook-schedule-triggers.md"
+    },
+    {
+      "id": "manual-one-off-triggers",
+      "module": "agentic-automation",
+      "title": "Manual and one-off triggers (workflow_dispatch)",
+      "level": 5,
+      "capabilities": [
+        "manual-one-off-triggers"
+      ],
+      "path": "learn/agentic-automation/capabilities/manual-one-off-triggers.md"
+    },
+    {
+      "id": "overlap-and-concurrency",
+      "module": "agentic-automation",
+      "title": "What happens when the next run starts before the last ends",
+      "level": 5,
+      "capabilities": [
+        "overlap-and-concurrency"
+      ],
+      "path": "learn/agentic-automation/capabilities/overlap-and-concurrency.md"
+    },
+    {
+      "id": "runaway-loop-and-timeouts",
+      "module": "agentic-automation",
+      "title": "Runaway-loop risk and timeouts",
+      "level": 5,
+      "capabilities": [
+        "runaway-loop-and-timeouts"
+      ],
+      "path": "learn/agentic-automation/capabilities/runaway-loop-and-timeouts.md"
+    },
+    {
+      "id": "schedule-reality-checks",
+      "module": "agentic-automation",
+      "title": "Scheduled does not mean exactly on time",
+      "level": 5,
+      "capabilities": [
+        "schedule-reality-checks"
+      ],
+      "path": "learn/agentic-automation/capabilities/schedule-reality-checks.md"
+    },
+    {
+      "id": "scheduled-workflows-github-actions",
+      "module": "agentic-automation",
+      "title": "Scheduled GitHub Actions (on.schedule)",
+      "level": 5,
+      "capabilities": [
+        "scheduled-workflows-github-actions"
+      ],
+      "path": "learn/agentic-automation/capabilities/scheduled-workflows-github-actions.md"
+    },
+    {
+      "id": "server-side-git-hooks",
+      "module": "agentic-automation",
+      "title": "Server-side git hooks",
+      "level": 5,
+      "capabilities": [
+        "server-side-git-hooks"
+      ],
+      "path": "learn/agentic-automation/capabilities/server-side-git-hooks.md"
+    },
+    {
+      "id": "shared-hooks-and-hookspath",
+      "module": "agentic-automation",
+      "title": "Sharing hooks across a team (core.hooksPath)",
+      "level": 5,
+      "capabilities": [
+        "shared-hooks-and-hookspath"
+      ],
+      "path": "learn/agentic-automation/capabilities/shared-hooks-and-hookspath.md"
+    },
+    {
+      "id": "the-kill-switch",
+      "module": "agentic-automation",
+      "title": "The kill switch: stopping a run vs. disabling its trigger",
+      "level": 5,
+      "capabilities": [
+        "the-kill-switch"
+      ],
+      "path": "learn/agentic-automation/capabilities/the-kill-switch.md"
+    },
+    {
+      "id": "ask-for-help",
+      "module": "debugging-recovery",
+      "title": "Escalating without leaking secrets",
+      "level": 2,
+      "capabilities": [
+        "ask-for-help"
+      ],
+      "path": "learn/debugging-recovery/capabilities/ask-for-help.md"
+    },
+    {
+      "id": "bisect-and-blame",
+      "module": "debugging-recovery",
+      "title": "When to bisect vs revert",
+      "level": 3,
+      "capabilities": [
+        "bisect-and-blame"
+      ],
+      "path": "learn/debugging-recovery/capabilities/bisect-and-blame.md"
+    },
+    {
+      "id": "read-error-messages",
+      "module": "debugging-recovery",
+      "title": "Reading stack traces and agent error output",
+      "level": 2,
+      "capabilities": [
+        "read-error-messages"
+      ],
+      "path": "learn/debugging-recovery/capabilities/read-error-messages.md"
+    },
+    {
+      "id": "api-auth-and-permissions",
+      "module": "dev-tooling-literacy",
+      "title": "API credentials, authentication, and permissions",
+      "level": 3,
+      "capabilities": [
+        "api-auth-and-permissions"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/api-auth-and-permissions.md"
+    },
+    {
+      "id": "apis-endpoints-rest",
+      "module": "dev-tooling-literacy",
+      "title": "APIs, endpoints, and REST",
+      "level": 3,
+      "capabilities": [
+        "apis-endpoints-rest"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/apis-endpoints-rest.md"
+    },
+    {
+      "id": "config-file-formats",
+      "module": "dev-tooling-literacy",
+      "title": "Recognizing JSON, YAML, and TOML config files",
+      "level": 3,
+      "capabilities": [
+        "config-file-formats"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/config-file-formats.md"
+    },
+    {
+      "id": "containers-and-sandboxes",
+      "module": "dev-tooling-literacy",
+      "title": "Containers, sandboxes, and isolation boundaries",
+      "level": 3,
+      "capabilities": [
+        "containers-and-sandboxes"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/containers-and-sandboxes.md"
+    },
+    {
+      "id": "database-connections",
+      "module": "dev-tooling-literacy",
+      "title": "Database connections and connection strings",
+      "level": 3,
+      "capabilities": [
+        "database-connections"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/database-connections.md"
+    },
+    {
+      "id": "database-migrations",
+      "module": "dev-tooling-literacy",
+      "title": "Database migrations: changes to stored structure",
+      "level": 3,
+      "capabilities": [
+        "database-migrations"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/database-migrations.md"
+    },
+    {
+      "id": "dependencies-and-package-managers",
+      "module": "dev-tooling-literacy",
+      "title": "Dependencies and package managers",
+      "level": 3,
+      "capabilities": [
+        "dependencies-and-package-managers"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/dependencies-and-package-managers.md"
+    },
+    {
+      "id": "dotenv-and-secrets",
+      "module": "dev-tooling-literacy",
+      "title": ".env files and keeping secrets out of code",
+      "level": 3,
+      "capabilities": [
+        "dotenv-and-secrets"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/dotenv-and-secrets.md"
+    },
+    {
+      "id": "environment-variables",
+      "module": "dev-tooling-literacy",
+      "title": "Environment variables",
+      "level": 3,
+      "capabilities": [
+        "environment-variables"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/environment-variables.md"
+    },
+    {
+      "id": "exit-codes",
+      "module": "dev-tooling-literacy",
+      "title": "Exit codes: how commands signal outcomes",
+      "level": 3,
+      "capabilities": [
+        "exit-codes"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/exit-codes.md"
+    },
+    {
+      "id": "file-permissions",
+      "module": "dev-tooling-literacy",
+      "title": "File permissions and access",
+      "level": 3,
+      "capabilities": [
+        "file-permissions"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/file-permissions.md"
+    },
+    {
+      "id": "formatters-and-linters",
+      "module": "dev-tooling-literacy",
+      "title": "Formatters and linters: different kinds of cleanup",
+      "level": 3,
+      "capabilities": [
+        "formatters-and-linters"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/formatters-and-linters.md"
+    },
+    {
+      "id": "http-requests-responses",
+      "module": "dev-tooling-literacy",
+      "title": "HTTP requests and responses",
+      "level": 3,
+      "capabilities": [
+        "http-requests-responses"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/http-requests-responses.md"
+    },
+    {
+      "id": "install-build-run",
+      "module": "dev-tooling-literacy",
+      "title": "Install, build, and run are different steps",
+      "level": 3,
+      "capabilities": [
+        "install-build-run"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/install-build-run.md"
+    },
+    {
+      "id": "license-files",
+      "module": "dev-tooling-literacy",
+      "title": "License files and third-party obligations",
+      "level": 3,
+      "capabilities": [
+        "license-files"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/license-files.md"
+    },
+    {
+      "id": "localhost-and-ports",
+      "module": "dev-tooling-literacy",
+      "title": "Localhost, ports, and exposed services",
+      "level": 3,
+      "capabilities": [
+        "localhost-and-ports"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/localhost-and-ports.md"
+    },
+    {
+      "id": "logs-and-severity-levels",
+      "module": "dev-tooling-literacy",
+      "title": "Application logs and severity levels",
+      "level": 3,
+      "capabilities": [
+        "logs-and-severity-levels"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/logs-and-severity-levels.md"
+    },
+    {
+      "id": "manifests-vs-lockfiles",
+      "module": "dev-tooling-literacy",
+      "title": "Dependency manifests vs. lockfiles",
+      "level": 3,
+      "capabilities": [
+        "manifests-vs-lockfiles"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/manifests-vs-lockfiles.md"
+    },
+    {
+      "id": "processes-and-servers",
+      "module": "dev-tooling-literacy",
+      "title": "Running processes and stopping a server",
+      "level": 3,
+      "capabilities": [
+        "processes-and-servers"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/processes-and-servers.md"
+    },
+    {
+      "id": "reproducing-a-bug",
+      "module": "dev-tooling-literacy",
+      "title": "Reproducing a bug: making a symptom repeatable",
+      "level": 3,
+      "capabilities": [
+        "reproducing-a-bug"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/reproducing-a-bug.md"
+    },
+    {
+      "id": "runtime-versions-lifecycle",
+      "module": "dev-tooling-literacy",
+      "title": "Runtime versions and support lifecycles",
+      "level": 3,
+      "capabilities": [
+        "runtime-versions-lifecycle"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/runtime-versions-lifecycle.md"
+    },
+    {
+      "id": "semantic-versioning",
+      "module": "dev-tooling-literacy",
+      "title": "Version numbers and semantic versioning",
+      "level": 3,
+      "capabilities": [
+        "semantic-versioning"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/semantic-versioning.md"
+    },
+    {
+      "id": "terminal-shell-commands",
+      "module": "dev-tooling-literacy",
+      "title": "Terminal, shell, and commands",
+      "level": 3,
+      "capabilities": [
+        "terminal-shell-commands"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/terminal-shell-commands.md"
+    },
+    {
+      "id": "virtual-environments",
+      "module": "dev-tooling-literacy",
+      "title": "Virtual environments: keeping dependencies separate",
+      "level": 3,
+      "capabilities": [
+        "virtual-environments"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/virtual-environments.md"
+    },
+    {
+      "id": "working-directories-and-paths",
+      "module": "dev-tooling-literacy",
+      "title": "Working directories and paths",
+      "level": 3,
+      "capabilities": [
+        "working-directories-and-paths"
+      ],
+      "path": "learn/dev-tooling-literacy/capabilities/working-directories-and-paths.md"
+    },
+    {
+      "id": "branch-protection-rulesets",
+      "module": "git-and-github",
+      "title": "Branch protection and rulesets",
+      "level": 3,
+      "capabilities": [
+        "branch-protection-rulesets"
+      ],
+      "path": "learn/git-and-github/capabilities/branch-protection-rulesets.md"
+    },
+    {
+      "id": "branches-and-switching",
+      "module": "git-and-github",
+      "title": "Branches and switching",
+      "level": 1,
+      "capabilities": [
+        "branches-and-switching"
+      ],
+      "path": "learn/git-and-github/capabilities/branches-and-switching.md"
+    },
+    {
+      "id": "cherry-picking",
+      "module": "git-and-github",
+      "title": "Cherry-picking a single commit",
+      "level": 3,
+      "capabilities": [
+        "cherry-picking"
+      ],
+      "path": "learn/git-and-github/capabilities/cherry-picking.md"
+    },
+    {
+      "id": "co-authored-commits",
+      "module": "git-and-github",
+      "title": "Crediting multiple commit authors",
+      "level": 2,
+      "capabilities": [
+        "co-authored-commits"
+      ],
+      "path": "learn/git-and-github/capabilities/co-authored-commits.md"
+    },
+    {
+      "id": "codeowners",
+      "module": "git-and-github",
+      "title": "CODEOWNERS and review routing",
+      "level": 3,
+      "capabilities": [
+        "codeowners"
+      ],
+      "path": "learn/git-and-github/capabilities/codeowners.md"
+    },
+    {
+      "id": "commit-identity-email-privacy",
+      "module": "git-and-github",
+      "title": "Commit identity and email privacy",
+      "level": 2,
+      "capabilities": [
+        "commit-identity-email-privacy"
+      ],
+      "path": "learn/git-and-github/capabilities/commit-identity-email-privacy.md"
+    },
+    {
+      "id": "commits-and-history",
+      "module": "git-and-github",
+      "title": "Commits and history",
+      "level": 1,
+      "capabilities": [
+        "commits-and-history"
+      ],
+      "path": "learn/git-and-github/capabilities/commits-and-history.md"
+    },
+    {
+      "id": "creating-and-cloning-repositories",
+      "module": "git-and-github",
+      "title": "Creating and cloning repositories",
+      "level": 1,
+      "capabilities": [
+        "creating-and-cloning-repositories"
+      ],
+      "path": "learn/git-and-github/capabilities/creating-and-cloning-repositories.md"
+    },
+    {
+      "id": "forks-create-sync-contribute",
+      "module": "git-and-github",
+      "title": "Forks: create, sync, and contribute",
+      "level": 3,
+      "capabilities": [
+        "forks-create-sync-contribute"
+      ],
+      "path": "learn/git-and-github/capabilities/forks-create-sync-contribute.md"
+    },
+    {
+      "id": "git-and-github",
+      "module": "git-and-github",
+      "title": "Git and GitHub",
+      "level": 1,
+      "capabilities": [
+        "git-and-github"
+      ],
+      "path": "learn/git-and-github/capabilities/git-and-github.md"
+    },
+    {
+      "id": "git-blame-file-history",
+      "module": "git-and-github",
+      "title": "Finding who changed a line with git blame",
+      "level": 3,
+      "capabilities": [
+        "git-blame-file-history"
+      ],
+      "path": "learn/git-and-github/capabilities/git-blame-file-history.md"
+    },
+    {
+      "id": "git-lfs-basics",
+      "module": "git-and-github",
+      "title": "Large files and Git LFS (recognition level)",
+      "level": 3,
+      "capabilities": [
+        "git-lfs-basics"
+      ],
+      "path": "learn/git-and-github/capabilities/git-lfs-basics.md"
+    },
+    {
+      "id": "git-stash",
+      "module": "git-and-github",
+      "title": "Shelving work in progress with git stash",
+      "level": 2,
+      "capabilities": [
+        "git-stash"
+      ],
+      "path": "learn/git-and-github/capabilities/git-stash.md"
+    },
+    {
+      "id": "git-worktrees",
+      "module": "git-and-github",
+      "title": "Working across branches with worktrees",
+      "level": 3,
+      "capabilities": [
+        "git-worktrees"
+      ],
+      "path": "learn/git-and-github/capabilities/git-worktrees.md"
+    },
+    {
+      "id": "github-actions-ci-checks",
+      "module": "git-and-github",
+      "title": "Reading CI checks on a pull request",
+      "level": 3,
+      "capabilities": [
+        "github-actions-ci-checks"
+      ],
+      "path": "learn/git-and-github/capabilities/github-actions-ci-checks.md"
+    },
+    {
+      "id": "github-cli-for-prs",
+      "module": "git-and-github",
+      "title": "GitHub CLI (gh) for PRs",
+      "level": 3,
+      "capabilities": [
+        "github-cli-for-prs"
+      ],
+      "path": "learn/git-and-github/capabilities/github-cli-for-prs.md"
+    },
+    {
+      "id": "github-codespaces-basics",
+      "module": "git-and-github",
+      "title": "GitHub Codespaces basics (recognition level)",
+      "level": 3,
+      "capabilities": [
+        "github-codespaces-basics"
+      ],
+      "path": "learn/git-and-github/capabilities/github-codespaces-basics.md"
+    },
+    {
+      "id": "github-desktop-essentials",
+      "module": "git-and-github",
+      "title": "GitHub Desktop essentials",
+      "level": 2,
+      "capabilities": [
+        "github-desktop-essentials"
+      ],
+      "path": "learn/git-and-github/capabilities/github-desktop-essentials.md"
+    },
+    {
+      "id": "github-dev-quick-edits",
+      "module": "git-and-github",
+      "title": "Quick browser editing with github.dev",
+      "level": 2,
+      "capabilities": [
+        "github-dev-quick-edits"
+      ],
+      "path": "learn/git-and-github/capabilities/github-dev-quick-edits.md"
+    },
+    {
+      "id": "gitignore-essentials",
+      "module": "git-and-github",
+      "title": ".gitignore essentials",
+      "level": 1,
+      "capabilities": [
+        "gitignore-essentials"
+      ],
+      "path": "learn/git-and-github/capabilities/gitignore-essentials.md"
+    },
+    {
+      "id": "glossary",
+      "module": "git-and-github",
+      "title": "Glossary",
+      "level": 1,
+      "capabilities": [
+        "glossary"
+      ],
+      "path": "learn/git-and-github/capabilities/glossary.md"
+    },
+    {
+      "id": "in-browser-commits",
+      "module": "git-and-github",
+      "title": "In-browser edits and commits on GitHub.com",
+      "level": 2,
+      "capabilities": [
+        "in-browser-commits"
+      ],
+      "path": "learn/git-and-github/capabilities/in-browser-commits.md"
+    },
+    {
+      "id": "line-endings-gitattributes",
+      "module": "git-and-github",
+      "title": "Line endings and .gitattributes",
+      "level": 3,
+      "capabilities": [
+        "line-endings-gitattributes"
+      ],
+      "path": "learn/git-and-github/capabilities/line-endings-gitattributes.md"
+    },
+    {
+      "id": "linking-issues-to-prs",
+      "module": "git-and-github",
+      "title": "Linking issues to PRs with closing keywords",
+      "level": 2,
+      "capabilities": [
+        "linking-issues-to-prs"
+      ],
+      "path": "learn/git-and-github/capabilities/linking-issues-to-prs.md"
+    },
+    {
+      "id": "markdown-for-prs-issues",
+      "module": "git-and-github",
+      "title": "Markdown formatting for PRs and issues",
+      "level": 2,
+      "capabilities": [
+        "markdown-for-prs-issues"
+      ],
+      "path": "learn/git-and-github/capabilities/markdown-for-prs-issues.md"
+    },
+    {
+      "id": "merge-commit-squash-and-rebase",
+      "module": "git-and-github",
+      "title": "Merge commit, squash, and rebase",
+      "level": 3,
+      "capabilities": [
+        "merge-commit-squash-and-rebase"
+      ],
+      "path": "learn/git-and-github/capabilities/merge-commit-squash-and-rebase.md"
+    },
+    {
+      "id": "merge-conflicts",
+      "module": "git-and-github",
+      "title": "Merge conflicts",
+      "level": 2,
+      "capabilities": [
+        "merge-conflicts"
+      ],
+      "path": "learn/git-and-github/capabilities/merge-conflicts.md"
+    },
+    {
+      "id": "partial-staging",
+      "module": "git-and-github",
+      "title": "Staging part of a file with git add -p",
+      "level": 3,
+      "capabilities": [
+        "partial-staging"
+      ],
+      "path": "learn/git-and-github/capabilities/partial-staging.md"
+    },
+    {
+      "id": "post-merge-synchronization-and-cleanup",
+      "module": "git-and-github",
+      "title": "Post-merge synchronization and cleanup",
+      "level": 3,
+      "capabilities": [
+        "post-merge-synchronization-and-cleanup"
+      ],
+      "path": "learn/git-and-github/capabilities/post-merge-synchronization-and-cleanup.md"
+    },
+    {
+      "id": "pr-issue-templates",
+      "module": "git-and-github",
+      "title": "Using PR and issue templates",
+      "level": 2,
+      "capabilities": [
+        "pr-issue-templates"
+      ],
+      "path": "learn/git-and-github/capabilities/pr-issue-templates.md"
+    },
+    {
+      "id": "pull-requests-and-review",
+      "module": "git-and-github",
+      "title": "Pull requests and review",
+      "level": 2,
+      "capabilities": [
+        "pull-requests-and-review"
+      ],
+      "path": "learn/git-and-github/capabilities/pull-requests-and-review.md"
+    },
+    {
+      "id": "push-and-upstream-branches",
+      "module": "git-and-github",
+      "title": "Push and upstream branches",
+      "level": 2,
+      "capabilities": [
+        "push-and-upstream-branches"
+      ],
+      "path": "learn/git-and-github/capabilities/push-and-upstream-branches.md"
+    },
+    {
+      "id": "remotes-fetch-and-pull",
+      "module": "git-and-github",
+      "title": "Remotes, fetch, and pull",
+      "level": 2,
+      "capabilities": [
+        "remotes-fetch-and-pull"
+      ],
+      "path": "learn/git-and-github/capabilities/remotes-fetch-and-pull.md"
+    },
+    {
+      "id": "repository-access-roles",
+      "module": "git-and-github",
+      "title": "Repository access roles and permissions",
+      "level": 3,
+      "capabilities": [
+        "repository-access-roles"
+      ],
+      "path": "learn/git-and-github/capabilities/repository-access-roles.md"
+    },
+    {
+      "id": "repository-templates",
+      "module": "git-and-github",
+      "title": "Standardizing projects with repository templates",
+      "level": 3,
+      "capabilities": [
+        "repository-templates"
+      ],
+      "path": "learn/git-and-github/capabilities/repository-templates.md"
+    },
+    {
+      "id": "secret-scanning-push-protection",
+      "module": "git-and-github",
+      "title": "Responding to secret-scanning and push-protection alerts",
+      "level": 3,
+      "capabilities": [
+        "secret-scanning-push-protection"
+      ],
+      "path": "learn/git-and-github/capabilities/secret-scanning-push-protection.md"
+    },
+    {
+      "id": "setup-configuration-and-authentication",
+      "module": "git-and-github",
+      "title": "Setup, configuration, and authentication",
+      "level": 1,
+      "capabilities": [
+        "setup-configuration-and-authentication"
+      ],
+      "path": "learn/git-and-github/capabilities/setup-configuration-and-authentication.md"
+    },
+    {
+      "id": "tags-and-releases",
+      "module": "git-and-github",
+      "title": "Tags and GitHub Releases",
+      "level": 3,
+      "capabilities": [
+        "tags-and-releases"
+      ],
+      "path": "learn/git-and-github/capabilities/tags-and-releases.md"
+    },
+    {
+      "id": "undoing-and-recovering-work",
+      "module": "git-and-github",
+      "title": "Undoing and recovering work",
+      "level": 2,
+      "capabilities": [
+        "undoing-and-recovering-work"
+      ],
+      "path": "learn/git-and-github/capabilities/undoing-and-recovering-work.md"
+    },
+    {
+      "id": "verified-commit-badge",
+      "module": "git-and-github",
+      "title": "What the Verified commit badge means",
+      "level": 3,
+      "capabilities": [
+        "verified-commit-badge"
+      ],
+      "path": "learn/git-and-github/capabilities/verified-commit-badge.md"
+    },
+    {
+      "id": "working-tree-staging-and-status",
+      "module": "git-and-github",
+      "title": "Working tree, staging, and status",
+      "level": 1,
+      "capabilities": [
+        "working-tree-staging-and-status"
+      ],
+      "path": "learn/git-and-github/capabilities/working-tree-staging-and-status.md"
+    },
+    {
+      "id": "install-and-bootstrap",
+      "module": "grimdex-harness",
+      "title": "Install, bootstrap, and first agent session",
+      "level": 2,
+      "capabilities": [
+        "install-and-bootstrap"
+      ],
+      "path": "learn/grimdex-harness/capabilities/install-and-bootstrap.md"
+    },
+    {
+      "id": "learn-module-verbosity",
+      "module": "grimdex-harness",
+      "title": "How the Learn module changes responses",
+      "level": 2,
+      "capabilities": [
+        "learn-module-verbosity"
+      ],
+      "path": "learn/grimdex-harness/capabilities/learn-module-verbosity.md"
+    },
+    {
+      "id": "student-zone-layout",
+      "module": "grimdex-harness",
+      "title": "Student zone vs generated vs config",
+      "level": 2,
+      "capabilities": [
+        "student-zone-layout"
+      ],
+      "path": "learn/grimdex-harness/capabilities/student-zone-layout.md"
+    },
+    {
+      "id": "what-is-grimdex",
+      "module": "grimdex-harness",
+      "title": "What Grimdex is (and is not)",
+      "level": 1,
+      "capabilities": [
+        "what-is-grimdex"
+      ],
+      "path": "learn/grimdex-harness/capabilities/what-is-grimdex.md"
+    },
+    {
+      "id": "clear-and-direct-instructions",
+      "module": "prompt-engineering",
+      "title": "Clear and direct instructions",
+      "level": 1,
+      "capabilities": [
+        "clear-and-direct-instructions"
+      ],
+      "path": "learn/prompt-engineering/capabilities/clear-and-direct-instructions.md"
+    },
+    {
+      "id": "context-and-working-memory",
+      "module": "prompt-engineering",
+      "title": "Context and working memory",
+      "level": 1,
+      "capabilities": [
+        "context-and-working-memory"
+      ],
+      "path": "learn/prompt-engineering/capabilities/context-and-working-memory.md"
+    },
+    {
+      "id": "defining-goals-and-success-criteria",
+      "module": "prompt-engineering",
+      "title": "Defining goals and success criteria",
+      "level": 2,
+      "capabilities": [
+        "defining-goals-and-success-criteria"
+      ],
+      "path": "learn/prompt-engineering/capabilities/defining-goals-and-success-criteria.md"
+    },
+    {
+      "id": "iterating-on-a-prompt",
+      "module": "prompt-engineering",
+      "title": "Iterating on a Prompt",
+      "level": 2,
+      "capabilities": [
+        "iterating-on-a-prompt"
+      ],
+      "path": "learn/prompt-engineering/capabilities/iterating-on-a-prompt.md"
+    },
+    {
+      "id": "tools-and-agent-actions",
+      "module": "prompt-engineering",
+      "title": "Tools and agent actions",
+      "level": 2,
+      "capabilities": [
+        "tools-and-agent-actions"
+      ],
+      "path": "learn/prompt-engineering/capabilities/tools-and-agent-actions.md"
+    },
+    {
+      "id": "verifying-agent-work",
+      "module": "prompt-engineering",
+      "title": "Verifying agent work",
+      "level": 2,
+      "capabilities": [
+        "verifying-agent-work"
+      ],
+      "path": "learn/prompt-engineering/capabilities/verifying-agent-work.md"
+    },
+    {
+      "id": "vibe-coding-practices",
+      "module": "prompt-engineering",
+      "title": "Session habits for agentic coding",
+      "level": 2,
+      "capabilities": [
+        "vibe-coding-practices"
+      ],
+      "path": "learn/prompt-engineering/capabilities/vibe-coding-practices.md"
+    },
+    {
+      "id": "fix-one-failure",
+      "module": "testing-basics",
+      "title": "Fixing one failing test at a time",
+      "level": 3,
+      "capabilities": [
+        "fix-one-failure"
+      ],
+      "path": "learn/testing-basics/capabilities/fix-one-failure.md"
+    },
+    {
+      "id": "run-tests-locally",
+      "module": "testing-basics",
+      "title": "Running pytest/Pester and reading pass-fail",
+      "level": 2,
+      "capabilities": [
+        "run-tests-locally"
+      ],
+      "path": "learn/testing-basics/capabilities/run-tests-locally.md"
+    },
+    {
+      "id": "why-tests-exist",
+      "module": "testing-basics",
+      "title": "Tests as save points for behavior",
+      "level": 2,
+      "capabilities": [
+        "why-tests-exist"
+      ],
+      "path": "learn/testing-basics/capabilities/why-tests-exist.md"
+    }
+  ]
+}

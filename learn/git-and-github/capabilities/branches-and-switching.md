@@ -1,6 +1,7 @@
 ---
 title: Branches and switching
 module_id: git-and-github
+level: 1
 capabilities:
   - branches-and-switching
 context7_library: /websites/git-scm

@@ -1,6 +1,7 @@
 ---
 title: Localhost, ports, and exposed services
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - localhost-and-ports
 context7_library:

@@ -1,29 +1,530 @@
 # Normalized claims baseline — agentic-automation
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/agent-lifecycle-hooks.md
-  - capabilities/agentic-loop-vs-code-loop.md
-  - capabilities/cost-and-observability.md
-  - capabilities/cron-five-fields.md
-  - capabilities/git-hooks-101.md
-  - capabilities/give-every-loop-an-exit.md
-  - capabilities/headless-noninteractive-mode.md
-  - capabilities/hook-feedback-loop-risk.md
-  - capabilities/hooks-as-gates.md
-  - capabilities/human-approval-gates.md
-  - capabilities/idempotency-safe-to-rerun.md
-  - capabilities/loop-hook-schedule-triggers.md
-  - capabilities/manual-one-off-triggers.md
-  - capabilities/overlap-and-concurrency.md
-  - capabilities/runaway-loop-and-timeouts.md
-  - capabilities/schedule-reality-checks.md
-  - capabilities/scheduled-workflows-github-actions.md
-  - capabilities/server-side-git-hooks.md
-  - capabilities/shared-hooks-and-hookspath.md
-  - capabilities/the-kill-switch.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: agent-lifecycle-hooks-001
+    page: capabilities/agent-lifecycle-hooks.md
+    claim: "Claude Code hooks are scripts that run automatically when the agent reaches specific lifecycle events such as PreToolUse, PostToolUse, Stop, Notification, and SessionStart."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-lifecycle-hooks-002
+    page: capabilities/agent-lifecycle-hooks.md
+    claim: "A hook script can return a non-zero exit code to deny or block the agent action it is attached to; on PreToolUse, a non-zero exit causes the tool call to be denied before it runs."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-lifecycle-hooks-003
+    page: capabilities/agent-lifecycle-hooks.md
+    claim: "The documented stop_hook_active field, associated with the Stop event, exists specifically to prevent a Stop hook from re-triggering agent work in an infinite feedback loop."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-lifecycle-hooks-004
+    page: capabilities/agent-lifecycle-hooks.md
+    claim: "Only PreToolUse hooks can prevent an action, so high-risk blocking belongs there; by the time PostToolUse fires, the tool has already run and the hook can only react."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agentic-loop-vs-code-loop-001
+    page: capabilities/agentic-loop-vs-code-loop.md
+    claim: "Claude Code's hooks system includes a Stop event and a stop_hook_active field specifically to prevent a hook from re-triggering more agent work in an infinite feedback loop."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agentic-loop-vs-code-loop-002
+    page: capabilities/agentic-loop-vs-code-loop.md
+    claim: "Git hooks are deterministic hooks that run around git operations, in contrast to the adaptive, non-deterministic agentic loop."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agentic-loop-vs-code-loop-003
+    page: capabilities/agentic-loop-vs-code-loop.md
+    claim: "Because an agentic loop's termination is the agent's judgment, you should bound unattended runs with real caps such as --max-turns in Claude Code headless mode or timeout-minutes in GitHub Actions jobs."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agentic-loop-vs-code-loop-004
+    page: capabilities/agentic-loop-vs-code-loop.md
+    claim: "When driving an agent headlessly with claude -p and capping iterations with --max-turns, use the outer script's exit-code checks, not the agent's self-report, as the loop's exit condition."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cost-and-observability-001
+    page: capabilities/cost-and-observability.md
+    claim: "GitHub Actions bills workflow-run minutes for every minute a workflow runs, whether or not a human is watching it."
+    source: https://docs.github.com
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cost-and-observability-002
+    page: capabilities/cost-and-observability.md
+    claim: "GitHub Actions jobs have a documented default timeout of around 360 minutes, so a job with no explicit timeout-minutes can bill many minutes before dying on its own."
+    source: https://docs.github.com
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cost-and-observability-003
+    page: capabilities/cost-and-observability.md
+    claim: "In GitHub Actions, cancelling an active run and disabling its future trigger are two separate operations: stopping the current burn requires cancelling, and preventing the next burn requires disabling."
+    source: https://docs.github.com
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cost-and-observability-004
+    page: capabilities/cost-and-observability.md
+    claim: "Claude Code headless mode supports an iteration cap (--max-turns-style flag) that bounds token usage per unattended run."
+    source: https://code.claude.com/docs
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cost-and-observability-005
+    page: capabilities/cost-and-observability.md
+    claim: "Bound the blast radius of unattended work by setting timeout-minutes explicitly for GitHub Actions jobs and pairing agent loops with an iteration cap."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cron-five-fields-001
+    page: capabilities/cron-five-fields.md
+    claim: "GitHub Actions evaluates cron expressions in UTC, so a local-time schedule must be converted from your timezone."
+    source: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cron-five-fields-002
+    page: capabilities/cron-five-fields.md
+    claim: "GitHub Actions scheduled workflows only run on the repository's default branch and are automatically disabled after 60 days of repository inactivity."
+    source: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cron-five-fields-003
+    page: capabilities/cron-five-fields.md
+    claim: "Scheduled GitHub Actions runs can be delayed or dropped under platform load, so they do not provide cron-like to-the-minute precision."
+    source: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: cron-five-fields-004
+    page: capabilities/cron-five-fields.md
+    claim: "In classic cron, when both the day-of-month and weekday fields are restricted, most implementations OR them rather than AND them; verify behavior in your specific scheduler before relying on it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: git-hooks-101-001
+    page: capabilities/git-hooks-101.md
+    claim: "A pre-commit hook runs before the commit is created, and a non-zero exit aborts the commit."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: git-hooks-101-002
+    page: capabilities/git-hooks-101.md
+    claim: "The commit-msg hook receives the path to the commit message file, and a non-zero exit aborts the commit."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: git-hooks-101-003
+    page: capabilities/git-hooks-101.md
+    claim: "Hooks live in .git/hooks/ and are not version-controlled by default; core.hooksPath or the pre-commit framework can be used to share them across a team."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: git-hooks-101-004
+    page: capabilities/git-hooks-101.md
+    claim: "Git servers run server-side hooks such as pre-receive and update, which is why a push can be rejected by the remote even though the local commit succeeded."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: give-every-loop-an-exit-001
+    page: capabilities/give-every-loop-an-exit.md
+    claim: "Claude Code's hooks system includes a Stop event with a stop_hook_active field, which exists to prevent a hook from re-triggering more agent work in an infinite feedback loop."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: give-every-loop-an-exit-002
+    page: capabilities/give-every-loop-an-exit.md
+    claim: "A hook returning a non-zero exit code can deny or block an agent action, which can serve as an enforced exit when a checkable condition fails."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: give-every-loop-an-exit-003
+    page: capabilities/give-every-loop-an-exit.md
+    claim: "Claude Code's headless mode supports an iteration cap (--max-turns-style) that bounds how many agent turns an unattended run can take, stopping the run if the done condition is never met."
+    source: https://code.claude.com/docs/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: give-every-loop-an-exit-004
+    page: capabilities/give-every-loop-an-exit.md
+    claim: "Every agentic loop needs both a checkable done condition and a hard cap on attempts or runtime; either alone is insufficient for safe unattended operation."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: headless-noninteractive-mode-001
+    page: capabilities/headless-noninteractive-mode.md
+    claim: "In Claude Code, `claude -p` invokes the agent programmatically, so the agent can be started and finished by a script rather than by a person typing at a terminal prompt."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: headless-noninteractive-mode-002
+    page: capabilities/headless-noninteractive-mode.md
+    claim: "Claude Code's documented headless/programmatic invocation is `claude -p \"<prompt or task description>\"`, and because it is programmatic it can be called from shell scripts, git hooks, CI workflows, or schedulers."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: headless-noninteractive-mode-003
+    page: capabilities/headless-noninteractive-mode.md
+    claim: "In a local headless run, the script starts the agent, the agent performs its act-observe-decide-repeat cycle until it finishes or hits a bound, and it exits and returns control to the invoker without any terminal session being attended."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: headless-noninteractive-mode-004
+    page: capabilities/headless-noninteractive-mode.md
+    claim: "Before automating a task headlessly, run it interactively at least once and confirm the outcome is correct and machine-checkable, because skipping this interactive-first step leaves no baseline for what done correctly looks like."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hook-feedback-loop-risk-001
+    page: capabilities/hook-feedback-loop-risk.md
+    claim: "In Claude Code, the Stop event fires when the agent finishes responding, and the hook input for that event includes a stop_hook_active field indicating the stop already resulted from a hook continuing the agent's work."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hook-feedback-loop-risk-002
+    page: capabilities/hook-feedback-loop-risk.md
+    claim: "A Stop hook is expected to check the stop_hook_active field and not instruct the agent to continue again when it is set, which is the documented guard against a hook endlessly re-triggering more agent work."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hook-feedback-loop-risk-003
+    page: capabilities/hook-feedback-loop-risk.md
+    claim: "A hook can return a non-zero exit code to deny or block an agent action."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hook-feedback-loop-risk-004
+    page: capabilities/hook-feedback-loop-risk.md
+    claim: "Any hook that feeds instructions back to the agent needs a terminating condition; before your hook causes more agent work, ask what terminates it and do not let it re-trigger work unboundedly."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hooks-as-gates-001
+    page: capabilities/hooks-as-gates.md
+    claim: "Claude Code hooks are scripts attached to named agent lifecycle events such as PreToolUse, PostToolUse, Stop, Notification, and SessionStart, and this system is separate from git hooks."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hooks-as-gates-002
+    page: capabilities/hooks-as-gates.md
+    claim: "In Claude Code, a hook that returns a non-zero exit code denies or blocks the agent action, while an exit code of zero means allow."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hooks-as-gates-003
+    page: capabilities/hooks-as-gates.md
+    claim: "Claude Code's Stop event and stop_hook_active field exist specifically to prevent a Stop hook from re-triggering more agent work in an infinite feedback loop."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hooks-as-gates-004
+    page: capabilities/hooks-as-gates.md
+    claim: "Enforce rules that matter with a hook that exits non-zero rather than a prompt instruction, because a prompt instruction can be ignored by the model while a non-zero gate cannot."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: human-approval-gates-001
+    page: capabilities/human-approval-gates.md
+    claim: "A Claude Code PreToolUse hook can return a non-zero exit code to deny an agent action before it executes."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: human-approval-gates-002
+    page: capabilities/human-approval-gates.md
+    claim: "The Stop event and its stop_hook_active field exist to prevent blocking hooks from re-triggering infinite agent work."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: human-approval-gates-003
+    page: capabilities/human-approval-gates.md
+    claim: "GitHub environment protection rules with required reviewers pause a workflow job targeting a protected environment until an approved reviewer signs off."
+    source: https://docs.github.com/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: human-approval-gates-004
+    page: capabilities/human-approval-gates.md
+    claim: "Do not combine skipping permission prompts with unattended loops or schedules without an intentional compensating gate such as lifecycle hooks that block dangerous actions."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: idempotency-safe-to-rerun-001
+    page: capabilities/idempotency-safe-to-rerun.md
+    claim: "HTTP defines certain request methods as idempotent, meaning that repeating a GET or PUT is safe while blindly repeating a POST may not be."
+    source: https://www.rfc-editor.org/rfc/rfc9110#section-9.2.2
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: idempotency-safe-to-rerun-002
+    page: capabilities/idempotency-safe-to-rerun.md
+    claim: "Claude Code hooks such as PreToolUse, PostToolUse, and Stop can deny actions via non-zero exit codes, serving as a guardrail complement rather than a substitute for idempotent design."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: idempotency-safe-to-rerun-003
+    page: capabilities/idempotency-safe-to-rerun.md
+    claim: "GitHub Actions scheduled runs can be delayed or dropped under platform load, run only on the default branch, and are auto-disabled after 60 days of repository inactivity."
+    source: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: idempotency-safe-to-rerun-004
+    page: capabilities/idempotency-safe-to-rerun.md
+    claim: "Prefer ensure-state phrasing such as 'ensure X exists' over do-action phrasing such as 'add X' in prompts given to scheduled or looped agents."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: loop-hook-schedule-triggers-001
+    page: capabilities/loop-hook-schedule-triggers.md
+    claim: "In git, a failing pre-commit hook aborts the commit locally, and server-side hooks such as pre-receive can reject a push even though the local commit succeeded."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: loop-hook-schedule-triggers-002
+    page: capabilities/loop-hook-schedule-triggers.md
+    claim: "Claude Code hooks fire on events such as PreToolUse, PostToolUse, Stop, Notification, and SessionStart, and a hook returning a non-zero exit code denies or blocks the agent action."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: loop-hook-schedule-triggers-003
+    page: capabilities/loop-hook-schedule-triggers.md
+    claim: "The Stop hook event and its stop_hook_active field exist to prevent a hook from re-triggering more agent work in an infinite feedback loop."
+    source: https://code.claude.com/docs/en/hooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: loop-hook-schedule-triggers-004
+    page: capabilities/loop-hook-schedule-triggers.md
+    claim: "Loop, hook, and schedule are not interchangeable triggers: choose based on whether the work should start from an outcome, an event, or a time."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manual-one-off-triggers-001
+    page: capabilities/manual-one-off-triggers.md
+    claim: "The workflow_dispatch event lets you trigger a GitHub Actions workflow manually from the GitHub web UI, the CLI, or the API."
+    source: https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manual-one-off-triggers-002
+    page: capabilities/manual-one-off-triggers.md
+    claim: "Declaring on: workflow_dispatch in a workflow file makes a \"Run workflow\" button appear on the Actions tab."
+    source: https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manual-one-off-triggers-003
+    page: capabilities/manual-one-off-triggers.md
+    claim: "A dispatched workflow runs on a branch you select at dispatch time, defaulting to the repository's default branch, and the workflow file must exist on that branch for the dispatch option to appear."
+    source: https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manual-one-off-triggers-004
+    page: capabilities/manual-one-off-triggers.md
+    claim: "Dispatch first and schedule later is the safest on-ramp to unattended runs, because every early iteration has a human approval gate on it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: overlap-and-concurrency-001
+    page: capabilities/overlap-and-concurrency.md
+    claim: "GitHub Actions runs with the same concurrency.group share a slot: while one is active, others queue or, with cancel-in-progress set to true, replace the pending or active run."
+    source: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: overlap-and-concurrency-002
+    page: capabilities/overlap-and-concurrency.md
+    claim: "In GitHub Actions, cancel-in-progress can be set conditionally, for example on a branch expression, in the current syntax."
+    source: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: overlap-and-concurrency-003
+    page: capabilities/overlap-and-concurrency.md
+    claim: "Killing an active run and disabling its trigger are two separate documented operations in GitHub Actions; doing only one means the other keeps firing."
+    source: https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/canceling-a-workflow
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: overlap-and-concurrency-004
+    page: capabilities/overlap-and-concurrency.md
+    claim: "With flock -n, an overlapping cron invocation fails fast and exits, so you may want the script to log when that happens so a persistent lock is visible rather than invisible."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: overlap-and-concurrency-005
+    page: capabilities/overlap-and-concurrency.md
+    claim: "Set timeout-minutes in Actions and cap agent iterations in headless mode, because a hung run without a timeout can block all future runs in the concurrency group indefinitely."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runaway-loop-and-timeouts-001
+    page: capabilities/runaway-loop-and-timeouts.md
+    claim: "GitHub Actions jobs have a `timeout-minutes` setting that caps how long a job may run, with a documented default of around 360 minutes."
+    source: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runaway-loop-and-timeouts-002
+    page: capabilities/runaway-loop-and-timeouts.md
+    claim: "When a GitHub Actions job exceeds its `timeout-minutes` limit, the job is terminated and marked as failed, and minutes consumed before the timeout still count against billing."
+    source: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runaway-loop-and-timeouts-003
+    page: capabilities/runaway-loop-and-timeouts.md
+    claim: "Claude Code's headless mode (`claude -p`) accepts an iteration cap flag of the `--max-turns` style that bounds how many turns a single non-interactive run can take."
+    source: https://code.claude.com/docs/en/headless
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runaway-loop-and-timeouts-004
+    page: capabilities/runaway-loop-and-timeouts.md
+    claim: "When the turn cap is reached in Claude Code headless mode, the run stops rather than continuing indefinitely, bounding both endless loops and token spend."
+    source: https://code.claude.com/docs/en/headless
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runaway-loop-and-timeouts-005
+    page: capabilities/runaway-loop-and-timeouts.md
+    claim: "Set the bound before the run starts, because an unattended loop has no human pressing Ctrl-C, and size the cap to the expected duration plus margin so legitimate work is not cut off."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: schedule-reality-checks-001
+    page: capabilities/schedule-reality-checks.md
+    claim: "GitHub Actions scheduled workflows run on a best-effort basis and may be delayed or dropped entirely during periods of high platform load, so the schedule is an approximation rather than a guarantee of cron-like precision."
+    source: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: schedule-reality-checks-002
+    page: capabilities/schedule-reality-checks.md
+    claim: "A scheduled workflow trigger only fires for the workflow file on the repository's default branch; schedule changes made on a branch or in a pull request have no effect until they land on the default branch."
+    source: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: schedule-reality-checks-003
+    page: capabilities/schedule-reality-checks.md
+    claim: "If a repository has no activity for 60 days, its scheduled workflows are automatically disabled and must be re-enabled manually."
+    source: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: schedule-reality-checks-004
+    page: capabilities/schedule-reality-checks.md
+    claim: "Pair the schedule trigger with workflow_dispatch so you can manually trigger the run to verify it works, instead of waiting a day or longer to discover a broken schedule."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: scheduled-workflows-github-actions-001
+    page: capabilities/scheduled-workflows-github-actions.md
+    claim: "A GitHub Actions workflow can contain a schedule trigger with one or more cron expressions in the standard 5-field format (minute, hour, day of month, month, day of week), and all scheduled times are interpreted in UTC, not local time."
+    source: https://docs.github.com/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: scheduled-workflows-github-actions-002
+    page: capabilities/scheduled-workflows-github-actions.md
+    claim: "Only the schedule trigger in a workflow on the repository's default branch is active; a schedule on a feature branch does nothing."
+    source: https://docs.github.com/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: scheduled-workflows-github-actions-003
+    page: capabilities/scheduled-workflows-github-actions.md
+    claim: "Scheduled workflow runs may start late or not fire at all under high platform load, and a schedule is automatically disabled after 60 days of repository inactivity and must be re-enabled manually."
+    source: https://docs.github.com/actions/using-workflows/events-that-trigger-workflows
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: scheduled-workflows-github-actions-004
+    page: capabilities/scheduled-workflows-github-actions.md
+    claim: "Pair the schedule trigger with workflow_dispatch so the workflow can be tested by hand instead of waiting for the next scheduled fire."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: server-side-git-hooks-001
+    page: capabilities/server-side-git-hooks.md
+    claim: "The pre-receive hook runs once for the entire push before any ref is updated, and a non-zero exit rejects all refs in the push."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: server-side-git-hooks-002
+    page: capabilities/server-side-git-hooks.md
+    claim: "The update hook runs once per ref being pushed, receives the ref name, old revision, and new revision as arguments, and a non-zero exit rejects that one ref."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: server-side-git-hooks-003
+    page: capabilities/server-side-git-hooks.md
+    claim: "Hooks are not version-controlled by default and live in .git/hooks on the relevant machine, so a fresh clone or new agent environment may lack the client-side hooks present elsewhere."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: server-side-git-hooks-004
+    page: capabilities/server-side-git-hooks.md
+    claim: "Server-side hooks give enforcement that client-side hooks cannot, because server-side policy applies to every pusher uniformly while a pre-commit hook is only as reliable as each clone's local .git/hooks directory."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: shared-hooks-and-hookspath-001
+    page: capabilities/shared-hooks-and-hookspath.md
+    claim: "Git hooks are scripts that run automatically around git operations and can block them; a failing pre-commit hook aborts the commit."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: shared-hooks-and-hookspath-002
+    page: capabilities/shared-hooks-and-hookspath.md
+    claim: "Hooks live in .git/hooks, which is machine-local and not version-controlled, so a fresh clone does not get anyone else's hooks."
+    source: https://git-scm.com/docs/githooks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: shared-hooks-and-hookspath-003
+    page: capabilities/shared-hooks-and-hookspath.md
+    claim: "The pre-commit framework manages hooks from a committed .pre-commit-config.yaml file, and pre-commit install wires the framework into your git hooks."
+    source: https://pre-commit.com
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: shared-hooks-and-hookspath-004
+    page: capabilities/shared-hooks-and-hookspath.md
+    claim: "Client-side hooks do not protect the remote; use server-side hooks like pre-receive as the enforcement backstop, since git commit --no-verify can bypass local hooks."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: the-kill-switch-001
+    page: capabilities/the-kill-switch.md
+    claim: "Cancelling an active GitHub Actions workflow run stops only the run that is executing right now and does not prevent future scheduled runs from starting."
+    source: https://docs.github.com/en/actions
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: the-kill-switch-002
+    page: capabilities/the-kill-switch.md
+    claim: "Disabling a workflow stops future triggers from firing, but a run already in progress is not affected and continues until completion, cancellation, or timeout."
+    source: https://docs.github.com/en/actions
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: the-kill-switch-003
+    page: capabilities/the-kill-switch.md
+    claim: "GitHub Actions documents that scheduled workflows can be delayed or dropped under platform load, run only on the default branch, and are automatically disabled after 60 days of repository inactivity."
+    source: https://docs.github.com/en/actions
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: the-kill-switch-004
+    page: capabilities/the-kill-switch.md
+    claim: "When something is actively misbehaving, do both operations in order: cancel the active run first, then disable the trigger, because doing only one leaves half the problem."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

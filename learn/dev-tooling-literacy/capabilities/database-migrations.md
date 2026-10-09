@@ -1,6 +1,7 @@
 ---
 title: "Database migrations: changes to stored structure"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - database-migrations
 context7_library:

@@ -1,6 +1,7 @@
 ---
 title: "Reproducing a bug: making a symptom repeatable"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - reproducing-a-bug
 context7_library:

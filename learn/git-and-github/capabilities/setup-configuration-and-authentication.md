@@ -1,6 +1,7 @@
 ---
 title: Setup, configuration, and authentication
 module_id: git-and-github
+level: 1
 capabilities:
   - setup-configuration-and-authentication
 context7_library: /websites/git-scm

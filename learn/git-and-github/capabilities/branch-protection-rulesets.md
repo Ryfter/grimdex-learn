@@ -1,6 +1,7 @@
 ---
 title: Branch protection and rulesets
 module_id: git-and-github
+level: 3
 capabilities:
   - branch-protection-rulesets
 context7_library: /websites/github_en

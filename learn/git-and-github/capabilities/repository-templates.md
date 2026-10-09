@@ -1,6 +1,7 @@
 ---
 title: Standardizing projects with repository templates
 module_id: git-and-github
+level: 3
 capabilities:
   - repository-templates
 context7_library: /websites/github_en

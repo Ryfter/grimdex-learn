@@ -1,6 +1,7 @@
 ---
 title: GitHub CLI (gh) for PRs
 module_id: git-and-github
+level: 3
 capabilities:
   - github-cli-for-prs
 context7_library: /websites/github_en

@@ -1,6 +1,7 @@
 ---
 title: Manual and one-off triggers (workflow_dispatch)
 module_id: agentic-automation
+level: 5
 capabilities:
   - manual-one-off-triggers
 context7_library: /websites/github_en_actions

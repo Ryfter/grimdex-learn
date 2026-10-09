@@ -1,6 +1,7 @@
 ---
 title: Database connections and connection strings
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - database-connections
 context7_library:

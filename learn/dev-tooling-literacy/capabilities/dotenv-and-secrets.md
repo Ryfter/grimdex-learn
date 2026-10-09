@@ -1,6 +1,7 @@
 ---
 title: ".env files and keeping secrets out of code"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - dotenv-and-secrets
 context7_library:

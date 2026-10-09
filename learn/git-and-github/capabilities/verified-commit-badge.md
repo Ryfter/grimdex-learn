@@ -1,6 +1,7 @@
 ---
 title: What the Verified commit badge means
 module_id: git-and-github
+level: 3
 capabilities:
   - verified-commit-badge
 context7_library: /websites/github_en

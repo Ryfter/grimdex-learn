@@ -1,6 +1,7 @@
 ---
 title: "Forks: create, sync, and contribute"
 module_id: git-and-github
+level: 3
 capabilities:
   - forks-create-sync-contribute
 context7_library: /websites/github_en

@@ -1,6 +1,7 @@
 ---
 title: "Headless mode: the building block of automation"
 module_id: agentic-automation
+level: 5
 capabilities:
   - headless-noninteractive-mode
 context7_library: /websites/platform_claude_en

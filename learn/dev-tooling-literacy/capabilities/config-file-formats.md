@@ -1,6 +1,7 @@
 ---
 title: Recognizing JSON, YAML, and TOML config files
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - config-file-formats
 context7_library:

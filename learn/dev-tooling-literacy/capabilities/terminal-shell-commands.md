@@ -1,6 +1,7 @@
 ---
 title: Terminal, shell, and commands
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - terminal-shell-commands
 context7_library:

@@ -1,6 +1,7 @@
 ---
 title: Clear and direct instructions
 module_id: prompt-engineering
+level: 1
 capabilities:
   - clear-and-direct-instructions
 context7_library: /websites/platform_claude_en

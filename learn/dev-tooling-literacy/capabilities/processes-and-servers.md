@@ -1,6 +1,7 @@
 ---
 title: Running processes and stopping a server
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - processes-and-servers
 context7_library:

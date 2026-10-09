@@ -1,6 +1,7 @@
 ---
 title: Working across branches with worktrees
 module_id: git-and-github
+level: 3
 capabilities:
   - git-worktrees
 context7_library: /websites/git-scm

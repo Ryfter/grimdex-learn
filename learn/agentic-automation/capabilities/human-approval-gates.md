@@ -1,6 +1,7 @@
 ---
 title: Human approval gates before autonomy
 module_id: agentic-automation
+level: 5
 capabilities:
   - human-approval-gates
 context7_library: /websites/platform_claude_en

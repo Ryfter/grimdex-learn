@@ -1,6 +1,7 @@
 ---
 title: Quick browser editing with github.dev
 module_id: git-and-github
+level: 2
 capabilities:
   - github-dev-quick-edits
 context7_library: /websites/github_en

@@ -20,14 +20,20 @@ Describe 'learn/manifest.json (golden module, D32)' {
         $m.contentAdmissionVersion | Should -Not -BeNullOrEmpty
     }
 
-    It 'lists the exact four neverShip files' {
+    It 'lists the exact neverShip files, including the surfacing ledger' {
         $m = Read-LearnManifest -Path $script:ManifestPath
         $m.neverShip | Should -Be @(
             'config/fleet.json',
             'config/learn-progress.json',
             'config/quota.json',
-            'config/settings.json'
+            'config/settings.json',
+            'learn-progress/surfacing.json'
         )
+    }
+
+    It 'registers learn-progress/ as a student root so install and graduation never write it' {
+        $m = Read-LearnManifest -Path $script:ManifestPath
+        $m.studentRoots | Should -Contain 'learn-progress/**'
     }
 
     It 'has the required module scaffold files on disk' {
@@ -97,6 +103,29 @@ Describe 'Every Learn module carries the D32 scaffold' {
     }
 }
 
+Describe 'Every capability page has baseline claims' {
+    It 'module <_.Name> registers each page in claims/baseline.yaml' -ForEach (
+        Get-ChildItem -Path (Join-Path $PSScriptRoot '..' 'learn') -Directory |
+            Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'capabilities') }
+    ) {
+        $baseline = Get-Content -Raw -LiteralPath (Join-Path $_.FullName 'claims' 'baseline.yaml')
+        $missing = @(Get-ChildItem -Path (Join-Path $_.FullName 'capabilities') -Filter '*.md' -File |
+            Where-Object { $baseline -notmatch ('(?m)^    page: capabilities/' + [regex]::Escape($_.Name) + '\s*$') } |
+            ForEach-Object { $_.Name })
+        $missing | Should -BeNullOrEmpty
+    }
+    It 'module <_.Name> baseline entries use a consistent two-space list indent' -ForEach (
+        Get-ChildItem -Path (Join-Path $PSScriptRoot '..' 'learn') -Directory |
+            Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'claims' 'baseline.yaml') }
+    ) {
+        # A mis-indented entry silently breaks YAML parsing for the whole file.
+        $lines = Get-Content -LiteralPath (Join-Path $_.FullName 'claims' 'baseline.yaml')
+        @($lines | Where-Object { $_ -match '^\s*- id:' -and $_ -notmatch '^  - id:' }) | Should -BeNullOrEmpty
+        @($lines | Where-Object { $_ -match '^\s+(page|claim|source|last_verified|kind|verification):' -and
+                                  $_ -notmatch '^    \w' }) | Should -BeNullOrEmpty
+    }
+}
+
 Describe 'Manifest enumerates every module on disk' {
     It 'modules[] matches the module directories under learn/' {
         $m = Read-LearnManifest -Path $script:ManifestPath
@@ -114,5 +143,38 @@ Describe 'Manifest enumerates every module on disk' {
         foreach ($mod in $m.modules) {
             (Join-Path $script:RepoRoot $mod.pagesPath) | Should -Exist
         }
+    }
+}
+
+Describe 'Every capability page declares a mastery level' {
+    BeforeAll {
+        $script:AllPages = @(
+            Get-ChildItem -Path (Join-Path $PSScriptRoot '..' 'learn') -Directory |
+                ForEach-Object { Join-Path $_.FullName 'capabilities' } |
+                Where-Object { Test-Path -LiteralPath $_ } |
+                ForEach-Object { Get-ChildItem -Path $_ -Filter '*.md' -File }
+        )
+        function Get-PageLevel([string]$Path) {
+            $t = [string](Get-Content -LiteralPath $Path -Raw)
+            if ($t -match '(?s)^---\r?\n(.*?)\r?\n---' -and $Matches[1] -match '(?m)^level:[ \t]*([1-7])[ \t]*\r?$') {
+                return [int]$Matches[1]
+            }
+            $null
+        }
+    }
+    # -ForEach is evaluated at discovery, before BeforeAll runs, so the page list
+    # is inlined here (same pattern as the file's other -ForEach tests).
+    It 'page <_.Directory.Parent.Name>/<_.Name> has level 1-7' -ForEach (
+        Get-ChildItem -Path (Join-Path $PSScriptRoot '..' 'learn') -Directory |
+            ForEach-Object { Join-Path $_.FullName 'capabilities' } |
+            Where-Object { Test-Path -LiteralPath $_ } |
+            ForEach-Object { Get-ChildItem -Path $_ -Filter '*.md' -File }
+    ) {
+        Get-PageLevel $_.FullName | Should -BeIn @(1, 2, 3, 4, 5, 6, 7)
+    }
+    It 'level counts match mastery spec Appendix A (11/26/46/17/27/5/5)' {
+        $counts = @{}
+        foreach ($p in $script:AllPages) { $l = Get-PageLevel $p.FullName; $counts[$l] = 1 + [int]$counts[$l] }
+        @(1..7 | ForEach-Object { [int]$counts[$_] }) | Should -Be @(11, 26, 46, 17, 27, 5, 5)
     }
 }

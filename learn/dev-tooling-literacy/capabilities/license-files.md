@@ -1,6 +1,7 @@
 ---
 title: License files and third-party obligations
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - license-files
 context7_library:

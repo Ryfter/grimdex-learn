@@ -98,6 +98,76 @@ Describe 'Get-LearnStanzaContent' {
         $c | Should -Not -Match 'matched to base Grimdex pin'
         $c | Should -Not -Match 'PINNED-RELEASE-TAG-SET-AT-INSTALL-PLAN'
     }
+    It 'always tells the agent where the index is and how to cite a lesson' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'learn/index\.json'
+        $c | Should -Match 'Learn: <module-id>/<lesson-id>'
+        $c | Should -Not -Match 'Learner level'
+        $c | Should -Not -Match '`'
+    }
+    It 'tells the agent to cite each lesson as a single plain-text line with no formatting' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'plain text'
+        $c | Should -Match 'one line per lesson'
+        $c | Should -Match 'nothing else on'
+        $c | Should -Match 'no formatting'
+    }
+    It 'tells the agent to report finished work first and teach second, in a separate Lesson section' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'report the work plainly first'
+        $c | Should -Match 'not while working'
+        $c | Should -Match 'separate section headed Lesson'
+        $c | Should -Match 'one-line definition'
+        $c | Should -Match 'put the Learn: citation lines at the end of that section'
+        $c | Should -Not -Match '`'
+    }
+    It 'scopes report-then-lesson to reports of work and lets the section be omitted' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'When the explanation is itself the answer to a question, just answer'
+        $c | Should -Match 'Omit the Lesson section when no Learn lesson applies'
+        $c | Should -Not -Match '(?i)wiki'
+    }
+    It 'keeps the Learn: citation on a direct answer, so question-driven explanations still count' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'just answer it, still ending with the Learn: citation lines'
+    }
+    It 'limits the Lesson section to the few key terms (depth discipline, no glossary)' {
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject)
+        $c | Should -Match 'for the few key terms or concepts the work involved'
+    }
+    It 'places the report-then-lesson lines after the citation format and before the level lines' {
+        $s = [pscustomobject]@{ level = 1; levelName = 'Prompt Novice'; maxLevel = 7
+            weights = @([pscustomobject]@{ level = 1; percent = 100 }); suppressed = @() }
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject) -Surfacing $s
+        $cite   = $c.IndexOf('Citing more than one lesson', [System.StringComparison]::Ordinal)
+        $report = $c.IndexOf('report the work plainly first', [System.StringComparison]::Ordinal)
+        $level  = $c.IndexOf('- Learner level:', [System.StringComparison]::Ordinal)
+        $cite   | Should -BeGreaterThan -1
+        $report | Should -BeGreaterThan $cite
+        $level  | Should -BeGreaterThan $report
+    }
+    It 'renders level, weighting, and suppressed lessons from a surfacing summary' {
+        $s = [pscustomobject]@{
+            level = 3; levelName = 'Task Delegator'; maxLevel = 7
+            weights = @([pscustomobject]@{ level = 3; percent = 100 },
+                        [pscustomobject]@{ level = 2; percent = 50 },
+                        [pscustomobject]@{ level = 1; percent = 25 })
+            suppressed = @('git-and-github/glossary', 'testing-basics/why-tests-exist')
+        }
+        $c = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject) -Surfacing $s
+        $c | Should -Match '(?m)^- Learner level: 3 of 7 \(Task Delegator\)\.$'
+        $c | Should -Match 'level 3 100%, level 2 50%, level 1 25%'
+        $c | Should -Match 'Never surface lessons above level 3\.'
+        $c | Should -Match 'git-and-github/glossary, testing-basics/why-tests-exist'
+    }
+    It 'omits the suppressed line when nothing is suppressed, and stays deterministic' {
+        $s = [pscustomobject]@{ level = 1; levelName = 'Prompt Novice'; maxLevel = 7
+            weights = @([pscustomobject]@{ level = 1; percent = 100 }); suppressed = @() }
+        $a = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject) -Surfacing $s
+        $b = Get-LearnStanzaContent -Manifest (New-FixtureManifestObject) -Surfacing $s
+        $a | Should -BeExactly $b
+        $a | Should -Not -Match 'Suppressed'
+    }
 }
 
 Describe 'Set-PointerStanza' {

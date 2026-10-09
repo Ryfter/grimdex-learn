@@ -1,28 +1,515 @@
 # Normalized claims baseline — agentic-ai-development
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/agent-evals.md
-  - capabilities/agent-to-agent-handoff.md
-  - capabilities/background-agents-and-ci.md
-  - capabilities/checkpoints-and-rollback-for-agent-work.md
-  - capabilities/codebase-retrieval-hybrid-search.md
-  - capabilities/context-engineering-and-window-management.md
-  - capabilities/hitl-interruption-and-steering.md
-  - capabilities/model-routing-and-cost-tiers.md
-  - capabilities/multi-agent-orchestration-tradeoffs.md
-  - capabilities/persistent-agent-memory.md
-  - capabilities/prompt-injection-and-lethal-trifecta.md
-  - capabilities/reading-agent-traces.md
-  - capabilities/repo-instruction-files.md
-  - capabilities/reviewing-agent-generated-code.md
-  - capabilities/sandboxing-and-least-privilege.md
-  - capabilities/secrets-and-data-hygiene-for-agent-context.md
-  - capabilities/spec-driven-plan-first-development.md
-  - capabilities/tool-and-schema-design.md
-  - capabilities/verification-first-loops.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: agent-evals-001
+    page: capabilities/agent-evals.md
+    claim: "Agent evals are a practice rather than a feature: a folder of task files plus a checklist or script that runs each task and records pass/fail against the expected outcome, with no syntax."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-evals-002
+    page: capabilities/agent-evals.md
+    claim: "Golden tasks should be re-run whenever the underlying model, a prompt, a tool configuration, or the agent's instructions change, because those are the moments when silent quality regressions sneak in."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-evals-003
+    page: capabilities/agent-evals.md
+    claim: "Each golden task needs an objective check for its outcome, such as tests, a linter, a type-checker, a build step, or an exact-match comparison, since without an observable signal you cannot tell a good run from a plausible-looking bad one."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-evals-004
+    page: capabilities/agent-evals.md
+    claim: "Anthropic's documentation on developing tests and evaluations covers success-criteria dimensions, example metrics, and grading-method tradeoffs, addressing the mechanics of grading one output rather than the golden-task-regression-set framing."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-to-agent-handoff-001
+    page: capabilities/agent-to-agent-handoff.md
+    claim: "Google's Agent2Agent (A2A) protocol is an open interoperability initiative that, as of 2025, has been moved under Linux Foundation governance so it is no longer controlled by a single vendor."
+    source: https://agents.md
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-to-agent-handoff-002
+    page: capabilities/agent-to-agent-handoff.md
+    claim: "MCP (Model Context Protocol) is about agent-to-tool communication, such as an agent calling databases, APIs, and file systems, while agent-to-agent protocols like A2A are about agents coordinating with each other directly."
+    source: https://agents.md
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-to-agent-handoff-003
+    page: capabilities/agent-to-agent-handoff.md
+    claim: "Vendors and platforms may adopt A2A so that agents from different providers can discover each other and exchange tasks, but adoption is real yet young and the ecosystem is still settling."
+    source: https://agents.md
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: agent-to-agent-handoff-004
+    page: capabilities/agent-to-agent-handoff.md
+    claim: "When a vendor deck mentions agent interoperability, ask whether it means agent-to-agent handoff, something like A2A, or MCP-style agent-to-tool connections, since the terms are often confused in vendor materials."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: background-agents-and-ci-001
+    page: capabilities/background-agents-and-ci.md
+    claim: "GitHub's Copilot coding agent can be assigned a GitHub issue and works autonomously to open a draft pull request containing an attempted fix, and may iterate based on review comments or automated checks."
+    source: https://docs.github.com/en/copilot
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: background-agents-and-ci-002
+    page: capabilities/background-agents-and-ci.md
+    claim: "Branch protection rules and required reviews act as the approval gate for agent-drafted pull requests, so an agent cannot merge its own work and nothing merges without a human approval."
+    source: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: background-agents-and-ci-003
+    page: capabilities/background-agents-and-ci.md
+    claim: "Verify an agent's claims against the actual diff and actual test runs rather than taking the agent's summary at face value, because rubber-stamping agent PRs removes the entire safety mechanism."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: background-agents-and-ci-004
+    page: capabilities/background-agents-and-ci.md
+    claim: "Delegate only genuinely independent, well-bounded tasks to a coding agent; issues that require back-and-forth clarification, architectural decisions, or cross-team context are poor autonomous-agent candidates."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: checkpoints-and-rollback-for-agent-work-001
+    page: capabilities/checkpoints-and-rollback-for-agent-work.md
+    claim: "Checkpointing agent work means committing or otherwise saving after each good, reviewed chunk of an agent session, rather than letting one long session accumulate a single giant change."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: checkpoints-and-rollback-for-agent-work-002
+    page: capabilities/checkpoints-and-rollback-for-agent-work.md
+    claim: "There is no new syntax or command set for checkpointing agent work; it uses whatever commit/checkpoint mechanism your tooling already provides, so the guidance is about cadence, not commands."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: checkpoints-and-rollback-for-agent-work-003
+    page: capabilities/checkpoints-and-rollback-for-agent-work.md
+    claim: "Locally, each checkpoint is a small, self-contained commit of one reviewed, working chunk, so rolling back after a bad chunk loses minutes of agent work rather than the whole session."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: checkpoints-and-rollback-for-agent-work-004
+    page: capabilities/checkpoints-and-rollback-for-agent-work.md
+    claim: "git-stash is for shelving in-progress work as a lighter-weight checkpoint than a commit."
+    source: https://git-scm.com/docs/git-stash
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: codebase-retrieval-hybrid-search-001
+    page: capabilities/codebase-retrieval-hybrid-search.md
+    claim: "Anthropic's platform documentation on handling tool calls describes how agents receive and act on retrieved or tool-provided content."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: codebase-retrieval-hybrid-search-002
+    page: capabilities/codebase-retrieval-hybrid-search.md
+    claim: "Pure vector search, also called naive RAG, often underperforms for code navigation because code contains exact-match signals such as symbol names, file paths, and import graphs that semantic similarity handles poorly."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: codebase-retrieval-hybrid-search-003
+    page: capabilities/codebase-retrieval-hybrid-search.md
+    claim: "Hybrid search combines embedding search with exact-match signals, typically via keyword or AST-aware search layered together with embeddings, and is described as the well-established cross-vendor approach for code retrieval."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: codebase-retrieval-hybrid-search-004
+    page: capabilities/codebase-retrieval-hybrid-search.md
+    claim: "Your coding-agent harness likely already performs hybrid retrieval, so you almost never need to build your own retrieval pipeline, and a homemade naive-vector layer can make results worse."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: context-engineering-and-window-management-001
+    page: capabilities/context-engineering-and-window-management.md
+    claim: "When a conversation approaches a token threshold, a compaction event summarizes older turns while preserving recent ones, so a long-running agent session does not silently lose earlier context or blow the context window."
+    source: https://platform.claude.com/docs/en/build-with-claude/compaction
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: context-engineering-and-window-management-002
+    page: capabilities/context-engineering-and-window-management.md
+    claim: "Compaction is a documented, current API feature on the platform side, triggered automatically near the token threshold rather than by a command; specific flag names should not be assumed beyond what official docs state."
+    source: https://platform.claude.com/docs/en/build-with-claude/compaction
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: context-engineering-and-window-management-003
+    page: capabilities/context-engineering-and-window-management.md
+    claim: "With subagent delegation, the main agent hands a large, self-contained task to a separate agent that does its own reading, searching, and reasoning in its own context, so only the result returns to the main session."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: context-engineering-and-window-management-004
+    page: capabilities/context-engineering-and-window-management.md
+    claim: "Capture critical decisions or constraints in a durable artifact such as a plan file or notes rather than relying on session memory, because compaction summarizes and detailed specifics from early turns may survive only in condensed form."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hitl-interruption-and-steering-001
+    page: capabilities/hitl-interruption-and-steering.md
+    claim: "A bare negative constraint like \"Do NOT do X\" leaves the agent without instructions for the moment it encounters X, so it has to guess what to do instead."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hitl-interruption-and-steering-002
+    page: capabilities/hitl-interruption-and-steering.md
+    claim: "Positive fallback framing such as \"If X happens, do Y instead\" gives the agent something actionable to do when the constraint binds."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hitl-interruption-and-steering-003
+    page: capabilities/hitl-interruption-and-steering.md
+    claim: "A session interrupted after two minutes of drift costs two minutes to fix, while the same drift found after a twenty-minute run costs a full review of a large diff and often a revert."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: hitl-interruption-and-steering-004
+    page: capabilities/hitl-interruption-and-steering.md
+    claim: "No commands or flags are involved in this capability; the \"syntax\" is phrasing, and the positive fallback is the load-bearing part even though both forms may be used together."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: model-routing-and-cost-tiers-001
+    page: capabilities/model-routing-and-cost-tiers.md
+    claim: "Prompt caching stores previously-processed context such as system prompts, long documents, and prior conversation turns so it is not re-billed and re-processed on every turn of a long session."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: model-routing-and-cost-tiers-002
+    page: capabilities/model-routing-and-cost-tiers.md
+    claim: "Prompt caching is a real, current, documented feature of Anthropic's platform and other major AI vendors, though exact syntax and pricing vary by vendor and change over time."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: model-routing-and-cost-tiers-003
+    page: capabilities/model-routing-and-cost-tiers.md
+    claim: "Cache entries expire after a period of inactivity, so very sporadic sessions may not benefit from caching."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: model-routing-and-cost-tiers-004
+    page: capabilities/model-routing-and-cost-tiers.md
+    claim: "Match the model to the task: use cheap models for easy, well-defined steps and reserve the best model for hard reasoning, since not every step of an agentic workflow needs the most capable model."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: model-routing-and-cost-tiers-005
+    page: capabilities/model-routing-and-cost-tiers.md
+    claim: "Validate output quality when downgrading a model tier, because a cheap model that produces subtly worse outputs can cost more in rework than it saved."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: multi-agent-orchestration-tradeoffs-001
+    page: capabilities/multi-agent-orchestration-tradeoffs.md
+    claim: "Anthropic's prompting guidance says to delegate only large, genuinely independent tasks to sub-agents and to avoid delegating small work you could finish directly."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: multi-agent-orchestration-tradeoffs-002
+    page: capabilities/multi-agent-orchestration-tradeoffs.md
+    claim: "Anthropic's delegation guidance warns against using sub-agents just to double-check your own work and advises keeping the number of spawned sub-agents low."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: multi-agent-orchestration-tradeoffs-003
+    page: capabilities/multi-agent-orchestration-tradeoffs.md
+    claim: "Splitting work across agents fragments shared context, so parallel fan-out actively hurts tasks whose later steps depend on earlier findings."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: multi-agent-orchestration-tradeoffs-004
+    page: capabilities/multi-agent-orchestration-tradeoffs.md
+    claim: "A hybrid approach works well: run independent investigation in parallel, then bring findings back into a single agent's context for the dependent reasoning phase."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: persistent-agent-memory-001
+    page: capabilities/persistent-agent-memory.md
+    claim: "Working context is everything the agent has loaded during the current session, and it disappears when the session ends."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: persistent-agent-memory-002
+    page: capabilities/persistent-agent-memory.md
+    claim: "Persistent memory in the common coding-agent case is just ordinary files written to the repo or workspace, readable by the next session and shareable through version control if committed."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: persistent-agent-memory-003
+    page: capabilities/persistent-agent-memory.md
+    claim: "Anthropic's compaction feature is the closest official anchor for what happens to context over a long session, but it does not itself describe a persistent-memory architecture."
+    source: https://platform.claude.com/docs/en/build-with-claude/compaction
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: persistent-agent-memory-004
+    page: capabilities/persistent-agent-memory.md
+    claim: "Keep secrets and credentials out of memory files entirely, since anything written there can be committed, shared, or re-read indefinitely."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: prompt-injection-and-lethal-trifecta-001
+    page: capabilities/prompt-injection-and-lethal-trifecta.md
+    claim: "Anthropic's guardrails documentation distinguishes two threat models: direct prompt injection, where the attacker is the application's own user, and indirect prompt injection, where adversarial instructions are embedded in third-party content the model processes."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: prompt-injection-and-lethal-trifecta-002
+    page: capabilities/prompt-injection-and-lethal-trifecta.md
+    claim: "Anthropic's tool-use guidance recommends delivering external content as tool results rather than pasting it into the system prompt or ordinary user text, because tool results are marked as data rather than instructions."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: prompt-injection-and-lethal-trifecta-003
+    page: capabilities/prompt-injection-and-lethal-trifecta.md
+    claim: "Anthropic's computer-use documentation describes an automated classifier that detects potential prompt injection in screenshots and web content and can trigger a human-confirmation step, but it is explicitly not a complete defense."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: prompt-injection-and-lethal-trifecta-004
+    page: capabilities/prompt-injection-and-lethal-trifecta.md
+    claim: "If an agent handles private data, designers should avoid giving it unsupervised outbound channels, because removing the exfiltration channel collapses the lethal trifecta and largely stops injected instructions from leaking data."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reading-agent-traces-001
+    page: capabilities/reading-agent-traces.md
+    claim: "When an agent calls a tool, the tool returns a result, and that result is the agent's input to reason over before its next step."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reading-agent-traces-002
+    page: capabilities/reading-agent-traces.md
+    claim: "In a tool-using agent session, the agent reasons, calls a tool, reads the returned result, reasons again, and repeats until it produces a final answer."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reading-agent-traces-003
+    page: capabilities/reading-agent-traces.md
+    claim: "The trace — the full sequence of tool calls, intermediate outputs, and reasoning steps — is the actual debugging surface for an agentic session, not the final answer."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reading-agent-traces-004
+    page: capabilities/reading-agent-traces.md
+    claim: "Walk the whole trace in order because the decisive mistake is often early, such as reading the wrong file, and skimming the last few calls misses it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: repo-instruction-files-001
+    page: capabilities/repo-instruction-files.md
+    claim: "AGENTS.md is a real, published open format adopted across multiple vendors, designed so the same file can work with several different tools."
+    source: https://agents.md/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: repo-instruction-files-002
+    page: capabilities/repo-instruction-files.md
+    claim: "The published AGENTS.md format is deliberately simple Markdown, typically a file named AGENTS.md at the repository root, with sections commonly including build/test commands and project conventions."
+    source: https://agents.md/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: repo-instruction-files-003
+    page: capabilities/repo-instruction-files.md
+    claim: "CLAUDE.md is Claude Code's own convention: a Markdown file, conventionally at the repo root, with free-form Markdown instructions that Claude Code reads automatically at the start of a session."
+    source: https://code.claude.com/docs
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: repo-instruction-files-004
+    page: capabilities/repo-instruction-files.md
+    claim: "Do not put secrets or credentials in an instructions file, because the file is read into the agent's context every session."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reviewing-agent-generated-code-001
+    page: capabilities/reviewing-agent-generated-code.md
+    claim: "Agents can produce code that calls plausible-sounding functions, methods, or parameters that do not actually exist in your codebase or in a library, so fluency is not evidence the API is real."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reviewing-agent-generated-code-002
+    page: capabilities/reviewing-agent-generated-code.md
+    claim: "Agent code often handles the obvious happy-path case correctly but misses corner cases such as empty input, unusual formats, concurrent access, and partial failure."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reviewing-agent-generated-code-003
+    page: capabilities/reviewing-agent-generated-code.md
+    claim: "You are accountable for what you merge regardless of who or what wrote it, and the agent saying it worked is not a review."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reviewing-agent-generated-code-004
+    page: capabilities/reviewing-agent-generated-code.md
+    claim: "When reviewing agent work locally, read the actual diff rather than the agent's narration, run the tests and other checks yourself, and confirm the change does what was asked and nothing extra."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: sandboxing-and-least-privilege-001
+    page: capabilities/sandboxing-and-least-privilege.md
+    claim: "Anthropic's computer-use documentation describes an automated classifier that can detect potential prompt injection and trigger a human-confirmation step, described as a mitigation rather than a complete defense."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: sandboxing-and-least-privilege-002
+    page: capabilities/sandboxing-and-least-privilege.md
+    claim: "The indirect prompt injection threat, in which agents process untrusted external content such as emails, web pages, and file uploads, is described in Anthropic's guardrails documentation."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: sandboxing-and-least-privilege-003
+    page: capabilities/sandboxing-and-least-privilege.md
+    claim: "Anthropic's tool-use documentation notes that tool results should be encapsulated as tool results rather than pasted into system prompts, as part of clearly distinguishing trusted instructions from untrusted data."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: sandboxing-and-least-privilege-004
+    page: capabilities/sandboxing-and-least-privilege.md
+    claim: "Network-disabled sandboxes are a particularly strong control against indirect prompt injection scenarios, because adversarial content trying to make the agent exfiltrate data has no network channel to use."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: secrets-and-data-hygiene-for-agent-context-001
+    page: capabilities/secrets-and-data-hygiene-for-agent-context.md
+    claim: "Git ignore rules govern version control only and do not stop an AI coding agent from reading files such as an untracked .env, so a file untracked by git can still enter the agent's context."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: secrets-and-data-hygiene-for-agent-context-002
+    page: capabilities/secrets-and-data-hygiene-for-agent-context.md
+    claim: "Some agent tools support an agent-specific ignore mechanism that controls what the agent may read into context, separate from what git tracks, and the exact file name and syntax vary by tool."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: secrets-and-data-hygiene-for-agent-context-003
+    page: capabilities/secrets-and-data-hygiene-for-agent-context.md
+    claim: "Once a secret enters an agent's context, it can surface in generated code, tool invocations, agent session logs, or anything later pasted or shared, even though git never saw it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: secrets-and-data-hygiene-for-agent-context-004
+    page: capabilities/secrets-and-data-hygiene-for-agent-context.md
+    claim: "The general secrets-hygiene discipline is to never commit credentials to git and instead keep them in environment variables or a secrets manager."
+    source: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: spec-driven-plan-first-development-001
+    page: capabilities/spec-driven-plan-first-development.md
+    claim: "Claude Code has a real plan mode feature in which the agent presents a plan, the user approves or adjusts it, and only then does the agent implement."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: spec-driven-plan-first-development-002
+    page: capabilities/spec-driven-plan-first-development.md
+    claim: "The official Claude Code documentation should be consulted for the current exact way to enter and exit plan mode, rather than relying on memorized keystrokes."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: spec-driven-plan-first-development-003
+    page: capabilities/spec-driven-plan-first-development.md
+    claim: "Reviewing a short plan before code exists is cheaper than reviewing a large diff afterward, because catching a wrong approach in a plan costs minutes while catching it after implementation costs a rewrite."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: spec-driven-plan-first-development-004
+    page: capabilities/spec-driven-plan-first-development.md
+    claim: "A good plan review checks three things: whether the approach is right, whether the scope is right with no unrequested changes, and whether the agent has misunderstood anything."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: tool-and-schema-design-001
+    page: capabilities/tool-and-schema-design.md
+    claim: "A custom tool's name, description, and parameter schema function as part of the prompt, and the agent has no other source of knowledge about what the tool does or what arguments it expects."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: tool-and-schema-design-002
+    page: capabilities/tool-and-schema-design.md
+    claim: "Each tool call and result flows back into the conversation, so a well-described tool plus a specific error message turns a failed call into a one-step correction."
+    source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: tool-and-schema-design-003
+    page: capabilities/tool-and-schema-design.md
+    claim: "Failed tool calls should return specific, actionable error messages stating what was wrong and what valid input looks like, because this measurably helps the agent recover and retry correctly."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: tool-and-schema-design-004
+    page: capabilities/tool-and-schema-design.md
+    claim: "If an agent misuses your tool, the first thing to check is the tool's description and schema rather than the agent, and similar overlapping tools should be explicitly distinguished in their descriptions."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: verification-first-loops-001
+    page: capabilities/verification-first-loops.md
+    claim: "A verification-first loop gives an AI coding agent an objective check it can run itself, and the agent acts, runs the check, reads the real result, and iterates until the check passes."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: verification-first-loops-002
+    page: capabilities/verification-first-loops.md
+    claim: "An agent optimizes against whatever feedback signal it can observe; with only its own narration available, it produces output that looks plausible rather than output that is correct."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: verification-first-loops-003
+    page: capabilities/verification-first-loops.md
+    claim: "In a closed loop, the agent edits a file, runs test/lint/build locally, sees the real error message, and corrects itself within the same session, so errors are caught cheaply and immediately."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: verification-first-loops-004
+    page: capabilities/verification-first-loops.md
+    claim: "Anthropic's Claude prompting best practices documentation includes guidance on delegating verifiable work to agents."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    last_verified: 2026-09-20
+    verification: page-restatement

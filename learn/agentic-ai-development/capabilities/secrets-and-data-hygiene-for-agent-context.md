@@ -1,6 +1,7 @@
 ---
 title: Secrets and data hygiene for agent context
 module_id: agentic-ai-development
+level: 6
 capabilities:
   - secrets-and-data-hygiene-for-agent-context
 context7_library: /websites/platform_claude_en

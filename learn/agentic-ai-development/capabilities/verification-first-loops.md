@@ -1,6 +1,7 @@
 ---
 title: "Verification-first loops: sensors and closed-loop harnesses"
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - verification-first-loops
 context7_library: /websites/platform_claude_en

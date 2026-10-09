@@ -1,13 +1,109 @@
 # Normalized claims baseline — grimdex-harness
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/install-and-bootstrap.md
-  - capabilities/learn-module-verbosity.md
-  - capabilities/student-zone-layout.md
-  - capabilities/what-is-grimdex.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: install-and-bootstrap-001
+    page: capabilities/install-and-bootstrap.md
+    claim: "Installing the Learn module requires an existing Grimdex install, which is a folder already containing a file named GRIMDEX.md; the Learn installer composes its files onto that existing folder and does not install Grimdex itself."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-and-bootstrap-002
+    page: capabilities/install-and-bootstrap.md
+    claim: "Both install paths run the same installer script (install-learn.ps1) and pin to a release tag rather than a moving branch, so everyone installing in the same term gets byte-identical content."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-and-bootstrap-003
+    page: capabilities/install-and-bootstrap.md
+    claim: "On success the script prints 'INSTALLED. Mode: fresh. Files: N.' plus a pointer stanza line; on a later run it prints 'Mode: re-apply' and 'unchanged' for the stanza."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-and-bootstrap-004
+    page: capabilities/install-and-bootstrap.md
+    claim: "Review the printed script before running the Path B one-liner, since you are executing a script fetched over the network rather than one already on disk."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: learn-module-verbosity-001
+    page: capabilities/learn-module-verbosity.md
+    claim: "When the Learn module is installed, responses become more verbose than the base Grimdex harness's short, minimal replies, giving explanatory answers that teach as you work."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: learn-module-verbosity-002
+    page: capabilities/learn-module-verbosity.md
+    claim: "When a response touches a topic with wiki coverage, Learn includes a link to that wiki page; when no wiki page exists, the link-out goes straight to the official documentation instead."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: learn-module-verbosity-003
+    page: capabilities/learn-module-verbosity.md
+    claim: "The Learn module adds no new commands; verbosity and pass-through are behavior, not syntax, so responses are simply longer and include link-outs after installation."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: learn-module-verbosity-004
+    page: capabilities/learn-module-verbosity.md
+    claim: "Learn's answers deliberately stop at what, why, and a little how, then link out to deeper material rather than exhausting the topic."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: student-zone-layout-001
+    page: capabilities/student-zone-layout.md
+    claim: "The Learn module adds only the learn/ folder (plus the reserved but unpopulated course/ folder) to disk during install."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: student-zone-layout-002
+    page: capabilities/student-zone-layout.md
+    claim: "Student roots under projects/** are always treated as never-touch during install, update, graduate, or remove, as declared in the lifecycle matrix in learn/manifest.json."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: student-zone-layout-003
+    page: capabilities/student-zone-layout.md
+    claim: "neverShip files such as config/fleet.json and config/settings.json stay present locally and are verified absent from every produced bundle, export, or mirror."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: student-zone-layout-004
+    page: capabilities/student-zone-layout.md
+    claim: "If a lifecycle operation encounters a foreign-owner collision on a path, it hard-fails with a path list rather than silently merging, and base always wins a contested path."
+    source: https://github.com/Ryfter/Grimdex
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: what-is-grimdex-001
+    page: capabilities/what-is-grimdex.md
+    claim: "Grimdex-edu, also called Learn, does exactly two things: pass-through pointing readers to a wiki or other documentation, and more verbose educational responses than stock Grimdex."
+    source: https://github.com/Ryfter/Grimdex
+    last_verified: 2026-09-18
+    verification: page-restatement
+  - id: what-is-grimdex-002
+    page: capabilities/what-is-grimdex.md
+    claim: "A wiki is not required for Learn; it must function fully without one, and a missing wiki is a normal state, not an error."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-18
+    verification: page-restatement
+  - id: what-is-grimdex-003
+    page: capabilities/what-is-grimdex.md
+    claim: "There is no special command or literal syntax for this concept; Learn's role is recognized through its responses, not a required label or exact response format."
+    source: https://github.com/Ryfter/grimdex-learn
+    last_verified: 2026-09-18
+    verification: page-restatement
+  - id: what-is-grimdex-004
+    page: capabilities/what-is-grimdex.md
+    claim: "Keep explanations to what, why, and a little how, and link out rather than exhaust the topic."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-18
+    verification: page-restatement

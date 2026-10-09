@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="saps-title saps-desc">
+  <title id="saps-title">Starting a project safely: an eight-rung build-up</title>
+  <desc id="saps-desc">A vertical ladder of eight numbered rungs, read bottom to top: know where you are, create or clone a repository, set identity and authentication, write .gitignore first, keep secrets in .env, add a dependency with its manifest and lockfile, install/build/run as three separate steps, and check the license. The bottom rung is labeled "start: empty folder" and the top rung is labeled "done: running, licensed project". A connecting rail runs up the left side of the rungs.</desc>
+  <defs>
+    <linearGradient id="saps-topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9480f"/>
+      <stop offset="1" stop-color="#1971c2"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="20" y="20" width="1560" height="860" rx="26" fill="#fffdf8" stroke="#e4ddd0" stroke-width="2"/>
+  <rect x="20" y="20" width="1560" height="10" rx="5" fill="url(#saps-topbar)"/>
+
+  <text x="800" y="90" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="40" font-weight="700" fill="#1b2230">Starting a project safely</text>
+  <text x="800" y="124" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="21" fill="#5d6676">Eight checkable rungs: from an empty folder to a running, licensed project</text>
+
+  <g fill="#f3ecdd">
+    <rect x="60" y="662.5" width="1480" height="85.0" rx="10"/>
+    <rect x="60" y="492.5" width="1480" height="85.0" rx="10"/>
+    <rect x="60" y="322.5" width="1480" height="85.0" rx="10"/>
+    <rect x="60" y="152.5" width="1480" height="85.0" rx="10"/>
+  </g>
+
+  <path d="M 300,828 L 300,157" fill="none" stroke="#1971c2" stroke-width="7" stroke-linecap="butt"/>
+
+  <!-- Rung 1: Know where you are -->
+  <g>
+    <circle cx="300" cy="790" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="802" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">1</text>
+    <text x="372" y="783" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Know where you are</text>
+    <text x="372" y="810" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">pwd, ls — terminal &amp; paths</text>
+  </g>
+
+  <!-- Rung 2: Create or clone -->
+  <g>
+    <circle cx="300" cy="705" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="717" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">2</text>
+    <text x="372" y="698" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Create or clone</text>
+    <text x="372" y="725" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">git init -b main</text>
+  </g>
+
+  <!-- Rung 3: Set identity &amp; auth -->
+  <g>
+    <circle cx="300" cy="620" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="632" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">3</text>
+    <text x="372" y="613" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Set identity &amp; auth</text>
+    <text x="372" y="640" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">git config user.email</text>
+  </g>
+
+  <!-- Rung 4: .gitignore first -->
+  <g>
+    <circle cx="300" cy="535" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="547" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">4</text>
+    <text x="372" y="528" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">.gitignore first</text>
+    <text x="372" y="555" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">before your first commit</text>
+  </g>
+
+  <!-- Rung 5: Secrets in .env -->
+  <g>
+    <circle cx="300" cy="450" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="462" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">5</text>
+    <text x="372" y="443" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Secrets in .env</text>
+    <text x="372" y="470" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">never hard-coded, never committed</text>
+  </g>
+
+  <!-- Rung 6: Add a dependency -->
+  <g>
+    <circle cx="300" cy="365" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="377" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">6</text>
+    <text x="372" y="358" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Add a dependency</text>
+    <text x="372" y="385" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">manifest + lockfile, together</text>
+  </g>
+
+  <!-- Rung 7: Install, build, run -->
+  <g>
+    <circle cx="300" cy="280" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="292" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">7</text>
+    <text x="372" y="273" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Install, build, run</text>
+    <text x="372" y="300" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">three separate, checkable steps</text>
+  </g>
+
+  <!-- Rung 8: Check the license -->
+  <g>
+    <circle cx="300" cy="195" r="38" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="207" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="34" font-weight="700" fill="#fffdf8">8</text>
+    <text x="372" y="188" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="700" fill="#1b2230">Check the license</text>
+    <text x="372" y="215" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="17" fill="#5d6676">MIT, Apache-2.0, GPL…</text>
+  </g>
+
+  <text x="1420" y="783" text-anchor="end" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="18" font-style="italic" fill="#5d6676">start: empty folder</text>
+  <text x="1420" y="188" text-anchor="end" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="18" font-style="italic" fill="#5d6676">done: running, licensed project</text>
+
+  <text x="800" y="866" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="18" font-style="italic" fill="#5d6676">Every rung is checkable before you climb to the next one.</text>
+</svg>

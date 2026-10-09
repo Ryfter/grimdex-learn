@@ -1,6 +1,7 @@
 ---
 title: Model routing and cost-tier optimization
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - model-routing-and-cost-tiers
 context7_library: /websites/platform_claude_en

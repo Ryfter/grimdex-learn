@@ -1,6 +1,7 @@
 ---
 title: "Practicum: name that component from a real config"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - name-that-component-practicum
 context7_library: /websites/platform_claude_en

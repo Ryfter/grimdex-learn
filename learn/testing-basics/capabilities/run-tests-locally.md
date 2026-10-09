@@ -1,6 +1,7 @@
 ---
 title: Running pytest/Pester and reading pass-fail
 module_id: testing-basics
+level: 2
 capabilities:
   - run-tests-locally
 context7_library: /websites/pytest_en_stable

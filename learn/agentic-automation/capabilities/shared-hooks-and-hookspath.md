@@ -1,6 +1,7 @@
 ---
 title: Sharing hooks across a team (core.hooksPath)
 module_id: agentic-automation
+level: 5
 capabilities:
   - shared-hooks-and-hookspath
 context7_library: /websites/git-scm

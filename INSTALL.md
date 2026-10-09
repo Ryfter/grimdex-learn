@@ -123,6 +123,32 @@ Running the install again with the same inputs is safe and expected. It reports
 `re-apply` mode, rewrites the content, and reports the pointer stanza as `unchanged`.
 Re-running produces no diff.
 
+## Tracking lesson exposure (optional)
+
+`scripts/learn-surfacing.ps1` reads transcripts after the fact and updates the
+student's mastery level. It is not part of install or graduation; run it only when
+asked to.
+
+    pwsh <source>/scripts/learn-surfacing.ps1 -InstallRoot <install> -TranscriptPath <path>[,<path>...]
+    pwsh <source>/scripts/learn-surfacing.ps1 -InstallRoot <install> -Suppress <module>/<lesson-id>
+    pwsh <source>/scripts/learn-surfacing.ps1 -InstallRoot <install> -Unsuppress <module>/<lesson-id>
+
+`-TranscriptPath` takes one or more files or directories; add `-PromotionThreshold
+<n>` to change the default of 10. Pass several with commas, with or without spaces
+(`a.jsonl,b.jsonl` or `a.jsonl, b.jsonl`) — this works the same whether you run the
+script from inside PowerShell or invoke it externally as `pwsh -File`, where a
+comma-joined value otherwise arrives as a single argument. A directory argument is
+scanned **non-recursively** by design — it reads `.jsonl`/`.md`/`.txt`/`.log` files
+directly inside it, not subfolders. A Claude Code project folder's `subagents/`
+subfolder is therefore not counted: those are turns the student never saw. If a
+directory has no transcript files, or a `.jsonl` file has no Claude Code assistant
+text events, the script prints a `WARNING:` and keeps going.
+
+Exit codes: 0 ok; 1 bad input, nothing written; 2 cannot read the install's Learn
+state or cannot update the pointer stanza. It writes only
+`<install>/learn-progress/surfacing.json` and the pointer stanza block — nothing
+else. Re-running it is always safe.
+
 ## Removing it again
 
 Removal is part of the graduation flow, not this document. See `docs/graduation.md`.

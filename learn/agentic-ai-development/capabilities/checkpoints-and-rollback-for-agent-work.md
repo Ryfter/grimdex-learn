@@ -1,6 +1,7 @@
 ---
 title: Checkpoints, diffs, and rollback for agent work
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - checkpoints-and-rollback-for-agent-work
 context7_library: /websites/git-scm

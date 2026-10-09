@@ -1,6 +1,7 @@
 ---
 title: Context engineering and window management
 module_id: agentic-ai-development
+level: 4
 capabilities:
   - context-engineering-and-window-management
 context7_library: /websites/platform_claude_en

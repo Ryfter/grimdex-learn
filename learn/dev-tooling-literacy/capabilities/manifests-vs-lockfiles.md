@@ -1,6 +1,7 @@
 ---
 title: Dependency manifests vs. lockfiles
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - manifests-vs-lockfiles
 context7_library:

@@ -3,6 +3,8 @@ BeforeAll {
     . (Join-Path $PSScriptRoot '..' 'scripts' 'verify-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'stanza-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'lifecycle-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'learn-index-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'surfacing-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'install-lib.ps1')
 
     $script:RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -153,7 +155,7 @@ Describe 'Install documentation' {
         $p = Join-Path $script:RepoRoot 'QUICKSTART.md'
         $p | Should -Exist
         $text = [string](Get-Content -LiteralPath $p -Raw)
-        $text | Should -Match 'git clone --branch v0\.2\.0-fall2026-draft'
+        $text | Should -Match 'git clone --branch v0\.3\.0-fall2026-draft'
         $text | Should -Match 'https://github.com/Ryfter/grimdex-learn'
         $text | Should -Match 'bootstrap\.ps1'
         $text | Should -Match '-InstallRoot'

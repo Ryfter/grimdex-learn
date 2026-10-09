@@ -1,6 +1,7 @@
 ---
 title: "Host, client, server: who talks to whom in MCP"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - mcp-host-client-server
 context7_library: /websites/platform_claude_en

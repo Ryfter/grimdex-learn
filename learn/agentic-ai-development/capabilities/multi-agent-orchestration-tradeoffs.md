@@ -1,6 +1,7 @@
 ---
 title: Multi-agent orchestration -- the honest tradeoffs
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - multi-agent-orchestration-tradeoffs
 context7_library: /websites/platform_claude_en

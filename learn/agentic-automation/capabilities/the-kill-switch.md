@@ -1,6 +1,7 @@
 ---
 title: "The kill switch: stopping a run vs. disabling its trigger"
 module_id: agentic-automation
+level: 5
 capabilities:
   - the-kill-switch
 context7_library: /websites/github_en_actions

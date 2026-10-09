@@ -3,6 +3,8 @@ BeforeAll {
     . (Join-Path $PSScriptRoot '..' 'scripts' 'verify-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'stanza-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'lifecycle-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'learn-index-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'surfacing-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'install-lib.ps1')
 
     # Test files must stand alone, so the fixture builders are defined here
@@ -820,5 +822,53 @@ Describe 'Security regressions found by the final adversarial review' {
             $plan.errors | Should -BeNullOrEmpty
             $plan.mode   | Should -Be 're-apply'
         }
+    }
+}
+
+Describe 'Install keeps the learner level in the stanza' {
+    BeforeAll {
+        function Add-FixtureIndex([string]$Src) {
+            @{ schemaVersion = 1; lessons = @(
+                @{ id = 'a1'; module = 'git-and-github'; title = 'A1'; level = 1; capabilities = @('a1'); path = 'learn/git-and-github/capabilities/a1.md' }
+                @{ id = 'b1'; module = 'git-and-github'; title = 'B1'; level = 2; capabilities = @('b1'); path = 'learn/git-and-github/capabilities/b1.md' }
+            ) } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $Src 'learn/index.json')
+        }
+    }
+    It 'renders level 1 for a student with no ledger yet' {
+        $src = New-FixtureSource 'lv-src1'; Add-FixtureIndex $src
+        $root = New-FixtureInstall 'lv-root1'
+        $plan = New-InstallPlan -SourceRoot $src -InstallRoot $root -Manifest (New-FixtureManifestObject)
+        $plan.stanzaContent | Should -Match 'Learner level: 1 of 7'
+    }
+    It 'renders the saved level and suppressions, and never writes the ledger' {
+        $src = New-FixtureSource 'lv-src2'; Add-FixtureIndex $src
+        $root = New-FixtureInstall 'lv-root2'
+        New-Item -ItemType Directory -Path (Join-Path $root 'learn-progress') | Out-Null
+        $ledgerPath = Join-Path $root 'learn-progress/surfacing.json'
+        Set-Content -LiteralPath $ledgerPath -NoNewline `
+            -Value '{"schemaVersion":1,"level":2,"counts":{"git-and-github/a1":10},"transcripts":{},"suppressed":["git-and-github/b1"]}'
+        $before = [IO.File]::ReadAllText($ledgerPath)
+        $work = Join-Path $TestDrive 'lv-work2'
+        $r = Invoke-LearnInstall -SourceRoot $src -InstallRoot $root -ManifestPath (Join-Path $src 'learn/manifest.json') -WorkDir $work
+        $r.status | Should -Be 'installed'
+        $body = Get-PointerStanzaBody -Path (Join-Path $root 'GRIMDEX.md')
+        $body | Should -Match 'Learner level: 2 of 7'
+        $body | Should -Match 'never surface these\): git-and-github/b1'
+        [IO.File]::ReadAllText($ledgerPath) | Should -BeExactly $before
+    }
+    It 'falls back to no level lines when the ledger is unreadable, without a plan error' {
+        $src = New-FixtureSource 'lv-src3'; Add-FixtureIndex $src
+        $root = New-FixtureInstall 'lv-root3'
+        New-Item -ItemType Directory -Path (Join-Path $root 'learn-progress') | Out-Null
+        Set-Content -LiteralPath (Join-Path $root 'learn-progress/surfacing.json') -Value '{ not json'
+        $plan = New-InstallPlan -SourceRoot $src -InstallRoot $root -Manifest (New-FixtureManifestObject)
+        @($plan.errors).Count | Should -Be 0
+        $plan.stanzaContent | Should -Not -Match 'Learner level'
+    }
+    It 'renders no level lines for a source pack without an index' {
+        $src = New-FixtureSource 'lv-src4'
+        $root = New-FixtureInstall 'lv-root4'
+        $plan = New-InstallPlan -SourceRoot $src -InstallRoot $root -Manifest (New-FixtureManifestObject)
+        $plan.stanzaContent | Should -Not -Match 'Learner level'
     }
 }

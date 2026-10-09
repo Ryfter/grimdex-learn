@@ -1,6 +1,7 @@
 ---
 title: What happens when the next run starts before the last ends
 module_id: agentic-automation
+level: 5
 capabilities:
   - overlap-and-concurrency
 context7_library: /websites/github_en_actions

@@ -1,6 +1,7 @@
 ---
 title: Environment variables
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - environment-variables
 context7_library:

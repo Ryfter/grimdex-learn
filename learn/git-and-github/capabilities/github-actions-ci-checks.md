@@ -1,6 +1,7 @@
 ---
 title: Reading CI checks on a pull request
 module_id: git-and-github
+level: 3
 capabilities:
   - github-actions-ci-checks
 context7_library: /websites/github_en_actions

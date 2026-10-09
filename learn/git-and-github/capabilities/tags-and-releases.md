@@ -1,6 +1,7 @@
 ---
 title: Tags and GitHub Releases
 module_id: git-and-github
+level: 3
 capabilities:
   - tags-and-releases
 context7_library: /websites/git-scm

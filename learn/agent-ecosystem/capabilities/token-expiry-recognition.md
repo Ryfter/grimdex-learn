@@ -1,6 +1,7 @@
 ---
 title: When tokens expire (and how it looks)
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - token-expiry-recognition
 context7_library: /websites/platform_claude_en

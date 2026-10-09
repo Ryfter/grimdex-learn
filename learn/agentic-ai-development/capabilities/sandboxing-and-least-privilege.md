@@ -1,6 +1,7 @@
 ---
 title: Sandboxing and least privilege for agents
 module_id: agentic-ai-development
+level: 6
 capabilities:
   - sandboxing-and-least-privilege
 context7_library: /websites/platform_claude_en

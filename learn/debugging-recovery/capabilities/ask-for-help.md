@@ -1,6 +1,7 @@
 ---
 title: Escalating without leaking secrets
 module_id: debugging-recovery
+level: 2
 capabilities:
   - ask-for-help
 context7_library: 

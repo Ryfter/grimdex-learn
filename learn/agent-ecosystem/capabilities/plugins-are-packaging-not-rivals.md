@@ -1,6 +1,7 @@
 ---
 title: "Plugins: packaging, not a rival to MCP"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - plugins-are-packaging-not-rivals
 context7_library: /websites/platform_claude_en

@@ -1,6 +1,7 @@
 ---
 title: Line endings and .gitattributes
 module_id: git-and-github
+level: 3
 capabilities:
   - line-endings-gitattributes
 context7_library: /websites/git-scm

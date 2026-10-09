@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>One change, start to finish</title>
+<style>
+/* Showcase deck (approach B): hand-designed, CSS only.
+   Idea: the change is a branch line on a transit map. Each step is a station;
+   the yellow badge is "you are here", and the route strip at the foot of each
+   step slide shows how far along the line you are. */
+:root{
+  --paper:#e9edf2;--panel:#ffffff;--ink:#14213d;--muted:#56627a;--rule:#d5dce6;
+  --line:#0b7a75;--line-soft:#e0f0ee;--main:#a3adbd;--signal:#f2b705;--signal-ink:#14213d;
+  --code-bg:#14213d;--code-ink:#e8edf5;--code-dim:#8d9ab3;--prompt:#f2b705;
+  --shadow:0 1px 0 rgba(20,33,61,.06),0 24px 60px -18px rgba(20,33,61,.28);
+  --display:"Avenir Next Condensed","Bahnschrift","DIN Condensed","Roboto Condensed","Arial Narrow",system-ui,sans-serif;
+  --text:"Avenir Next","Segoe UI Variable Text","Segoe UI",Roboto,"Helvetica Neue",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Cascadia Code",Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0a101c;--panel:#121b2c;--ink:#e8edf5;--muted:#9ba8bd;--rule:#26324a;
+  --line:#3cc9be;--line-soft:#123236;--main:#45526a;--signal:#ffc93c;--signal-ink:#14213d;
+  --code-bg:#060a13;--code-ink:#e8edf5;--code-dim:#7b88a1;--prompt:#ffc93c;
+  --shadow:0 1px 0 rgba(255,255,255,.04),0 24px 60px -18px rgba(0,0,0,.7);
+}}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);line-height:1.4;-webkit-font-smoothing:antialiased}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- slide frame ---------- */
+.slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5vh 3vw}
+.frame{position:relative;width:min(94vw,calc((100vh - 9vh) * 16 / 9));aspect-ratio:16/9;container-type:size;
+  background:var(--panel);border-radius:clamp(10px,1.2vw,22px);box-shadow:var(--shadow);overflow:hidden;
+  padding:5.2cqw 6cqw 8.4cqw;display:flex;flex-direction:column;gap:2.6cqw;font-size:2.05cqw}
+.frame::before{content:"";position:absolute;left:0;top:0;bottom:0;width:.7cqw;background:var(--line)}
+h1,h2,h3{font-family:var(--display);font-stretch:condensed;margin:0;letter-spacing:-.005em}
+h2{display:flex;align-items:center;gap:2.2cqw;font-size:4.5cqw;font-weight:700;line-height:1}
+strong{font-weight:700}
+code{font-family:var(--mono);font-size:.86em;background:var(--line-soft);color:var(--ink);padding:.06em .32em;border-radius:.28em;white-space:nowrap}
+ul{margin:0;padding:0;list-style:none}
+p{margin:0}
+
+/* station badge: "you are here" */
+.stop{flex:none;width:7.4cqw;height:7.4cqw;border-radius:50%;background:var(--signal);color:var(--signal-ink);
+  box-shadow:0 0 0 .55cqw var(--panel),0 0 0 1.05cqw var(--line);
+  display:grid;place-content:center;text-align:center;line-height:.85}
+.stop small{display:block;font-family:var(--text);font-size:1.15cqw;font-weight:600;letter-spacing:.02em;margin-bottom:.15cqw}
+.stop b{font-size:4.2cqw;font-weight:800}
+
+/* bullets as stations along a short vertical line */
+.pts{display:flex;flex-direction:column;gap:1.5cqw;position:relative}
+.pts li{position:relative;padding-left:2.6cqw;line-height:1.28;font-size:2.65cqw}
+.pts li::before{content:"";position:absolute;left:0;top:.42em;width:1.15cqw;height:1.15cqw;border-radius:50%;
+  background:var(--panel);box-shadow:inset 0 0 0 .32cqw var(--line)}
+
+/* terminal */
+.term{background:var(--code-bg);color:var(--code-ink);border-radius:1.2cqw;padding:2.2cqw 2.6cqw;font-family:var(--mono);
+  font-size:2.3cqw;line-height:1.55;position:relative;margin:0}
+.term::before{content:"";display:block;width:5.2cqw;height:1cqw;margin-bottom:1.5cqw;
+  background:radial-gradient(circle,#ff6b5e 46%,transparent 50%) 0 0/1.6cqw 1cqw no-repeat,
+             radial-gradient(circle,#f2b705 46%,transparent 50%) 1.8cqw 0/1.6cqw 1cqw no-repeat,
+             radial-gradient(circle,#3cc9be 46%,transparent 50%) 3.6cqw 0/1.6cqw 1cqw no-repeat}
+.term code{background:none;color:inherit;padding:0;font-size:1em}
+.term .ln{display:block;white-space:pre}
+.term .ln::before{content:"$ ";color:var(--prompt)}
+.term.big{font-size:3.6cqw}
+
+/* route strip */
+.route{position:absolute;left:6cqw;right:14cqw;bottom:3.6cqw;height:1.8cqw}
+.route::before,.route::after{content:"";position:absolute;left:0;top:50%;height:.5cqw;margin-top:-.25cqw;border-radius:1cqw}
+.route::before{right:0;background:var(--main)}
+.route::after{width:var(--p);background:var(--line)}
+.route i{position:absolute;top:50%;width:1.3cqw;height:1.3cqw;margin:-.65cqw 0 0 -.65cqw;border-radius:50%;z-index:1;
+  background:var(--panel);box-shadow:inset 0 0 0 .3cqw var(--main)}
+.route i.done{background:var(--line);box-shadow:none}
+.route i.here{width:2.3cqw;height:2.3cqw;margin:-1.15cqw 0 0 -1.15cqw;background:var(--signal);box-shadow:0 0 0 .4cqw var(--line)}
+.route i:nth-child(1){left:0}.route i:nth-child(2){left:11.111%}.route i:nth-child(3){left:22.222%}
+.route i:nth-child(4){left:33.333%}.route i:nth-child(5){left:44.444%}.route i:nth-child(6){left:55.556%}
+.route i:nth-child(7){left:66.667%}.route i:nth-child(8){left:77.778%}.route i:nth-child(9){left:88.889%}
+.route i:nth-child(10){left:100%}
+.num{position:absolute;right:6cqw;bottom:3.2cqw;font-family:var(--display);font-stretch:condensed;font-size:1.7cqw;
+  font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* layout helpers */
+.split{display:grid;grid-template-columns:1.12fr .88fr;gap:4.5cqw;align-items:center;flex:1;min-height:0}
+.split.even{grid-template-columns:1fr 1fr}
+.stack{display:flex;flex-direction:column;gap:2.2cqw}
+.cap{color:var(--muted);font-size:1.55cqw;line-height:1.35}
+
+/* ---------- 1: title ---------- */
+.title{justify-content:flex-end;padding-bottom:6cqw;gap:2cqw}
+.title h1{font-size:9.6cqw;font-weight:800;line-height:.92;letter-spacing:-.012em}
+.title h1 span{display:block}
+.title .sub{font-size:2.5cqw;color:var(--muted);max-width:30em;line-height:1.35}
+.fork{position:absolute;left:6cqw;right:6cqw;top:7cqw;height:17cqw}
+.fork::before{content:"";position:absolute;left:0;right:0;bottom:0;height:.8cqw;border-radius:1cqw;background:var(--main)}
+.fork .arc{position:absolute;left:8%;right:8%;bottom:0;top:0;border:.8cqw solid var(--line);border-bottom:0;border-radius:9cqw 9cqw 0 0}
+.fork .arc i{position:absolute;top:-1.5cqw;width:2.2cqw;height:2.2cqw;margin-left:-1.1cqw;border-radius:50%;background:var(--panel);box-shadow:inset 0 0 0 .6cqw var(--line)}
+.fork .arc i:nth-child(1){left:14%}.fork .arc i:nth-child(2){left:24.5%}.fork .arc i:nth-child(3){left:35%}.fork .arc i:nth-child(4){left:45.5%}
+.fork .arc i:nth-child(5){left:56%}.fork .arc i:nth-child(6){left:66.5%}.fork .arc i:nth-child(7){left:77%}.fork .arc i:nth-child(8){left:87.5%}
+.fork .end{position:absolute;bottom:-1.1cqw;width:3cqw;height:3cqw;margin-left:-1.5cqw;border-radius:50%;background:var(--signal);box-shadow:0 0 0 .6cqw var(--panel),0 0 0 1.1cqw var(--ink)}
+.fork .end.a{left:8%}.fork .end.b{left:92%}
+.fork .lab{position:absolute;bottom:-5cqw;font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:2cqw;color:var(--muted);transform:translateX(-50%)}
+.fork .lab.a{left:8%}.fork .lab.b{left:92%}
+
+/* ---------- mini branch diagram (step 1) ---------- */
+.mini{position:relative;height:13cqw;margin:0 1cqw}
+.mini::before{content:"";position:absolute;left:0;right:0;bottom:2cqw;height:.6cqw;border-radius:1cqw;background:var(--main)}
+.mini .b{position:absolute;left:22%;right:0;bottom:2cqw;height:8cqw;border:.6cqw solid var(--line);border-right:0;border-bottom:0;border-radius:6cqw 0 0 0}
+.mini .b::after{content:"";position:absolute;right:-1cqw;top:-1.3cqw;width:2cqw;height:2cqw;border-radius:50%;background:var(--signal);box-shadow:0 0 0 .45cqw var(--line)}
+.mini .t{position:absolute;font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:1.8cqw;color:var(--muted)}
+.mini .t.main{left:0;bottom:-.6cqw}
+.mini .t.yours{right:0;top:-.4cqw;color:var(--line)}
+
+/* ---------- 3: three areas ---------- */
+.areas{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:1.4cqw}
+.area{border:.3cqw solid var(--rule);border-top:.9cqw solid var(--line);border-radius:1cqw;padding:1.6cqw 1.8cqw;background:var(--panel)}
+.area h3{font-size:3cqw;font-weight:700;line-height:1;margin-bottom:.8cqw}
+.area p{color:var(--muted);font-size:2.15cqw;line-height:1.3}
+.arrow{align-self:center;width:3cqw;height:.5cqw;background:var(--line);position:relative}
+.arrow::after{content:"";position:absolute;right:-.6cqw;top:50%;margin-top:-1cqw;border:1cqw solid transparent;border-left:1.2cqw solid var(--line);border-right:0}
+.lede{font-size:2.3cqw;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr auto;gap:4cqw;align-items:center}
+
+/* ---------- 4: three statements ---------- */
+.claims{display:flex;flex-direction:column;flex:1;justify-content:center}
+.claims li{font-family:var(--display);font-stretch:condensed;font-weight:600;font-size:3.5cqw;line-height:1.12;
+  padding:2.1cqw 0 2.1cqw 3cqw;border-top:.25cqw solid var(--rule);position:relative}
+.claims li:last-child{border-bottom:.25cqw solid var(--rule)}
+.claims li::before{content:"";position:absolute;left:0;top:2.1cqw;bottom:2.1cqw;width:.7cqw;border-radius:1cqw;background:var(--line)}
+.claims strong{font-weight:800;color:var(--line)}
+
+/* ---------- 5: the map ---------- */
+.map{padding:3cqw 4cqw 3cqw 5cqw;gap:1.4cqw}
+.maphead{display:flex;align-items:baseline;justify-content:space-between;gap:3cqw}
+.maphead h2{font-size:4cqw}
+.maphead ul{display:flex;flex-direction:column;align-items:flex-end;gap:.3cqw;font-size:1.75cqw;color:var(--muted);text-align:right}
+.mapimg{flex:1;min-height:0;display:flex;justify-content:center}
+.mapimg img{height:100%;width:auto;max-width:100%;border-radius:1.2cqw;box-shadow:0 0 0 .3cqw var(--rule)}
+
+/* ---------- 6: diff ---------- */
+.prose-vs{font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:3.1cqw;line-height:1.08;color:var(--line);margin-top:.4cqw}
+
+/* ---------- 7: traps ---------- */
+.traps{display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw;flex:1;min-height:0}
+.trap{border-radius:1.2cqw;padding:2.4cqw 2.6cqw;background:var(--line-soft);display:flex;flex-direction:column;gap:1.2cqw;justify-content:center}
+.trap h3{font-size:3.7cqw;font-weight:800;line-height:1}
+.trap p{font-size:2.45cqw;line-height:1.32}
+.trap .q{font-family:var(--display);font-stretch:condensed;font-weight:800;font-size:6cqw;line-height:.8;color:var(--line)}
+.hazard{position:relative;border-radius:1.2cqw;padding:2cqw 2.6cqw 2cqw 6cqw;background:var(--ink);color:var(--panel);
+  font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:2.9cqw;line-height:1.1}
+.hazard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.6cqw;border-radius:1.2cqw 0 0 1.2cqw;
+  background:repeating-linear-gradient(-45deg,var(--signal) 0 .9cqw,var(--ink) .9cqw 1.8cqw)}
+
+/* ---------- 8: exit codes ---------- */
+.codes{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
+.codes div{border-radius:1.2cqw;padding:1.4cqw 2cqw 1.8cqw;background:var(--line-soft)}
+.codes div + div{background:color-mix(in srgb,var(--signal) 22%,var(--panel))}
+.codes b{display:block;font-family:var(--display);font-stretch:condensed;font-weight:800;font-size:13cqw;line-height:.9;color:var(--line)}
+.codes div + div b{color:var(--ink)}
+.codes span{font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:2.6cqw}
+.exitline{font-size:2.2cqw;line-height:1.35}
+
+/* ---------- 9: two steps ---------- */
+.twostep{display:flex;flex-direction:column;gap:0}
+.twostep .s{display:grid;grid-template-columns:5.2cqw 1fr;gap:1.6cqw;align-items:center}
+.twostep .n{width:5.2cqw;height:5.2cqw;border-radius:50%;display:grid;place-content:center;font-family:var(--display);font-stretch:condensed;
+  font-weight:800;font-size:3cqw;background:var(--panel);box-shadow:inset 0 0 0 .5cqw var(--line);color:var(--ink)}
+.twostep .s + .s .n{background:var(--signal);box-shadow:0 0 0 .5cqw var(--line)}
+.twostep .join{width:.5cqw;height:2.4cqw;background:var(--line);margin-left:2.35cqw}
+.twostep .term{font-size:2.3cqw;padding:1.5cqw 2cqw;margin:0}
+.twostep .term::before{display:none}
+.twostep .term .ln{white-space:nowrap}
+.commitrow{flex:1;min-height:0;display:flex;align-items:center;padding-left:2.6cqw}
+.imper q{font-family:var(--display);font-stretch:condensed;font-weight:700;font-size:1.22em;color:var(--line);quotes:"\201C" "\201D"}
+
+/* ---------- 10: push ---------- */
+.wire{display:grid;grid-template-columns:1fr 6cqw 1fr;align-items:center}
+.node{border:.3cqw solid var(--rule);border-radius:1.2cqw;padding:1.6cqw 1.8cqw;text-align:center}
+.node.remote{border-color:var(--line);background:var(--line-soft)}
+.node h3{font-size:2.6cqw;font-weight:700;line-height:1}
+.node code{display:inline-block;margin-top:.8cqw;font-size:1.7cqw}
+.wire .go,.merge .go{height:.6cqw;background:var(--line);position:relative;margin:0 1.2cqw 0 .6cqw}
+.wire .go::after,.merge .go::after{content:"";position:absolute;right:-1.2cqw;top:50%;margin-top:-1.2cqw;border:1.2cqw solid transparent;border-left:1.4cqw solid var(--line);border-right:0}
+
+/* ---------- 11: pull request ---------- */
+.notpull{display:inline-block;margin-top:.9cqw;padding:.5cqw 1.2cqw;border-radius:.8cqw;font-weight:600;
+  background:color-mix(in srgb,var(--signal) 30%,var(--panel));color:var(--ink)}
+.merge{display:grid;grid-template-columns:1fr 7cqw 1fr;align-items:center}
+.merge .node p{color:var(--muted);font-size:1.8cqw;margin-top:.6cqw;line-height:1.25}
+.merge .node.base{border-color:var(--ink);border-width:.4cqw}
+
+/* ---------- 12: cleanup ---------- */
+.checklist .ln{counter-increment:c}
+.checklist .ln::before{content:counter(c) "  $ "}
+.checklist{counter-reset:c;font-size:2.35cqw;line-height:1.85}
+
+/* ---------- presenter notes ---------- */
+.notes{width:min(94vw,calc((100vh - 9vh) * 16 / 9));margin-top:1.4vh;font-size:15px;line-height:1.5;
+  background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:.5em 1.1em;color:var(--ink)}
+.notes summary{cursor:pointer;font-weight:650;color:var(--line);list-style-position:inside}
+.notes summary:focus-visible,.notes a:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+.notes > p,.notes > ul,.notes > details{margin-top:.55em}
+.notes .short{font-size:1.08em;font-weight:500}
+.notes .deep{padding-left:.9em;border-left:3px solid var(--line)}
+.notes .deep p{margin-top:.35em;color:var(--ink)}
+.notes .graphic{color:var(--muted)}
+.notes .lessons{list-style:disc;padding-left:1.2em}
+.notes .lessons span{color:var(--muted);font-size:.86em}
+.notes a{color:var(--line);font-weight:600}
+.notes code{white-space:normal}
+
+@media (max-width:700px){.slide{padding:12px 16px}.frame,.notes{width:100%}}
+@media print{
+  :root{--paper:#fff;--panel:#fff;--ink:#14213d;--muted:#56627a;--rule:#d5dce6;--line:#0b7a75;--line-soft:#e0f0ee;
+    --main:#a3adbd;--signal:#f2b705;--code-bg:#14213d;--code-ink:#e8edf5;--prompt:#f2b705}
+  @page{size:13.333in 7.5in;margin:0}
+  html{scroll-snap-type:none;background:#fff}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .notes{display:none}
+  .slide{min-height:0;height:7.5in;padding:0;break-after:page;page-break-after:always;break-inside:avoid}
+  .frame{width:13.333in;border-radius:0;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<section class="slide" id="s1" aria-label="Slide 1 of 12">
+<div class="frame title">
+<div class="fork" aria-hidden="true">
+<div class="arc"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<span class="end a"></span><span class="end b"></span>
+<span class="lab a">idea</span><span class="lab b">merged</span>
+</div>
+<h1><span>One change,</span> <span>start to finish</span></h1>
+<p class="sub">A guided tour of one small code change, from branch to merged, one checkable step at a time.</p>
+<p class="num">1 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Today we walk one small change all the way through: branch, prompt, review, test, commit, push, pull request, cleanup.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Ask the room: how many of you have edited a file and worried about breaking something? The whole point of this workflow is that every step is small, checkable, and reversible. By the end, one change will feel like a routine, not a leap.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Title slide with a simple hand-drawn path from &quot;idea&quot; to &quot;merged&quot;, with small icons at each stop.</p>
+</details>
+</section>
+
+<section class="slide" id="s2" aria-label="Slide 2 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>1</b><span class="vh">:</span></span> Make a branch</h2>
+<div class="split">
+<ul class="pts">
+<li>A <strong>branch</strong> is a movable pointer to a commit, not a copy of the project</li>
+<li>Working on a branch keeps your changes off the main line of development</li>
+<li><code>git switch -c &lt;name&gt;</code> creates a branch and moves you onto it</li>
+</ul>
+<div class="stack">
+<div class="mini" aria-hidden="true"><span class="b"></span><span class="t main">main line</span><span class="t yours">your change lives here</span></div>
+<pre class="term"><code><span class="ln">git switch -c my-change</span></code></pre>
+</div>
+</div>
+<div class="route" style="--p:0%" aria-hidden="true"><i class="here"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="num">2 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">A branch is just a named pointer, so creating one is cheap. Do it before you start editing.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Common mistake: <code>git branch &lt;name&gt;</code> creates the pointer but does not switch to it, so new commits land on the old branch. Use <code>git switch -c</code> to create and move in one step. Also note: a branch name stays local until you push it.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A main line with a small side path branching off, labeled &quot;your change lives here&quot;.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/branches-and-switching.md">Branches and switching</a> <span>(git-and-github/branches-and-switching)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s3" aria-label="Slide 3 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>2</b><span class="vh">:</span></span> Know where your work lives</h2>
+<p class="lede">Git has three areas:</p>
+<div class="areas">
+<div class="area"><h3>Working tree</h3><p>files you edit</p></div>
+<span class="arrow" aria-hidden="true"></span>
+<div class="area"><h3>Staging area</h3><p>what the next commit will record</p></div>
+<span class="arrow" aria-hidden="true"></span>
+<div class="area"><h3>Repository</h3><p>committed history</p></div>
+</div>
+<div class="row2">
+<ul class="pts">
+<li><code>git status</code> shows what is untracked, modified, or staged</li>
+<li><code>git add &lt;path&gt;</code> stages chosen files for the next commit</li>
+</ul>
+<pre class="term big"><code><span class="ln">git status</span></code></pre>
+</div>
+<div class="route" style="--p:11.111%" aria-hidden="true"><i class="done"></i><i class="here"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="num">3 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Editing a file changes only the working tree. Staging chooses what the next commit will include.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Read <code>git status</code> before staging anything. The sections mean different comparisons: &quot;changes to be committed&quot; is the staging area versus the last commit; &quot;not staged&quot; is the working tree versus the staging area; &quot;untracked&quot; means Git is not recording the file yet. Mixing these up leads to committing more or less than you meant.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Three boxes in a row: working tree, staging area, repository, with arrows showing files moving left to right.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/working-tree-staging-and-status.md">Working tree, staging, and status</a> <span>(git-and-github/working-tree-staging-and-status)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s4" aria-label="Slide 4 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>3</b><span class="vh">:</span></span> Tell the agent exactly what you want</h2>
+<ul class="claims">
+<li>State the outcome you want, not just &quot;make it better&quot;</li>
+<li>Write <strong>success criteria</strong>: short, checkable statements of what &quot;done&quot; means</li>
+<li>Give reasons for rules and limit scope so the agent does not build extra things</li>
+</ul>
+<div class="route" style="--p:22.222%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="num">4 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Say the result, define how you will check it, and bound the scope before you ask.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>&quot;Make it good&quot; is not a criterion. If you cannot picture a yes-or-no check, it is not done yet. A good &quot;done&quot; list also protects you from scope creep: if a suggested change is not on the list, you can decline it confidently. Write the criteria before the first prompt, not after seeing the output.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A side-by-side of a vague prompt (&quot;improve this&quot;) versus a direct prompt with a short &quot;done&quot; checklist.</p>
+<ul class="lessons">
+<li><a href="../../../prompt-engineering/capabilities/clear-and-direct-instructions.md">Clear and direct instructions</a> <span>(prompt-engineering/clear-and-direct-instructions)</span></li>
+<li><a href="../../../prompt-engineering/capabilities/defining-goals-and-success-criteria.md">Defining goals and success criteria</a> <span>(prompt-engineering/defining-goals-and-success-criteria)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s5" aria-label="Slide 5 of 12">
+<div class="frame map">
+<div class="maphead">
+<h2>The whole journey on one page</h2>
+<ul>
+<li>Ten small steps from idea to merged change</li>
+<li>Each step is checkable, so mistakes stay small</li>
+</ul>
+</div>
+<div class="mapimg"><img src="infographic.svg" alt="The one-change workflow, start to finish"></div>
+<p class="vh">5 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Here is the map. The next slides walk each stop in order.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Point out that the loop is small on purpose: every step either produces something checkable (a diff, a test result, a review) or moves already-checked work forward. If a step feels scary, it usually means the previous step was skipped.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The hand-drawn infographic itself: branch, prompt, review, test, commit, push, pull request, cleanup, drawn as a winding path with numbered stops.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/branches-and-switching.md">Branches and switching</a> <span>(git-and-github/branches-and-switching)</span></li>
+<li><a href="../../../git-and-github/capabilities/pull-requests-and-review.md">Pull requests and review</a> <span>(git-and-github/pull-requests-and-review)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s6" aria-label="Slide 6 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>4</b><span class="vh">:</span></span> Review the diff yourself</h2>
+<div class="split even">
+<pre class="term big"><code><span class="ln">git diff</span></code></pre>
+<ul class="pts">
+<li>A <strong>diff</strong> shows exactly what changed, line by line</li>
+<li>Read the real diff, not the agent&#39;s summary of what it did</li>
+<li>Run the checks yourself; <span class="prose-vs">plausible prose is not evidence</span></li>
+</ul>
+</div>
+<div class="route" style="--p:33.333%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="num">6 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The agent&#39;s story is the least reliable input. The diff and the test output are the truth.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Verify against the success criteria you wrote earlier. Check that only expected paths changed, skim for debug junk or secrets, and run the agreed test command yourself. When a check fails, re-prompt with the failure facts and tighter scope rather than accepting the story.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A chat bubble saying &quot;all tests pass!&quot; next to a diff view showing an unexpected extra file changed.</p>
+<ul class="lessons">
+<li><a href="../../../prompt-engineering/capabilities/verifying-agent-work.md">Verifying agent work</a> <span>(prompt-engineering/verifying-agent-work)</span></li>
+<li><a href="../../../git-and-github/capabilities/commits-and-history.md">Commits and history</a> <span>(git-and-github/commits-and-history)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s7" aria-label="Slide 7 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>5</b><span class="vh">:</span></span> Watch for agent-specific traps</h2>
+<div class="traps">
+<div class="trap"><span class="q" aria-hidden="true">?</span><h3>Hallucinated APIs</h3><p>code can call a plausible-sounding function that does not exist</p></div>
+<div class="trap"><span class="q" aria-hidden="true">?</span><h3>Missed edge cases</h3><p>the obvious case works, the corner case does not</p></div>
+</div>
+<p class="hazard">You are accountable for what you merge, no matter who or what wrote it</p>
+<div class="route" style="--p:44.444%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="num">7 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Agent code reads fluently, but fluency is not correctness. Check names against real files and run the tests.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Ask the room: how would you catch a call to a function that was never defined? Usually a failed import, type-check, or test run exposes it fast — that&#39;s why this workflow pairs a human review of the diff with running the real checks, rather than trusting either alone. Also ask the corner-case question the agent may not have: empty input, unusual format, null value.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A confident-looking code snippet with a function name circled and a question mark: &quot;does this even exist?&quot;</p>
+<ul class="lessons">
+<li><a href="../../../agentic-ai-development/capabilities/reviewing-agent-generated-code.md">Reviewing agent-generated code and staying accountable</a> <span>(agentic-ai-development/reviewing-agent-generated-code)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s8" aria-label="Slide 8 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>6</b><span class="vh">:</span></span> Run the tests locally</h2>
+<div class="split">
+<div class="stack">
+<ul class="pts">
+<li>A test runner prints a compact pass/fail summary, then details for failures</li>
+<li>pytest shows a dot per passing test and an <code>F</code> per failing test</li>
+</ul>
+<pre class="term"><code><span class="ln">pytest</span></code></pre>
+</div>
+<div class="stack">
+<div class="codes" aria-hidden="true">
+<div><b>0</b><span>all passed</span></div>
+<div><b>1</b><span>some failed</span></div>
+</div>
+<p class="exitline">The <strong>exit code</strong> is the machine-readable summary: 0 means all passed, 1 means some failed</p>
+</div>
+</div>
+<div class="route" style="--p:55.556%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i><i></i><i></i></div>
+<p class="num">8 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Run the tests yourself and read the summary first, then the failure details.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Watch for exit code 5 in pytest: &quot;no tests collected&quot; means nothing ran, which looks like success but is not. A failing test is usually a real signal about behavior, so verify manually before dismissing it.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A terminal window showing a pytest summary line like &quot;1 failed, 1 passed&quot; with the F highlighted.</p>
+<ul class="lessons">
+<li><a href="../../../testing-basics/capabilities/run-tests-locally.md">Running pytest/Pester and reading pass-fail</a> <span>(testing-basics/run-tests-locally)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s9" aria-label="Slide 9 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>7</b><span class="vh">:</span></span> Commit the change</h2>
+<ul class="pts">
+<li>A <strong>commit</strong> is a recorded snapshot of the staged content, with author, time, and message</li>
+<li><code>git add</code> stages, then <code>git commit -m</code> records; two separate steps</li>
+<li class="imper">Write the message summary in the imperative mood: <q>Add the missing header</q></li>
+</ul>
+<div class="commitrow">
+<div class="twostep">
+<div class="s"><span class="n" aria-hidden="true">1</span><pre class="term"><code><span class="ln">git add notes.txt</span></code></pre></div>
+<span class="join" aria-hidden="true"></span>
+<div class="s"><span class="n" aria-hidden="true">2</span><pre class="term"><code><span class="ln">git commit -m &quot;Add a note about the new line&quot;</span></code></pre></div>
+</div>
+</div>
+<div class="route" style="--p:66.667%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i><i></i></div>
+<p class="num">9 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Nothing is committed unless it was staged first, so add and commit are two steps.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A commit is a snapshot, not a diff. Check <code>git diff --staged</code> before committing to see what the commit will actually record. If you need to fix the most recent commit, <code>git commit --amend</code> replaces it, but never amend a commit that has already been pushed or shared.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A chain of snapshot icons, each labeled with a short message, linked parent to child.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/commits-and-history.md">Commits and history</a> <span>(git-and-github/commits-and-history)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s10" aria-label="Slide 10 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>8</b><span class="vh">:</span></span> Push and set upstream</h2>
+<div class="split even">
+<ul class="pts">
+<li><code>git push</code> publishes your local commits to a <strong>remote</strong> repository, such as on GitHub</li>
+<li><code>git push -u origin &lt;branch&gt;</code> pushes the branch and records its <strong>upstream</strong> (the default remote branch for later push and pull)</li>
+<li>The first push of a new branch name creates that branch on the remote</li>
+</ul>
+<div class="stack">
+<div class="wire" aria-hidden="true">
+<div class="node"><h3>your laptop</h3><code>my-change</code></div>
+<span class="go"></span>
+<div class="node remote"><h3>remote (origin)</h3><code>my-change</code></div>
+</div>
+<pre class="term"><code><span class="ln">git push -u origin my-change</span></code></pre>
+</div>
+</div>
+<div class="route" style="--p:77.778%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i><i></i></div>
+<p class="num">10 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Push sends your commits to the remote; it does not pull anything down.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>If a push is rejected because the remote branch moved, treat it as a stop sign: fetch, inspect, integrate, then push again. Never answer a rejection with a blind force push, which can delete other people&#39;s commits from the branch tip.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A laptop pushing commits along an arrow to a cloud labeled &quot;remote&quot;, with a small tag marking the upstream link.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/push-and-upstream-branches.md">Push and upstream branches</a> <span>(git-and-github/push-and-upstream-branches)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s11" aria-label="Slide 11 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>9</b><span class="vh">:</span></span> Open a pull request</h2>
+<ul class="pts">
+<li>A <strong>pull request</strong> is a GitHub feature for proposing that one branch merge into another, with discussion and review; <span class="notpull">it is not the <code>git pull</code> command</span></li>
+</ul>
+<div class="split even">
+<div class="merge">
+<div class="node"><h3>head</h3><p>carries your commits</p></div>
+<span class="go" aria-hidden="true"></span>
+<div class="node base"><h3>base</h3><p>receives the change</p></div>
+</div>
+<pre class="term"><code><span class="ln">gh pr create</span></code></pre>
+</div>
+<ul class="pts">
+<li>The <strong>base</strong> branch receives the change; the <strong>head</strong> branch carries your commits</li>
+<li>Reviewers comment, approve, or request changes before anyone merges</li>
+</ul>
+<div class="route" style="--p:88.889%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i><i></i></div>
+<p class="num">11 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The pull request is where people look at your change before it lands.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The central naming trap: <code>git pull</code> updates your local branch from a remote; a pull request asks the host to merge head into base after review. Pushing more commits to the same branch updates an open pull request automatically. Drafts share early work but cannot be merged until marked ready.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two branches converging, with a speech-bubble conversation and approve/check icons between them.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/pull-requests-and-review.md">Pull requests and review</a> <span>(git-and-github/pull-requests-and-review)</span></li>
+</ul>
+</details>
+</section>
+
+<section class="slide" id="s12" aria-label="Slide 12 of 12">
+<div class="frame">
+<h2><span class="stop"><small>Step</small><b>10</b><span class="vh">:</span></span> Clean up after merge</h2>
+<div class="split even">
+<pre class="term checklist"><code><span class="ln">git switch main</span>
+<span class="ln">git pull</span>
+<span class="ln">git branch -d my-change</span>
+<span class="ln">git fetch --prune</span></code></pre>
+<ul class="pts">
+<li>After the pull request merges, switch to the default branch and pull the result</li>
+<li>Delete the finished branch locally with <code>git branch -d</code> (it refuses unmerged work)</li>
+<li><code>git fetch --prune</code> clears stale remote-tracking names</li>
+</ul>
+</div>
+<div class="route" style="--p:100%" aria-hidden="true"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="here"></i></div>
+<p class="num">12 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Merging on the host does not update your laptop; you pull, then retire the branch.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Prefer <code>git branch -d</code> over <code>-D</code>: the lowercase form only deletes when Git believes the work is already merged, which is a safety rail. After a squash merge, <code>-d</code> may refuse even though the change landed; verify the content is on the default branch before force-deleting. Prune keeps your local view of remote branches honest.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The winding path from the infographic with the last stops highlighted and a small broom icon sweeping away the finished branch.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/post-merge-synchronization-and-cleanup.md">Post-merge synchronization and cleanup</a> <span>(git-and-github/post-merge-synchronization-and-cleanup)</span></li>
+</ul>
+</details>
+</section>
+
+</main>
+</body>
+</html>

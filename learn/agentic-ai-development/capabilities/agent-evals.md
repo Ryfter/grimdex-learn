@@ -1,6 +1,7 @@
 ---
 title: "Agent evals: measuring non-deterministic quality over time"
 module_id: agentic-ai-development
+level: 5
 capabilities:
   - agent-evals
 context7_library: /websites/platform_claude_en

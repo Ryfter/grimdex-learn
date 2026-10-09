@@ -1,6 +1,7 @@
 ---
 title: Install, bootstrap, and first agent session
 module_id: grimdex-harness
+level: 2
 capabilities:
   - install-and-bootstrap
 context7_library:
@@ -49,7 +50,7 @@ macOS with PowerShell 7 is best-effort, not officially supported.
 **Path A — taught, primary path (what students are taught):**
 
 ```
-git clone --branch v0.2.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
+git clone --branch v0.3.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
 pwsh <source>/bootstrap.ps1 -InstallRoot <install>
 ```
 
@@ -60,13 +61,13 @@ To preview what would happen without changing anything, add `-Preview` to the sa
 First review the script without running it (this only prints it):
 
 ```
-irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1
+irm https://github.com/Ryfter/grimdex-learn/raw/v0.3.0-fall2026-draft/get-learn.ps1
 ```
 
 Then run it:
 
 ```
-iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
+iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.3.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
 ```
 
 Path B fetches a small bootstrapper, which itself downloads the pinned release and runs the same `bootstrap.ps1` as Path A. Say it plainly: Path B relocates the clone and adds a trust hop; it does not remove the clone. It does not skip cloning entirely.
@@ -92,7 +93,7 @@ To confirm the install actually worked: the script printed `INSTALLED` and exite
 A student with a Grimdex install at `C:\grimdex` runs:
 
 ```
-git clone --branch v0.2.0-fall2026-draft https://github.com/Ryfter/grimdex-learn C:\learn-src
+git clone --branch v0.3.0-fall2026-draft https://github.com/Ryfter/grimdex-learn C:\learn-src
 pwsh C:\learn-src\bootstrap.ps1 -InstallRoot C:\grimdex
 ```
 

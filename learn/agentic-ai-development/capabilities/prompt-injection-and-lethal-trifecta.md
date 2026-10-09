@@ -1,6 +1,7 @@
 ---
 title: Indirect prompt injection and the "lethal trifecta"
 module_id: agentic-ai-development
+level: 6
 capabilities:
   - prompt-injection-and-lethal-trifecta
 context7_library: /websites/platform_claude_en

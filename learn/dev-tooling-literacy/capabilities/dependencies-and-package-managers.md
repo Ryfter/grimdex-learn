@@ -1,6 +1,7 @@
 ---
 title: Dependencies and package managers
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - dependencies-and-package-managers
 context7_library:

@@ -1,9 +1,10 @@
 Set-StrictMode -Version 3.0
 
-# Requires manifest-lib.ps1, verify-lib.ps1, stanza-lib.ps1 and lifecycle-lib.ps1
-# to be dot-sourced first, in that order (install-learn.ps1 does this; tests do
-# it in BeforeAll). Install is the mirror image of graduation and deliberately
-# reuses its plan / backup / verify / rollback patterns.
+# Requires manifest-lib.ps1, verify-lib.ps1, stanza-lib.ps1, lifecycle-lib.ps1,
+# learn-index-lib.ps1 and surfacing-lib.ps1 to be dot-sourced first, in that
+# order (install-learn.ps1 does this; tests do it in BeforeAll). Install is the
+# mirror image of graduation and deliberately reuses its plan / backup /
+# verify / rollback patterns.
 
 function Test-NeverShipPath {
     [CmdletBinding()]
@@ -138,8 +139,22 @@ function New-InstallPlan {
     }
 
     # 5. The stanza body. Deterministic; failure here is a plan error, not a throw.
+    #    When the pack ships a lesson index, the stanza carries the student's saved
+    #    mastery level (learn-progress/ is read, never written). A missing ledger
+    #    means level 1; an unreadable ledger or index drops the level lines rather
+    #    than blocking an install.
+    $surfacing = $null
+    $sourceIndex = Join-Path $SourceRoot 'learn' 'index.json'
+    if (Test-Path -LiteralPath $sourceIndex -PathType Leaf) {
+        try {
+            $surfacing = Get-SurfacingSummary -Ledger (Read-SurfacingLedger -InstallRoot $InstallRoot) `
+                -Index (Read-LearnIndex -Path $sourceIndex)
+        } catch {
+            $surfacing = $null
+        }
+    }
     try {
-        $stanzaContent = Get-LearnStanzaContent -Manifest $Manifest
+        $stanzaContent = Get-LearnStanzaContent -Manifest $Manifest -Surfacing $surfacing
     } catch {
         $errors += "Cannot build the Learn pointer stanza: $($_.Exception.Message)"
         $stanzaContent = ''

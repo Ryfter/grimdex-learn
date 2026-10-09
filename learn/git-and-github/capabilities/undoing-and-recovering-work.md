@@ -1,6 +1,7 @@
 ---
 title: Undoing and recovering work
 module_id: git-and-github
+level: 2
 capabilities:
   - undoing-and-recovering-work
 context7_library: /websites/git-scm

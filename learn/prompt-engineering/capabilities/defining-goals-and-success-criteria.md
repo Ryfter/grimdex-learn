@@ -1,6 +1,7 @@
 ---
 title: Defining goals and success criteria
 module_id: prompt-engineering
+level: 2
 capabilities:
   - defining-goals-and-success-criteria
 context7_library: /websites/platform_claude_en

@@ -1,6 +1,7 @@
 ---
 title: Iterating on a Prompt
 module_id: prompt-engineering
+level: 2
 capabilities:
   - iterating-on-a-prompt
 context7_library: /websites/platform_claude_en

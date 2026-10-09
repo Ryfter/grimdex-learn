@@ -1,6 +1,7 @@
 ---
 title: Persistent agent memory vs. working context
 module_id: agentic-ai-development
+level: 7
 capabilities:
   - persistent-agent-memory
 context7_library: /websites/platform_claude_en

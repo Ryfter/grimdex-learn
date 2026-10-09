@@ -1,6 +1,7 @@
 ---
 title: "OAuth: borrowed, scoped, revocable access"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - oauth-delegated-scoped-access
 context7_library: /websites/platform_claude_en

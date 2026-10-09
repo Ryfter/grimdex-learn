@@ -1,6 +1,7 @@
 ---
 title: Version numbers and semantic versioning
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - semantic-versioning
 context7_library:

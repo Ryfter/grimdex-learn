@@ -1,6 +1,7 @@
 ---
 title: Verifying agent work
 module_id: prompt-engineering
+level: 2
 capabilities:
   - verifying-agent-work
 context7_library: /websites/platform_claude_en

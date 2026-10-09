@@ -1,6 +1,7 @@
 ---
 title: Pull requests and review
 module_id: git-and-github
+level: 2
 capabilities:
   - pull-requests-and-review
 context7_library: /websites/git-scm

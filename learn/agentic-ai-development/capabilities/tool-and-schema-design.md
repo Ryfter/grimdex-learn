@@ -1,6 +1,7 @@
 ---
 title: "Tool and schema design: tool descriptions are prompts"
 module_id: agentic-ai-development
+level: 6
 capabilities:
   - tool-and-schema-design
 context7_library: /websites/platform_claude_en

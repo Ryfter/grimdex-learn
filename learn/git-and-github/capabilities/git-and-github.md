@@ -1,6 +1,7 @@
 ---
 title: Git and GitHub
 module_id: git-and-github
+level: 1
 capabilities:
   - git-and-github
 context7_library: /websites/git-scm

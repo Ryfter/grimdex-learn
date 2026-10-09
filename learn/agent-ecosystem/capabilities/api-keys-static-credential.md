@@ -1,6 +1,7 @@
 ---
 title: "API keys: the static master key"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - api-keys-static-credential
 context7_library: /websites/platform_claude_en

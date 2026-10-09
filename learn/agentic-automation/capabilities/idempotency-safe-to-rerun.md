@@ -1,6 +1,7 @@
 ---
 title: "Idempotency: designing tasks safe to run again"
 module_id: agentic-automation
+level: 5
 capabilities:
   - idempotency-safe-to-rerun
 context7_library: /websites/platform_claude_en

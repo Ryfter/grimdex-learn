@@ -1,6 +1,7 @@
 ---
 title: When to bisect vs revert
 module_id: debugging-recovery
+level: 3
 capabilities:
   - bisect-and-blame
 context7_library: /websites/git-scm

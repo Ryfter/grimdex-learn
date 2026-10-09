@@ -1,6 +1,7 @@
 ---
 title: GitHub Desktop essentials
 module_id: git-and-github
+level: 2
 capabilities:
   - github-desktop-essentials
 context7_library: /websites/github_en

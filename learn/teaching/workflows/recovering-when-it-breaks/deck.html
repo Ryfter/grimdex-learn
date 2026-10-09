@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recovering when it breaks</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1b2230;--muted:#5d6676;--accent:#d9480f;--accent-2:#1971c2;--rule:#e4ddd0;--code-bg:#1b2230;--code-ink:#f1f3f5;--shadow:0 18px 50px rgba(27,34,48,.14)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f131a;--card:#171d27;--ink:#e9edf2;--muted:#9aa5b4;--accent:#ff8a3d;--accent-2:#5aa9ff;--rule:#283141;--code-bg:#0a0d12;--code-ink:#e9edf2;--shadow:0 18px 50px rgba(0,0,0,.45)}}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.45}
+.slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3vh 3vw}
+.frame{position:relative;width:min(94vw,calc(84vh*16/9));aspect-ratio:16/9;background:radial-gradient(135% 110% at 100% 0%,color-mix(in srgb,var(--accent-2) 7%,var(--card)) 0%,var(--card) 55%),var(--card);border-radius:20px;box-shadow:var(--shadow);padding:4.5% 6% 5%;overflow:hidden;font-size:clamp(13px,1.9vw,30px);display:flex;flex-direction:column;justify-content:safe center;gap:.4em}
+.frame::before{content:"";position:absolute;inset:0 0 auto 0;height:.45em;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.frame::after{content:"";position:absolute;right:-12%;bottom:-18%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 9%,transparent),transparent 72%);pointer-events:none}
+.kicker{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2{margin:0;line-height:1.08;letter-spacing:-.015em;font-size:1.85em}
+.lead .frame,.slide:first-child .frame{justify-content:safe center;background:radial-gradient(120% 140% at 0% 0%,color-mix(in srgb,var(--accent) 16%,var(--card)) 0%,var(--card) 55%)}
+.lead h1,.slide:first-child h1{font-size:2.6em}
+.subtitle{font-size:1.1em;color:var(--muted);margin:0;max-width:30em}
+ul{margin:0;padding-left:1.15em}
+li{margin:.28em 0}
+li::marker{color:var(--accent)}
+li ul{font-size:.82em;color:var(--muted);margin-top:.15em}
+p{margin:.4em 0}
+code{font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;font-size:.9em;background:color-mix(in srgb,var(--accent-2) 14%,transparent);padding:.05em .3em;border-radius:.3em}
+pre{margin:0;background:var(--code-bg);color:var(--code-ink);padding:.7em 1em;border-radius:12px;font-size:.68em;line-height:1.5;overflow:auto}
+pre code{background:none;padding:0;font-size:1em}
+.visual{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.visual img{max-width:100%;max-height:100%;object-fit:contain}
+a{color:var(--accent-2)}
+.num{position:absolute;right:3.2%;bottom:3.4%;font-size:.5em;color:var(--muted);font-variant-numeric:tabular-nums}
+.notes{width:min(94vw,calc(84vh*16/9));margin-top:1.4vh;background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:.55em 1.1em;font-size:15px}
+.notes summary{cursor:pointer;font-weight:650;color:var(--accent-2)}
+.notes .short{font-size:1.05em}
+.notes .deep{margin:.4em 0;padding-left:.8em;border-left:3px solid var(--rule)}
+.notes .graphic{color:var(--muted)}
+.notes .lessons{margin:.3em 0 .2em;padding-left:1.1em}
+.notes .lessons span{color:var(--muted);font-size:.85em}
+@media print{html{scroll-snap-type:none;background:#fff}.notes{display:none}.slide{min-height:0;padding:0;break-after:page}.frame{width:100%;box-shadow:none;border:1px solid #ccc}@page{size:landscape;margin:8mm}}
+</style>
+</head>
+<body>
+<main class="deck">
+<section class="slide" id="s1" aria-label="Slide 1 of 13">
+<div class="frame">
+<h1>Recovering when it breaks</h1>
+<p class="subtitle">Staying calm when something breaks — and working through it in a small, orderly way: read the real error, check the signals, undo carefully, and ask for help well.</p>
+<p class="num">1 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Things will break — that&#39;s normal. This deck is about staying calm and recovering in small, orderly steps instead of panicking or guessing.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Beginners often respond to a failure by changing many things at once or by deleting everything. The theme of this deck is that recovery is a sequence of small, checkable steps. Ask the room: what do you usually do first when something breaks?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A calm title slide: a single broken line in a diagram being repaired step by step, with a steady &quot;one step at a time&quot; motif.</p>
+</details>
+</section>
+<section class="slide" id="s2" aria-label="Slide 2 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Stay calm, find the real error</h2>
+<ul>
+<li>A <strong>stack trace</strong> (also called a traceback) is the sequence of calls active when the error happened.</li>
+<li>Programs conventionally write errors to <strong>stderr</strong> (standard error), a separate output stream from <strong>stdout</strong> (standard output) — a decades-old convention.</li>
+<li>The core skill: find the <strong>actual error line</strong> (the error type and message) inside a long, intimidating wall of text.</li>
+<li>Then find the <strong>frame nearest your own code</strong>, rather than library internals.</li>
+</ul>
+<pre><code>Trace text... frame after frame of active calls ...
+ErrorType: descriptive message about what went wrong</code></pre>
+<p class="num">2 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Don&#39;t be intimidated by a long trace. Scan for the error type and message first, then find the call nearest code you wrote.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A trace is a snapshot of the path the program took to reach the failure. A long one usually means a deep call chain, not a complex problem — frameworks add many frames that aren&#39;t yours. A common mistake is capturing only stdout when saving output, which can silently lose the stderr error. Ask the room: in a 50-line trace, which single line matters most?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A long stack trace with one line highlighted — the error type and message — and an arrow pointing to the frame in &quot;your code&quot; among many framework frames.</p>
+<ul class="lessons">
+<li><a href="../../../debugging-recovery/capabilities/read-error-messages.md">Reading stack traces and agent error output</a> <span>(debugging-recovery/read-error-messages)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s3" aria-label="Slide 3 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Check the exit code, not just the output</h2>
+<ul>
+<li>Every finished command leaves an <strong>exit code</strong> — a number the tool returns to the shell to report how things went.</li>
+<li>By convention: <strong>0 = success</strong>, <strong>non-zero = failure</strong> of some kind.</li>
+<li>A returned prompt proves nothing — the shell shows the prompt whether the command succeeded or failed.</li>
+<li>Visible output proves nothing either — a command can print friendly text and still fail, or succeed while printing nothing.</li>
+<li>The exit code is the tool&#39;s own structured statement; this is often how an agent knows a command &quot;failed&quot; even when you saw no error on screen.</li>
+</ul>
+<p class="num">3 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Success and failure are reported through a channel separate from the visible output. The exit code, not the prompt or the text, is the verdict.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Beginners treat a returned prompt or polite output as proof of success — neither is. Beyond 0/non-zero, specific values vary by tool, so don&#39;t assume a number means the same thing everywhere. Ask the room: if an agent says a command failed but you saw no error, what would you ask it for?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two terminal panels side by side: one with chatty output but a non-zero exit code (failed), one silent with exit code 0 (succeeded) — with a &quot;verdict&quot; badge on each.</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/exit-codes.md">Exit codes: how commands signal outcomes</a> <span>(dev-tooling-literacy/exit-codes)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s4" aria-label="Slide 4 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Read the logs for context</h2>
+<ul>
+<li><strong>Logs</strong> are short records an application writes about what it is doing; each line typically has a timestamp, a message, and a <strong>severity level</strong>.</li>
+<li><strong>DEBUG</strong> — very detailed internal activity, normally hidden in everyday operation.</li>
+<li><strong>INFO</strong> — routine, expected events: a server started, a request was handled.</li>
+<li><strong>WARNING</strong> — something unusual happened, but the application kept going.</li>
+<li><strong>ERROR</strong> — a specific operation failed; this is the signal to act on.</li>
+<li>Not every log line is a failure — judge by severity level, not by volume.</li>
+</ul>
+<p class="num">4 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">A wall of log output is mostly routine narration. INFO is expected noise, WARNING is a heads-up, and ERROR is where to focus.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Beginners panic at the volume of INFO lines, or feel relief when no ERROR lines appear — but a silent app isn&#39;t necessarily healthy, and warnings often persist in healthy applications. Ask the room: if a log ends with a successful startup, what does that tell you about the lines above it?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A terminal log stream with lines color-coded by level: gray INFO lines, a yellow WARNING, and one red ERROR line circled as &quot;the one that matters.&quot;</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/logs-and-severity-levels.md">Application logs and severity levels</a> <span>(dev-tooling-literacy/logs-and-severity-levels)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s5" aria-label="Slide 5 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Reproduce it on demand</h2>
+<ul>
+<li><strong>Reproducing a bug</strong> means establishing repeatable starting conditions, inputs, and actions that reliably make the symptom appear.</li>
+<li>Write down three things: <strong>starting conditions</strong> (branch, server state, configuration), the <strong>exact steps in order</strong>, and <strong>expected vs. observed</strong> behavior.</li>
+<li>A symptom the agent can reproduce, it can investigate; a symptom it cannot reproduce, it can only guess at.</li>
+<li>Try the steps again before reporting — if the symptom doesn&#39;t recur, say so honestly; that&#39;s useful information too.</li>
+</ul>
+<p class="num">5 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Turn a one-time impression into a repeatable recipe. Numbered steps in order, plus what you expected versus what you saw.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>&quot;It&#39;s broken&quot; gives an agent nothing to re-run. Note what varies between attempts — a fresh restart versus a long-running server often explains &quot;works the first time, fails after.&quot; Ask the room: what prior action might your bug secretly depend on, like a login or a first save?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A written &quot;bug recipe&quot; card with three labeled sections: Starting conditions, Steps (numbered), Expected vs. Observed — with a repeat counter like &quot;3 out of 3 tries.&quot;</p>
+<ul class="lessons">
+<li><a href="../../../dev-tooling-literacy/capabilities/reproducing-a-bug.md">Reproducing a bug: making a symptom repeatable</a> <span>(dev-tooling-literacy/reproducing-a-bug)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s6" aria-label="Slide 6 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>The whole recovery path on one page</h2>
+<ul>
+<li>Recovery is a <strong>loop you can walk back through</strong> when something breaks — not a single leap to a fix.</li>
+<li>Each stop is <strong>checkable</strong>: read the real error, confirm the exit code, scan the logs for the ERROR line.</li>
+<li>Make the symptom <strong>repeatable</strong>, then narrow down <strong>which change</strong> broke it.</li>
+<li>Undo with the <strong>right tool</strong>, fix <strong>one failure at a time</strong>, and <strong>escalate well</strong> if you&#39;re stuck.</li>
+</ul>
+<div class="visual"><img src="infographic.svg" alt="The recovering-when-it-breaks workflow, stay calm to resolved"></div>
+<p class="num">6 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">This map is the deck in one picture. When something breaks, find where you are on the loop and take the next small checkable step.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The value of the map is that no step requires guessing — every stop produces a concrete signal (an error line, an exit code, a log level, a commit). Ask the room: which stop on this loop do you skip most often, and what does skipping it cost you?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The provided infographic: a loop-shaped recovery map from &quot;stay calm&quot; through reading errors, exit codes, logs, reproduction, bisecting, undo tools, stash, conflict resolution, one-fix-at-a-time, and asking for help.</p>
+<ul class="lessons">
+<li><a href="../../../debugging-recovery/capabilities/read-error-messages.md">Reading stack traces and agent error output</a> <span>(debugging-recovery/read-error-messages)</span></li>
+<li><a href="../../../dev-tooling-literacy/capabilities/exit-codes.md">Exit codes: how commands signal outcomes</a> <span>(dev-tooling-literacy/exit-codes)</span></li>
+<li><a href="../../../debugging-recovery/capabilities/bisect-and-blame.md">When to bisect vs revert</a> <span>(debugging-recovery/bisect-and-blame)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s7" aria-label="Slide 7 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Find which change broke it</h2>
+<ul>
+<li><code>git bisect</code> performs a <strong>binary search</strong> across your commit history to find the exact commit where a problem was introduced.</li>
+<li>Mark one commit <strong>bad</strong> (shows the bug) and one <strong>good</strong> (does not); git checks out midpoint commits for you to test.</li>
+<li>Each <code>good</code>/<code>bad</code> report halves the remaining suspects, so even long histories converge in a handful of rounds.</li>
+<li><code>git bisect reset</code> returns you to your original branch when done — always run it, or you stay on a detached checkout.</li>
+</ul>
+<pre><code>git bisect start
+git bisect bad                 # current version is bad
+git bisect good &lt;commit&gt;       # last known good revision
+
+# git then checks out a midpoint commit; you test it and report:
+git bisect good                # or
+git bisect bad
+
+# When finished:
+git bisect reset</code></pre>
+<p class="num">7 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Tell git one bad commit and one good commit, test the midpoints it checks out, and the search narrows fast. Finish with git bisect reset to get back to your branch.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A wrong &quot;good&quot; mark poisons the whole search — verify your endpoints. Bisect finds the culprit; deciding the fix is a separate step. Ask the room: roughly how many test rounds does a 1,000-commit range take with halving?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A row of commits with a shrinking highlighted range: after each good/bad report, the range halves, ending at one circled &quot;first bad commit.&quot;</p>
+<ul class="lessons">
+<li><a href="../../../debugging-recovery/capabilities/bisect-and-blame.md">When to bisect vs revert</a> <span>(debugging-recovery/bisect-and-blame)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s8" aria-label="Slide 8 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Choose the right undo tool</h2>
+<ul>
+<li>**<code>git revert</code><strong> makes a </strong>new** commit that undoes an earlier one and keeps history intact — the safe choice once something is shared or pushed.</li>
+<li>**<code>git reset</code>** moves the current branch tip; depending on mode (<code>--soft</code>, <code>--mixed</code>, <code>--hard</code>) it may also change the <strong>index</strong> (the staging area) and the working tree — a <strong>local-only</strong> tool.</li>
+<li>**<code>git restore &lt;path&gt;</code>** discards uncommitted edits in the working tree; <code>git restore --staged &lt;path&gt;</code> safely unstages without discarding.</li>
+<li>Plain rule: <strong>committed work is almost always recoverable</strong>; uncommitted edits discarded by <code>git reset --hard</code> or <code>git restore</code> are <strong>not</strong>.</li>
+</ul>
+<p class="num">8 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Pick the undo tool by what you&#39;re undoing and whether anyone else has the commits. Shared history gets revert; local cleanup gets reset or restore.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The honest boundary: Git can usually recover committed work, but bytes that were never committed and got discarded are gone — commit early and often. Ask the room: which of these three tools would you use on a branch a teammate already pulled?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A decision tree: &quot;Already pushed or shared?&quot; → revert; &quot;Local tip adjustment?&quot; → reset (with soft/mixed/hard branches); &quot;Just one file&#39;s edits?&quot; → restore, with a warning sign on the destructive paths.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/undoing-and-recovering-work.md">Undoing and recovering work</a> <span>(git-and-github/undoing-and-recovering-work)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s9" aria-label="Slide 9 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Recover a lost commit with the reflog</h2>
+<ul>
+<li>**<code>git reflog</code>** is a local log of where <code>HEAD</code> and branch tips recently pointed.</li>
+<li>**<code>ORIG_HEAD</code>** names the tip as it was immediately before the last reset.</li>
+<li><code>git reset --hard ORIG_HEAD</code> (or to a chosen <code>HEAD@{n}</code> entry) can put the branch tip back.</li>
+<li>Inspect with <code>git reflog</code> and <code>git log</code> first — and recover sooner rather than later, since reflog entries are eventually pruned.</li>
+</ul>
+<pre><code>$ git reset --hard HEAD~2
+$ git reflog
+# find the entry from before the reset (often HEAD@{1} or ORIG_HEAD)
+$ git reset --hard ORIG_HEAD
+# or: git branch recover-tip HEAD@{1}</code></pre>
+<p class="num">9 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">After a scary reset, the commits usually still exist. The reflog tells you their names, and ORIG_HEAD points at where the branch was just before the reset.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A tip that seems to have vanished after a reset can usually be found again while its reflog entries remain. &quot;I reset too far&quot; is usually fixable when the work was committed — that&#39;s exactly what the reflog is for. The mistake to avoid is running another --hard before inspecting, which discards any uncommitted work present at recovery time. Ask the room: why does committing regularly make recovery possible at all?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A reflog listing with entries HEAD@{0}, HEAD@{1}, ... and an arrow from &quot;ORIG_HEAD&quot; back to the pre-reset tip, showing the branch pointer being restored.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/undoing-and-recovering-work.md">Undoing and recovering work</a> <span>(git-and-github/undoing-and-recovering-work)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s10" aria-label="Slide 10 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Shelve work in progress, don&#39;t lose it</h2>
+<ul>
+<li>**<code>git stash</code>** temporarily saves your uncommitted changes and returns the working tree to a clean state.</li>
+<li>Stashes live on a local <strong>stack</strong> you can <code>pop</code> (re-apply and remove) or <code>apply</code> (re-apply and keep) later.</li>
+<li>Use it when you need a clean working tree <strong>without committing half-finished work</strong> — for example, to test whether a bug exists in a clean copy of the code.</li>
+<li>Stashing is entirely local; nothing is sent to any remote.</li>
+</ul>
+<pre><code>git stash push -m &quot;message&quot;   # save current changes with a descriptive label
+git stash list                # show all stashed entries
+git stash pop                 # re-apply the most recent stash and remove it from the list</code></pre>
+<p class="num">10 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Stash is a shelf, not a commit. Push changes onto it, list what&#39;s there, and pop them back when you&#39;re ready.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Stash entries are easy to forget — run git stash list regularly, because unclaimed stashes are a common source of &quot;where did my work go?&quot; confusion. Also note stash is not a substitute for committing and pushing important work. Ask the room: when would you prefer apply over pop?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A shelf metaphor: half-finished edits being lifted off a messy desk onto a labeled shelf slot, leaving a clean desk, then taken back down later.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/git-stash.md">Shelving work in progress with git stash</a> <span>(git-and-github/git-stash)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s11" aria-label="Slide 11 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Resolve a merge conflict calmly</h2>
+<ul>
+<li>A conflict means <strong>both sides changed the same region</strong> of a file since they diverged, and Git won&#39;t guess which to keep — this is <strong>normal</strong>, not a broken repository.</li>
+<li><strong>Conflict markers</strong> show both sides: <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+<li>Edit the file to the intended result, <strong>remove the markers</strong>, then <code>git add</code> the path.</li>
+<li>Finish with <code>git commit</code> or <code>git merge --continue</code>.</li>
+<li><code>git merge --abort</code> is the safe way out if you want to stop entirely.</li>
+</ul>
+<p class="num">11 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">A conflict is a decision point, not an error. Read both sides, write the intended result, remove the markers, stage the file, and finish the merge.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The common mistake is deleting the markers without deciding what the content should be — that stages cleanly but can be logically wrong. And don&#39;t delete the repository or force-reset just because markers appeared. Ask the room: what does the block after ======= represent?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A file open in an editor showing the three conflict markers with &quot;ours&quot; and &quot;theirs&quot; blocks labeled, and an arrow to the same file after editing: one coherent result, markers gone.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/merge-conflicts.md">Merge conflicts</a> <span>(git-and-github/merge-conflicts)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s12" aria-label="Slide 12 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Fix one failure at a time</h2>
+<ul>
+<li>When several tests fail, <strong>fix and re-run one failure at a time</strong> — don&#39;t change many things and re-run the whole suite once.</li>
+<li>The payoff is <strong>attribution</strong>: after each cycle, you know exactly which change fixed which failure.</li>
+<li>The loop: pick one failing test, make the smallest change you believe fixes it, re-run, confirm it passes and nothing else newly broke, repeat.</li>
+<li>If a &quot;fix&quot; for one test breaks another, that itself is diagnostic information.</li>
+</ul>
+<p class="num">12 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">One fix, one re-run, repeat. That way every change stays connected to the failure it fixed.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Batch fixing leaves you unable to tell which change mattered — or which one broke something else. This is the same &quot;change one variable at a time&quot; discipline used across engineering, and it matters doubly when an agent is editing on your behalf. Ask the room: what do you lose if you fix three tests in one edit?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A cycle diagram: pick one failure → smallest fix → re-run → confirm, with a tally showing each fix linked to the failure it solved.</p>
+<ul class="lessons">
+<li><a href="../../../testing-basics/capabilities/fix-one-failure.md">Fixing one failing test at a time</a> <span>(testing-basics/fix-one-failure)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s13" aria-label="Slide 13 of 13">
+<div class="frame">
+<p class="kicker">Recovering when it breaks</p>
+<h2>Ask for help well</h2>
+<ul>
+<li>A good escalation answers three questions: <strong>what happened</strong> (the actual error, not a paraphrase), <strong>what you already tried</strong>, and <strong>what you expected</strong>.</li>
+<li>Quote the real error line — small details like a hostname, exit code, or line number often carry the diagnosis.</li>
+<li><strong>Redact credentials, tokens, and secrets</strong> from logs before sharing them anywhere — including into an AI agent&#39;s context.</li>
+<li>Redact <strong>before</strong> sharing: once text leaves your control it may be copied, forwarded, or retained, and you generally cannot un-share it later.</li>
+</ul>
+<p class="num">13 / 13</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Hand over your diagnostic work: the real error, what you tried, what you expected — with secrets replaced by placeholders before anything leaves your machine.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The most common leak is pasting a raw log first and thinking about redaction later — private channels don&#39;t change the standard, since logs can be forwarded or retained. But don&#39;t sanitize so hard the report is useless; keep the diagnostic signal. Ask the room: which of the three questions do escalations most often leave out?</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A side-by-side comparison: a weak escalation (&quot;it&#39;s broken&quot;) versus a structured one with error excerpt, tried list, expected behavior, and a [REDACTED] placeholder where a token was.</p>
+<ul class="lessons">
+<li><a href="../../../debugging-recovery/capabilities/ask-for-help.md">Escalating without leaking secrets</a> <span>(debugging-recovery/ask-for-help)</span></li>
+</ul>
+</details>
+</section>
+</main>
+</body>
+</html>

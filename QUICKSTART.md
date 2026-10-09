@@ -19,7 +19,7 @@ The major version must be 7 or more. Use the single quotes exactly as written.
 
 Two commands. Clone a release tag, not `main`, so everyone gets the same bytes.
 
-    git clone --branch v0.2.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
+    git clone --branch v0.3.0-fall2026-draft https://github.com/Ryfter/grimdex-learn <source>
     pwsh <source>/bootstrap.ps1 -InstallRoot <install>
 
 Optional, changes nothing — run this first if you want to see the plan:
@@ -64,15 +64,42 @@ does not remove the clone.
 
 Review the bootstrapper first (this prints the script; it does not run it):
 
-    irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1
+    irm https://github.com/Ryfter/grimdex-learn/raw/v0.3.0-fall2026-draft/get-learn.ps1
 
 Run it only if you accept that trust hop:
 
-    iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.2.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
+    iex "& { $(irm https://github.com/Ryfter/grimdex-learn/raw/v0.3.0-fall2026-draft/get-learn.ps1) } -InstallRoot '<install>'"
 
 What you will see, and how to tell it worked, are the same as the taught
 path after the announcement: `INSTALLED`, `<install>/learn/manifest.json`
 present, `<!-- grimdex-learn:start -->` in `GRIMDEX.md`.
+
+## Track which lessons you've seen (optional)
+
+When your agent finishes a piece of work, it reports what it did first, then adds a short
+**Lesson** section that defines the terms involved and ends with lines like
+`Learn: git-and-github/commits-and-history`. From your grimdex-edu checkout, run this
+now and then to count those lines and update your level:
+
+    pwsh ./scripts/learn-surfacing.ps1 -InstallRoot <your Grimdex folder> -TranscriptPath <your session logs folder>
+
+Claude Code keeps session logs under `~/.claude/projects/`, in a folder named after
+your project's path. Seeing every lesson at your level 10 or more times moves you up
+a level, out of 7. Lower-level lessons still come up now and then.
+
+To stop a lesson from being shown:
+
+    pwsh ./scripts/learn-surfacing.ps1 -InstallRoot <your Grimdex folder> -Suppress git-and-github/glossary
+
+`-Unsuppress` turns it back on. Your progress lives in `learn-progress/` in your
+Grimdex folder. It is yours and is never uploaded or overwritten by an update.
+
+## Teaching aids
+
+For teaching or presenting Learn's material, `learn/teaching/README.md` points to four
+workflows: one change start to finish, recovering when it breaks, starting a project
+safely, and working with an agent safely. Each has slides, a ready-to-present HTML
+deck, a one-page infographic, and a guided exercise.
 
 ## Agents
 

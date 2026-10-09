@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="waas-title waas-desc">
+  <title id="waas-title">Working with an agent safely: a guarded loop</title>
+  <desc id="waas-desc">A vertical loop of six numbered steps, read top to bottom and then repeating: give the agent a repo instruction file, manage its context, plan first, act inside a sandbox, verify the result, and checkpoint. A curved return arrow on the left runs from the last step back up to the first, showing the cycle repeats. A dashed guardrail box surrounds the "act inside a sandbox" step. An approval gate sits on the connecting line between "plan first" and "act inside a sandbox," labeled "a human says yes." A dashed bracket spans the full height of the loop, from step one to step six, and connects to a kill switch control in the bottom right, showing that the kill switch applies to every step, not just one. The kill switch lists its two separate operations: cancel the active run, and disable the trigger so it cannot restart. Two small caution notes mark where to keep secrets out of context and where to watch for injected instructions.</desc>
+  <defs>
+    <linearGradient id="waas-topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9480f"/>
+      <stop offset="1" stop-color="#1971c2"/>
+    </linearGradient>
+    <marker id="waas-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d9480f"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="20" width="1560" height="860" rx="26" fill="#fffdf8" stroke="#e4ddd0" stroke-width="2"/>
+  <rect x="20" y="20" width="1560" height="10" rx="5" fill="url(#waas-topbar)"/>
+
+  <text x="800" y="86" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="38" font-weight="700" fill="#1b2230">Working with an agent safely</text>
+  <text x="800" y="118" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="19" fill="#5d6676">A guarded loop: an approval gate on the way in, a sandbox around the action, and a kill switch over the whole thing</text>
+
+  <!-- Guardrail bracket around step 4 (act inside a sandbox) -->
+  <rect x="246" y="515" width="708" height="113" rx="18" fill="none" stroke="#1971c2" stroke-width="3" stroke-dasharray="11 9"/>
+
+  <!-- Loop-back return arrow, left side, step 6 back up to step 1 -->
+  <path d="M 300,800 C 92,800 92,220 300,220" fill="none" stroke="#d9480f" stroke-width="5" stroke-dasharray="3 9" marker-end="url(#waas-arrow)"/>
+  <text x="96" y="510" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="17" font-style="italic" fill="#5d6676" transform="rotate(-90 96 510)">the loop repeats</text>
+
+  <!-- Main rail -->
+  <path d="M 300,800 L 300,220" fill="none" stroke="#1971c2" stroke-width="7" stroke-linecap="butt"/>
+
+  <!-- Step 1: repo instruction file -->
+  <g>
+    <circle cx="300" cy="220" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="231" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">1</text>
+    <text x="372" y="213" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Give it a repo instruction file</text>
+    <text x="372" y="239" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">AGENTS.md / CLAUDE.md</text>
+  </g>
+
+  <!-- Step 2: manage context -->
+  <g>
+    <circle cx="300" cy="320" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="331" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">2</text>
+    <text x="372" y="313" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Manage its context</text>
+    <text x="372" y="339" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">finite working memory</text>
+    <text x="372" y="361" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="15" font-style="italic" fill="#d9480f">caution: keep secrets out of it</text>
+  </g>
+
+  <!-- Step 3: plan first -->
+  <g>
+    <circle cx="300" cy="420" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="431" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">3</text>
+    <text x="372" y="413" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Plan first</text>
+    <text x="372" y="439" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">review before code runs</text>
+  </g>
+
+  <!-- Approval gate, on the rail between step 3 and step 4 -->
+  <g>
+    <text x="372" y="484" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="700" fill="#1b2230">Approval gate — a human says yes</text>
+    <rect x="276" y="490" width="48" height="16" rx="3" fill="#fffdf8" stroke="#1b2230" stroke-width="3"/>
+    <line x1="284" y1="490" x2="284" y2="506" stroke="#1b2230" stroke-width="3"/>
+    <line x1="300" y1="490" x2="300" y2="506" stroke="#1b2230" stroke-width="3"/>
+    <line x1="316" y1="490" x2="316" y2="506" stroke="#1b2230" stroke-width="3"/>
+  </g>
+
+  <!-- Step 4: act inside a sandbox -->
+  <g>
+    <circle cx="300" cy="575" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="586" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">4</text>
+    <text x="372" y="568" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Act — inside a sandbox</text>
+    <text x="372" y="594" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">least privilege, bounded</text>
+    <text x="372" y="616" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="15" font-style="italic" fill="#d9480f">caution: watch for injected instructions</text>
+  </g>
+
+  <!-- Step 5: verify -->
+  <g>
+    <circle cx="300" cy="700" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="711" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">5</text>
+    <text x="372" y="693" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Verify the result</text>
+    <text x="372" y="719" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">run the real check</text>
+  </g>
+
+  <!-- Step 6: checkpoint -->
+  <g>
+    <circle cx="300" cy="800" r="40" fill="#d9480f" stroke="#fffdf8" stroke-width="4"/>
+    <text x="300" y="811" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="32" font-weight="700" fill="#fffdf8">6</text>
+    <text x="372" y="793" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" fill="#1b2230">Checkpoint</text>
+    <text x="372" y="819" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="16" fill="#5d6676">commit the good chunk</text>
+  </g>
+
+  <!-- Scope bracket: shows the kill switch applies to all six steps, not just one -->
+  <g stroke="#1971c2" stroke-width="3" stroke-dasharray="9 7" fill="none">
+    <path d="M 1000,220 L 1000,800"/>
+    <path d="M 985,220 L 1015,220"/>
+    <path d="M 985,800 L 1015,800"/>
+    <path d="M 1000,510 L 1080,510"/>
+  </g>
+  <text x="1010" y="493" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="14" font-style="italic" fill="#5d6676">guards every step</text>
+
+  <!-- Kill switch control, bottom right, independent of the rail -->
+  <g>
+    <rect x="1080" y="515" width="440" height="180" rx="16" fill="#f3ecdd" stroke="#1b2230" stroke-width="2.5"/>
+    <circle cx="1130" cy="567" r="26" fill="#fffdf8" stroke="#d9480f" stroke-width="5"/>
+    <circle cx="1130" cy="567" r="10" fill="#d9480f"/>
+    <text x="1170" y="559" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="700" fill="#1b2230">Kill switch</text>
+    <text x="1170" y="582" text-anchor="start" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#5d6676">applies to the loop, any time</text>
+    <text x="1104" y="623" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="15" fill="#1b2230">1. cancel the run (stop it now)</text>
+    <text x="1104" y="649" text-anchor="start" font-family="ui-monospace,'Cascadia Code','SF Mono',Consolas,monospace" font-size="15" fill="#1b2230">2. disable the trigger (no restart)</text>
+  </g>
+
+  <text x="800" y="854" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="17" font-style="italic" fill="#5d6676">Each pass ends with a checkpoint — then the loop begins again.</text>
+</svg>

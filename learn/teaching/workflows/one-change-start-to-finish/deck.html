@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One change, start to finish</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1b2230;--muted:#5d6676;--accent:#d9480f;--accent-2:#1971c2;--rule:#e4ddd0;--code-bg:#1b2230;--code-ink:#f1f3f5;--shadow:0 18px 50px rgba(27,34,48,.14)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f131a;--card:#171d27;--ink:#e9edf2;--muted:#9aa5b4;--accent:#ff8a3d;--accent-2:#5aa9ff;--rule:#283141;--code-bg:#0a0d12;--code-ink:#e9edf2;--shadow:0 18px 50px rgba(0,0,0,.45)}}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.45}
+.slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3vh 3vw}
+.frame{position:relative;width:min(94vw,calc(84vh*16/9));aspect-ratio:16/9;background:radial-gradient(135% 110% at 100% 0%,color-mix(in srgb,var(--accent-2) 7%,var(--card)) 0%,var(--card) 55%),var(--card);border-radius:20px;box-shadow:var(--shadow);padding:4.5% 6% 5%;overflow:hidden;font-size:clamp(13px,1.9vw,30px);display:flex;flex-direction:column;justify-content:safe center;gap:.4em}
+.frame::before{content:"";position:absolute;inset:0 0 auto 0;height:.45em;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.frame::after{content:"";position:absolute;right:-12%;bottom:-18%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 9%,transparent),transparent 72%);pointer-events:none}
+.kicker{font-size:.55em;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2{margin:0;line-height:1.08;letter-spacing:-.015em;font-size:1.85em}
+.lead .frame,.slide:first-child .frame{justify-content:safe center;background:radial-gradient(120% 140% at 0% 0%,color-mix(in srgb,var(--accent) 16%,var(--card)) 0%,var(--card) 55%)}
+.lead h1,.slide:first-child h1{font-size:2.6em}
+.subtitle{font-size:1.1em;color:var(--muted);margin:0;max-width:30em}
+ul{margin:0;padding-left:1.15em}
+li{margin:.28em 0}
+li::marker{color:var(--accent)}
+li ul{font-size:.82em;color:var(--muted);margin-top:.15em}
+p{margin:.4em 0}
+code{font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;font-size:.9em;background:color-mix(in srgb,var(--accent-2) 14%,transparent);padding:.05em .3em;border-radius:.3em}
+pre{margin:0;background:var(--code-bg);color:var(--code-ink);padding:.7em 1em;border-radius:12px;font-size:.68em;line-height:1.5;overflow:auto}
+pre code{background:none;padding:0;font-size:1em}
+.visual{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.visual img{max-width:100%;max-height:100%;object-fit:contain}
+a{color:var(--accent-2)}
+.num{position:absolute;right:3.2%;bottom:3.4%;font-size:.5em;color:var(--muted);font-variant-numeric:tabular-nums}
+.notes{width:min(94vw,calc(84vh*16/9));margin-top:1.4vh;background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:.55em 1.1em;font-size:15px}
+.notes summary{cursor:pointer;font-weight:650;color:var(--accent-2)}
+.notes .short{font-size:1.05em}
+.notes .deep{margin:.4em 0;padding-left:.8em;border-left:3px solid var(--rule)}
+.notes .graphic{color:var(--muted)}
+.notes .lessons{margin:.3em 0 .2em;padding-left:1.1em}
+.notes .lessons span{color:var(--muted);font-size:.85em}
+@media print{html{scroll-snap-type:none;background:#fff}.notes{display:none}.slide{min-height:0;padding:0;break-after:page}.frame{width:100%;box-shadow:none;border:1px solid #ccc}@page{size:landscape;margin:8mm}}
+</style>
+</head>
+<body>
+<main class="deck">
+<section class="slide" id="s1" aria-label="Slide 1 of 12">
+<div class="frame">
+<h1>One change, start to finish</h1>
+<p class="subtitle">A guided tour of one small code change, from branch to merged, one checkable step at a time.</p>
+<p class="num">1 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Today we walk one small change all the way through ten steps: branch, check status, write the prompt, review, watch for traps, test, commit, push, pull request, cleanup.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Ask the room: how many of you have edited a file and worried about breaking something? The whole point of this workflow is that every step is small, checkable, and reversible. By the end, one change will feel like a routine, not a leap.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Title slide with a simple hand-drawn path from &quot;idea&quot; to &quot;merged&quot;, with small icons at each stop.</p>
+</details>
+</section>
+<section class="slide" id="s2" aria-label="Slide 2 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 1: Make a branch</h2>
+<ul>
+<li>A <strong>branch</strong> is a movable pointer to a commit, not a copy of the project</li>
+<li>Working on a branch keeps your changes off the main line of development</li>
+<li><code>git switch -c &lt;name&gt;</code> creates a branch and moves you onto it</li>
+</ul>
+<pre><code>git switch -c my-change</code></pre>
+<p class="num">2 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">A branch is just a named pointer, so creating one is cheap. Do it before you start editing.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Common mistake: <code>git branch &lt;name&gt;</code> creates the pointer but does not switch to it, so new commits land on the old branch. Use <code>git switch -c</code> to create and move in one step. Also note: a branch name stays local until you push it.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A main line with a small side path branching off, labeled &quot;your change lives here&quot;.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/branches-and-switching.md">Branches and switching</a> <span>(git-and-github/branches-and-switching)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s3" aria-label="Slide 3 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 2: Know where your work lives</h2>
+<ul>
+<li>Git has three areas: the <strong>working tree</strong> (files you edit), the <strong>staging area</strong> (what the next commit will record), and the repository (committed history)</li>
+<li><code>git status</code> shows what is untracked, modified, or staged</li>
+<li><code>git add &lt;path&gt;</code> stages chosen files for the next commit</li>
+</ul>
+<pre><code>git status</code></pre>
+<p class="num">3 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Editing a file changes only the working tree. Staging chooses what the next commit will include.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Read <code>git status</code> before staging anything. The sections mean different comparisons: &quot;changes to be committed&quot; is the staging area versus the last commit; &quot;not staged&quot; is the working tree versus the staging area; &quot;untracked&quot; means Git is not recording the file yet. Mixing these up leads to committing more or less than you meant.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Three boxes in a row: working tree, staging area, repository, with arrows showing files moving left to right.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/working-tree-staging-and-status.md">Working tree, staging, and status</a> <span>(git-and-github/working-tree-staging-and-status)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s4" aria-label="Slide 4 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 3: Tell the agent exactly what you want</h2>
+<ul>
+<li>State the outcome you want, not just &quot;make it better&quot;</li>
+<li>Write <strong>success criteria</strong>: short, checkable statements of what &quot;done&quot; means</li>
+<li>Give reasons for rules and limit scope so the agent does not build extra things</li>
+</ul>
+<p class="num">4 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Say the result, define how you will check it, and bound the scope before you ask.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>&quot;Make it good&quot; is not a criterion. If you cannot picture a yes-or-no check, it is not done yet. A good &quot;done&quot; list also protects you from scope creep: if a suggested change is not on the list, you can decline it confidently. Write the criteria before the first prompt, not after seeing the output.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A side-by-side of a vague prompt (&quot;improve this&quot;) versus a direct prompt with a short &quot;done&quot; checklist.</p>
+<ul class="lessons">
+<li><a href="../../../prompt-engineering/capabilities/clear-and-direct-instructions.md">Clear and direct instructions</a> <span>(prompt-engineering/clear-and-direct-instructions)</span></li>
+<li><a href="../../../prompt-engineering/capabilities/defining-goals-and-success-criteria.md">Defining goals and success criteria</a> <span>(prompt-engineering/defining-goals-and-success-criteria)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s5" aria-label="Slide 5 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>The whole journey on one page</h2>
+<ul>
+<li>Ten small steps from idea to merged change</li>
+<li>Each step is checkable, so mistakes stay small</li>
+</ul>
+<div class="visual"><img src="infographic.svg" alt="The one-change workflow, start to finish"></div>
+<p class="num">5 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Here is the map. The next slides walk each stop in order.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Point out that the loop is small on purpose: every step either produces something checkable (a diff, a test result, a review) or moves already-checked work forward. If a step feels scary, it usually means the previous step was skipped.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The hand-drawn infographic itself: branch, prompt, review, test, commit, push, pull request, cleanup, drawn as a winding path with numbered stops.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/branches-and-switching.md">Branches and switching</a> <span>(git-and-github/branches-and-switching)</span></li>
+<li><a href="../../../git-and-github/capabilities/pull-requests-and-review.md">Pull requests and review</a> <span>(git-and-github/pull-requests-and-review)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s6" aria-label="Slide 6 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 4: Review the diff yourself</h2>
+<ul>
+<li>A <strong>diff</strong> shows exactly what changed, line by line</li>
+<li>Read the real diff, not the agent&#39;s summary of what it did</li>
+<li>Run the checks yourself; plausible prose is not evidence</li>
+</ul>
+<pre><code>git diff</code></pre>
+<p class="num">6 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The agent&#39;s story is the least reliable input. The diff and the test output are the truth.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Verify against the success criteria you wrote earlier. Check that only expected paths changed, skim for debug junk or secrets, and run the agreed test command yourself. When a check fails, re-prompt with the failure facts and tighter scope rather than accepting the story.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A chat bubble saying &quot;all tests pass!&quot; next to a diff view showing an unexpected extra file changed.</p>
+<ul class="lessons">
+<li><a href="../../../prompt-engineering/capabilities/verifying-agent-work.md">Verifying agent work</a> <span>(prompt-engineering/verifying-agent-work)</span></li>
+<li><a href="../../../git-and-github/capabilities/commits-and-history.md">Commits and history</a> <span>(git-and-github/commits-and-history)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s7" aria-label="Slide 7 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 5: Watch for agent-specific traps</h2>
+<ul>
+<li><strong>Hallucinated APIs</strong>: code can call a plausible-sounding function that does not exist</li>
+<li><strong>Missed edge cases</strong>: the obvious case works, the corner case does not</li>
+<li>You are accountable for what you merge, no matter who or what wrote it</li>
+</ul>
+<p class="num">7 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Agent code reads fluently, but fluency is not correctness. Check names against real files and run the tests.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Ask the room: how would you catch a call to a function that was never defined? Usually a failed import, type-check, or test run exposes it fast — that&#39;s why this workflow pairs a human review of the diff with running the real checks, rather than trusting either alone. Also ask the corner-case question the agent may not have: empty input, unusual format, null value.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A confident-looking code snippet with a function name circled and a question mark: &quot;does this even exist?&quot;</p>
+<ul class="lessons">
+<li><a href="../../../agentic-ai-development/capabilities/reviewing-agent-generated-code.md">Reviewing agent-generated code and staying accountable</a> <span>(agentic-ai-development/reviewing-agent-generated-code)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s8" aria-label="Slide 8 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 6: Run the tests locally</h2>
+<ul>
+<li>A test runner prints a compact pass/fail summary, then details for failures</li>
+<li>pytest shows a dot per passing test and an <code>F</code> per failing test</li>
+<li>The <strong>exit code</strong> is the machine-readable summary: 0 means all passed, 1 means some failed</li>
+</ul>
+<pre><code>pytest</code></pre>
+<p class="num">8 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Run the tests yourself and read the summary first, then the failure details.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Watch for exit code 5 in pytest: &quot;no tests collected&quot; means nothing ran, which looks like success but is not. A failing test is usually a real signal about behavior, so verify manually before dismissing it.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A terminal window showing a pytest summary line like &quot;1 failed, 1 passed&quot; with the F highlighted.</p>
+<ul class="lessons">
+<li><a href="../../../testing-basics/capabilities/run-tests-locally.md">Running pytest/Pester and reading pass-fail</a> <span>(testing-basics/run-tests-locally)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s9" aria-label="Slide 9 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 7: Commit the change</h2>
+<ul>
+<li>A <strong>commit</strong> is a recorded snapshot of the staged content, with author, time, and message</li>
+<li><code>git add</code> stages, then <code>git commit -m</code> records; two separate steps</li>
+<li>Write the message summary in the imperative mood: &quot;Add the missing header&quot;</li>
+</ul>
+<pre><code>git add notes.txt
+git commit -m &quot;Add a note about the new line&quot;</code></pre>
+<p class="num">9 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Nothing is committed unless it was staged first, so add and commit are two steps.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>A commit is a snapshot, not a diff. Check <code>git diff --staged</code> before committing to see what the commit will actually record. If you need to fix the most recent commit, <code>git commit --amend</code> replaces it, but never amend a commit that has already been pushed or shared.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A chain of snapshot icons, each labeled with a short message, linked parent to child.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/commits-and-history.md">Commits and history</a> <span>(git-and-github/commits-and-history)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s10" aria-label="Slide 10 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 8: Push and set upstream</h2>
+<ul>
+<li><code>git push</code> publishes your local commits to a <strong>remote</strong> repository, such as on GitHub</li>
+<li><code>git push -u origin &lt;branch&gt;</code> pushes the branch and records its <strong>upstream</strong> (the default remote branch for later push and pull)</li>
+<li>The first push of a new branch name creates that branch on the remote</li>
+</ul>
+<pre><code>git push -u origin my-change</code></pre>
+<p class="num">10 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Push sends your commits to the remote; it does not pull anything down.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>If a push is rejected because the remote branch moved, treat it as a stop sign: fetch, inspect, integrate, then push again. Never answer a rejection with a blind force push, which can delete other people&#39;s commits from the branch tip.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> A laptop pushing commits along an arrow to a cloud labeled &quot;remote&quot;, with a small tag marking the upstream link.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/push-and-upstream-branches.md">Push and upstream branches</a> <span>(git-and-github/push-and-upstream-branches)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s11" aria-label="Slide 11 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 9: Open a pull request</h2>
+<ul>
+<li>A <strong>pull request</strong> is a GitHub feature for proposing that one branch merge into another, with discussion and review; it is not the <code>git pull</code> command</li>
+<li>The <strong>base</strong> branch receives the change; the <strong>head</strong> branch carries your commits</li>
+<li>Reviewers comment, approve, or request changes before anyone merges</li>
+</ul>
+<pre><code>gh pr create</code></pre>
+<p class="num">11 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">The pull request is where people look at your change before it lands.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>The central naming trap: <code>git pull</code> updates your local branch from a remote; a pull request asks the host to merge head into base after review. Pushing more commits to the same branch updates an open pull request automatically. Drafts share early work but cannot be merged until marked ready.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> Two branches converging, with a speech-bubble conversation and approve/check icons between them.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/pull-requests-and-review.md">Pull requests and review</a> <span>(git-and-github/pull-requests-and-review)</span></li>
+</ul>
+</details>
+</section>
+<section class="slide" id="s12" aria-label="Slide 12 of 12">
+<div class="frame">
+<p class="kicker">One change, start to finish</p>
+<h2>Step 10: Clean up after merge</h2>
+<ul>
+<li>After the pull request merges, switch to the default branch and pull the result</li>
+<li>Delete the finished branch locally with <code>git branch -d</code> (it refuses unmerged work)</li>
+<li><code>git fetch --prune</code> clears stale remote-tracking names</li>
+</ul>
+<pre><code>git switch main
+git pull
+git branch -d my-change
+git fetch --prune</code></pre>
+<p class="num">12 / 12</p>
+</div>
+<details class="notes">
+<summary>Presenter notes</summary>
+<p class="short">Merging on the host does not update your laptop; you pull, then retire the branch.</p>
+<details class="deep">
+<summary>Deeper notes</summary>
+<p>Prefer <code>git branch -d</code> over <code>-D</code>: the lowercase form only deletes when Git believes the work is already merged, which is a safety rail. After a squash merge, <code>-d</code> may refuse even though the change landed; verify the content is on the default branch before force-deleting. Prune keeps your local view of remote branches honest.</p>
+</details>
+<p class="graphic"><strong>Suggested graphic:</strong> The winding path from the infographic with the last stops highlighted and a small broom icon sweeping away the finished branch.</p>
+<ul class="lessons">
+<li><a href="../../../git-and-github/capabilities/post-merge-synchronization-and-cleanup.md">Post-merge synchronization and cleanup</a> <span>(git-and-github/post-merge-synchronization-and-cleanup)</span></li>
+</ul>
+</details>
+</section>
+</main>
+</body>
+</html>

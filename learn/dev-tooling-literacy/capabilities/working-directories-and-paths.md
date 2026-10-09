@@ -1,6 +1,7 @@
 ---
 title: Working directories and paths
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - working-directories-and-paths
 context7_library:

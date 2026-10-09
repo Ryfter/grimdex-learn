@@ -1,6 +1,7 @@
 ---
 title: Using PR and issue templates
 module_id: git-and-github
+level: 2
 capabilities:
   - pr-issue-templates
 context7_library: /websites/github_en

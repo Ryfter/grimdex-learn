@@ -1,12 +1,81 @@
 # Normalized claims baseline — debugging-recovery
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/ask-for-help.md
-  - capabilities/bisect-and-blame.md
-  - capabilities/read-error-messages.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: ask-for-help-001
+    page: capabilities/ask-for-help.md
+    claim: "Before pasting logs, stack traces, error output, or configuration into a teammate's DM, support channel, or AI agent's context, you should remove credentials, tokens, API keys, and other secrets."
+    source: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: ask-for-help-002
+    page: capabilities/ask-for-help.md
+    claim: "A good escalation report contains the actual error line, type, and message copied from the trace or log, the concrete steps you already tried and their outcomes, and what you expected to happen."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: ask-for-help-003
+    page: capabilities/ask-for-help.md
+    claim: "Once shared, text may be copied, forwarded, logged, or retained by a channel, teammate, or AI service long after the problem is solved, so redaction must happen before sharing rather than after."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: bisect-and-blame-001
+    page: capabilities/bisect-and-blame.md
+    claim: "git bisect performs a binary search across commit history to find the exact commit where a problem was introduced, using one marked good commit and one marked bad commit."
+    source: https://git-scm.com/docs/git-bisect
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: bisect-and-blame-002
+    page: capabilities/bisect-and-blame.md
+    claim: "git bisect run <command> automates the search loop by using the command's exit code to decide good or bad, with no manual reporting per step."
+    source: https://git-scm.com/docs/git-bisect
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: bisect-and-blame-003
+    page: capabilities/bisect-and-blame.md
+    claim: "git bisect skip marks a commit that cannot be tested, such as one that does not build, and git works around it in the search."
+    source: https://git-scm.com/docs/git-bisect
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: bisect-and-blame-004
+    page: capabilities/bisect-and-blame.md
+    claim: "Always run git bisect reset when finished so you return to your original branch; forgetting it leaves you on a detached checkout in the middle of history."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: read-error-messages-001
+    page: capabilities/read-error-messages.md
+    claim: "A stack trace (also called a traceback in some languages) is the sequence of function or method calls that were active at the moment the error occurred, like a snapshot of the call chain."
+    source: https://docs.python.org/3/tutorial/errors.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: read-error-messages-002
+    page: capabilities/read-error-messages.md
+    claim: "Python's own 'Errors and Exceptions' tutorial chapter explains tracebacks clearly and is used here as one real, well-known worked example, since stack traces and stderr are cross-language, decades-old conventions rather than Python-specific."
+    source: https://docs.python.org/3/tutorial/errors.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: read-error-messages-003
+    page: capabilities/read-error-messages.md
+    claim: "Find the error type and message first by scanning for a line like 'SomethingError: <message>', then locate the frame nearest the file or code you wrote rather than library internals."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: read-error-messages-004
+    page: capabilities/read-error-messages.md
+    claim: "When capturing or sharing a failure, capture stderr as well as stdout, because redirecting only stdout can silently lose the error, and redact credentials, tokens, and other secrets before sharing a trace."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

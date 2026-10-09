@@ -1,6 +1,7 @@
 ---
 title: Tools and agent actions
 module_id: prompt-engineering
+level: 2
 capabilities:
   - tools-and-agent-actions
 context7_library: /websites/platform_claude_en

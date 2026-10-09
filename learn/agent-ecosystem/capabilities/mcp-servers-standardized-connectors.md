@@ -1,6 +1,7 @@
 ---
 title: "MCP servers: standardized connectors"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - mcp-servers-standardized-connectors
 context7_library: /websites/platform_claude_en

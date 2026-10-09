@@ -1,6 +1,7 @@
 ---
 title: Crediting multiple commit authors
 module_id: git-and-github
+level: 2
 capabilities:
   - co-authored-commits
 context7_library: /websites/github_en

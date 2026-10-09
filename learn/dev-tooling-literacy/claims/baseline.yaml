@@ -1,34 +1,642 @@
 # Normalized claims baseline — dev-tooling-literacy
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD).
-#
-# Claim extraction for this module has not been done yet. The list is empty on purpose
-# rather than seeded with guessed claims: every entry must be a sentence the cited
-# source actually states. Pages still awaiting extraction are listed below.
-claims: []
-pending_extraction:
-  - capabilities/api-auth-and-permissions.md
-  - capabilities/apis-endpoints-rest.md
-  - capabilities/config-file-formats.md
-  - capabilities/containers-and-sandboxes.md
-  - capabilities/database-connections.md
-  - capabilities/database-migrations.md
-  - capabilities/dependencies-and-package-managers.md
-  - capabilities/dotenv-and-secrets.md
-  - capabilities/environment-variables.md
-  - capabilities/exit-codes.md
-  - capabilities/file-permissions.md
-  - capabilities/formatters-and-linters.md
-  - capabilities/http-requests-responses.md
-  - capabilities/install-build-run.md
-  - capabilities/license-files.md
-  - capabilities/localhost-and-ports.md
-  - capabilities/logs-and-severity-levels.md
-  - capabilities/manifests-vs-lockfiles.md
-  - capabilities/processes-and-servers.md
-  - capabilities/reproducing-a-bug.md
-  - capabilities/runtime-versions-lifecycle.md
-  - capabilities/semantic-versioning.md
-  - capabilities/terminal-shell-commands.md
-  - capabilities/virtual-environments.md
-  - capabilities/working-directories-and-paths.md
+##
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
+claims:
+  - id: api-auth-and-permissions-001
+    page: capabilities/api-auth-and-permissions.md
+    claim: "The OWASP REST Security Cheat Sheet covers authorization checks and minimizing exposure of services and credentials as applied security guidance for real-world API integrations."
+    source: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-auth-and-permissions-002
+    page: capabilities/api-auth-and-permissions.md
+    claim: "The OWASP REST Security Cheat Sheet is the anchor source for guidance on authentication versus authorization and least-privilege integrations, meaning an integration should receive only the access it actually needs."
+    source: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-auth-and-permissions-003
+    page: capabilities/api-auth-and-permissions.md
+    claim: "Prefer keys limited to what the integration actually does, because a read-only key cannot delete data no matter what code or an attacker sends."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: api-auth-and-permissions-004
+    page: capabilities/api-auth-and-permissions.md
+    claim: "Do not paste credentials into chat, code, screenshots, or commit messages; the correct pattern is loading credentials from environment or configuration rather than embedding them in application files."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: apis-endpoints-rest-001
+    page: capabilities/apis-endpoints-rest.md
+    claim: "REST is a design style, not a guarantee of behavior, so you should check the specific endpoint's documented method, inputs, and authentication rather than trusting a 'RESTful' label."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: apis-endpoints-rest-002
+    page: capabilities/apis-endpoints-rest.md
+    claim: "A 200 status code only means the request was handled at the HTTP level; the response body may still report an application-level failure."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: config-file-formats-001
+    page: capabilities/config-file-formats.md
+    claim: "JSON is defined by the IETF standards document RFC 8259, and tools aim to conform to this specification."
+    source: https://www.rfc-editor.org/rfc/rfc8259
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: config-file-formats-002
+    page: capabilities/config-file-formats.md
+    claim: "YAML is defined by its published 1.2.2 specification, maintained by a standards or community body."
+    source: https://yaml.org/spec/1.2.2/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: config-file-formats-003
+    page: capabilities/config-file-formats.md
+    claim: "TOML is defined by its own specification hosted at toml.io, and tools aim to conform to it."
+    source: https://toml.io/en/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: config-file-formats-004
+    page: capabilities/config-file-formats.md
+    claim: "When an agent's config edit produces a parse error, the fix is typically a formatting correction rather than a change of intent, so review the formatting first."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: containers-and-sandboxes-001
+    page: capabilities/containers-and-sandboxes.md
+    claim: "A container is a way of running software in an isolated environment where the application gets its own filesystem, its own view of the system, and its own dependencies, separate from the host machine's defaults."
+    source: https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: containers-and-sandboxes-002
+    page: capabilities/containers-and-sandboxes.md
+    claim: "Containers on a default Linux setup do not provide a hard security boundary equivalent to a full virtual machine, and configuration choices such as mounts, capabilities, and network determine real exposure."
+    source: https://docs.docker.com/engine/security/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: containers-and-sandboxes-003
+    page: capabilities/containers-and-sandboxes.md
+    claim: "A volume or mount is a folder from your real machine connected into the container, and the container can read and write it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: containers-and-sandboxes-004
+    page: capabilities/containers-and-sandboxes.md
+    claim: "Unless networking is explicitly restricted, code inside a container can typically reach the internet, so a compromised dependency installed by an agent inside a sandbox can still phone home."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-connections-001
+    page: capabilities/database-connections.md
+    claim: "The PostgreSQL documentation's section on database connection control functions defines the standard connection parameters, such as host, port, dbname, user, and password."
+    source: https://www.postgresql.org/docs/current/libpq-connect.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-connections-002
+    page: capabilities/database-connections.md
+    claim: "A URL-style PostgreSQL connection string carries the database type, the user account, an inline password, the host and port, and the name of the specific database being opened."
+    source: https://www.postgresql.org/docs/current/libpq-connect.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-connections-003
+    page: capabilities/database-connections.md
+    claim: "Credentials in a connection string are real secrets, so treat any string containing a password like a password itself."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-connections-004
+    page: capabilities/database-connections.md
+    claim: "A connection string that appeared once in plaintext, such as in logs, chat, or error messages, should be treated as exposed and rotated, not just deleted."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-migrations-001
+    page: capabilities/database-migrations.md
+    claim: "A migration tool such as Prisma Migrate records structural changes as ordered, named steps, and each migration represents a change applied to the database that the tool tracks so it is not run twice."
+    source: https://prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-migrations-002
+    page: capabilities/database-migrations.md
+    claim: "Migration tools maintain a schema or model description file describing the intended structure, generate migration files named or numbered in sequence for each recorded change, and keep an applied-migrations record often stored in the database itself."
+    source: https://prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-migrations-003
+    page: capabilities/database-migrations.md
+    claim: "Applying a migration alters the persistent structure of the targeted database, and structural changes to a shared or production database can affect real data and other users."
+    source: https://prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: database-migrations-004
+    page: capabilities/database-migrations.md
+    claim: "Before a migration is run, ask which database is being targeted (local, shared, or production) and treat the connection string in the environment as ground truth rather than the agent's description."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dependencies-and-package-managers-001
+    page: capabilities/dependencies-and-package-managers.md
+    claim: "npm keeps dependencies in a node_modules folder inside the project."
+    source: https://docs.npmjs.com/about-npm
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dependencies-and-package-managers-002
+    page: capabilities/dependencies-and-package-managers.md
+    claim: "npm is a package manager for JavaScript/Node.js projects that finds, downloads, and organizes dependencies."
+    source: https://docs.npmjs.com/about-npm
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dependencies-and-package-managers-003
+    page: capabilities/dependencies-and-package-managers.md
+    claim: "Python installs packages into the active Python environment."
+    source: https://packaging.python.org/en/latest/tutorials/installing-packages/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dependencies-and-package-managers-004
+    page: capabilities/dependencies-and-package-managers.md
+    claim: "A quick sanity check of a package name against its registry page is reasonable due diligence, since mistyped or ambiguous names are a real failure mode."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dotenv-and-secrets-001
+    page: capabilities/dotenv-and-secrets.md
+    claim: "A .env file is unencrypted plain text on disk; putting a secret in it keeps the secret out of source code but does not make it safe to publish, share, or commit carelessly."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dotenv-and-secrets-002
+    page: capabilities/dotenv-and-secrets.md
+    claim: "Projects conventionally exclude .env files from version control via a .gitignore entry, and may commit a .env.example template with placeholder values instead."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dotenv-and-secrets-003
+    page: capabilities/dotenv-and-secrets.md
+    claim: "When an app is deployed, .env values must be provided another way, typically through the hosting service's configuration settings, because a secret that worked locally will not automatically follow the app to a server."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: dotenv-and-secrets-004
+    page: capabilities/dotenv-and-secrets.md
+    claim: "The OWASP Secrets Management Cheat Sheet treats hard-coded credentials and secrets in shared files as a recognized class of security failure and outlines dedicated secrets-management systems for organizations."
+    source: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: environment-variables-001
+    page: capabilities/environment-variables.md
+    claim: "The GNU Bash manual documents the distinction between shell variables and the exported environment passed to the programs a shell starts."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: environment-variables-002
+    page: capabilities/environment-variables.md
+    claim: "In Bash, the common form for setting a variable in the shell so it applies to programs started from that session is export NAME=value."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: environment-variables-003
+    page: capabilities/environment-variables.md
+    claim: "A program copies the values it inherits when it starts, so changing a variable afterward does not affect an already-running program until it is restarted."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: environment-variables-004
+    page: capabilities/environment-variables.md
+    claim: "A variable set in one terminal does not exist in a separately opened terminal, which is why a project can work in one terminal but not another even though no source file changed."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: exit-codes-001
+    page: capabilities/exit-codes.md
+    claim: "In the Bash shell, the exit status of the most recent command is available to check, as documented in the Bash manual's \"Exit Status\" section."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: exit-codes-002
+    page: capabilities/exit-codes.md
+    claim: "The Bash manual's \"Exit Status\" section is the authoritative reference for how the shell records and exposes exit statuses, including special statuses the shell itself assigns."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: exit-codes-003
+    page: capabilities/exit-codes.md
+    claim: "Do not treat a returned prompt or visible output as proof of success; the exit code is the tool's own machine-readable statement of its outcome."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: exit-codes-004
+    page: capabilities/exit-codes.md
+    claim: "Do not over-interpret a non-zero exit code by itself; it says something went wrong, and the accompanying error text usually says what."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: file-permissions-001
+    page: capabilities/file-permissions.md
+    claim: "In a permission string like -rw-r--r--, the first group gives the owner read and write but not execute, the second group gives group members read only, and the third gives everyone else read only."
+    source: https://www.gnu.org/software/coreutils/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: file-permissions-002
+    page: capabilities/file-permissions.md
+    claim: "A leading d instead of - in a permission string means the entry is a directory, and an x in a group means execute is allowed for that class of user."
+    source: https://www.gnu.org/software/coreutils/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: file-permissions-003
+    page: capabilities/file-permissions.md
+    claim: "When a process tries to open, change, or run a file, the operating system checks permissions first and refuses the action with an error if they don't allow it, regardless of what the software wanted."
+    source: https://www.gnu.org/software/coreutils/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: file-permissions-004
+    page: capabilities/file-permissions.md
+    claim: "Approve an agent's request for elevated privileges only when you understand why it's needed, not just to make an error disappear, since elevation bypasses the protection that reported the problem."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: formatters-and-linters-001
+    page: capabilities/formatters-and-linters.md
+    claim: "A formatter automatically changes the layout of code such as spacing, indentation, line breaks, and quoting style, while the code's meaning is supposed to stay exactly the same."
+    source: https://prettier.io/docs/comparison
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: formatters-and-linters-002
+    page: capabilities/formatters-and-linters.md
+    claim: "A linter statically checks code, reading it and flagging patterns that may indicate mistakes, questionable style, or risks, without running the program."
+    source: https://eslint.org/docs/latest/use/core-concepts/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: formatters-and-linters-003
+    page: capabilities/formatters-and-linters.md
+    claim: "Neither a formatter passing nor a linter coming back clean establishes that the application behaves correctly; these are signals about consistency and common pitfalls, not proof that a feature works."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: formatters-and-linters-004
+    page: capabilities/formatters-and-linters.md
+    claim: "Large diffs showing only tiny whitespace or layout differences are expected formatter behavior, so don't panic at the diff size, but ask the agent to confirm which changes are cosmetic."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: http-requests-responses-001
+    page: capabilities/http-requests-responses.md
+    claim: "An HTTP request begins with a method stating intent, such as GET to retrieve something, POST to send new data, PUT or PATCH to update existing data, and DELETE to remove something."
+    source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: http-requests-responses-002
+    page: capabilities/http-requests-responses.md
+    claim: "A 200 status does not always mean the operation fully succeeded, because some services report application-level errors inside a 200 response body, so reading the body is the reliable habit."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: http-requests-responses-003
+    page: capabilities/http-requests-responses.md
+    claim: "When reporting a problem to an agent, including both the status code and the response body is more useful than saying only that it did not work."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-build-run-001
+    page: capabilities/install-build-run.md
+    claim: "In many JavaScript/Node.js projects, the install, build, and run steps appear as named scripts in a package.json file, such as common script names like install, build, and start."
+    source: https://docs.npmjs.com/cli/v11/using-npm/scripts
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-build-run-002
+    page: capabilities/install-build-run.md
+    claim: "In npm-based projects, these steps correspond to lifecycle scripts (npm install, npm run build, npm start)."
+    source: https://docs.npmjs.com/cli/v11/using-npm/scripts
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-build-run-003
+    page: capabilities/install-build-run.md
+    claim: "A successful build means artifacts were generated, but it is not proof that the application is running; a build can finish cleanly while the app was never started or was started and then stopped."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-build-run-004
+    page: capabilities/install-build-run.md
+    claim: "When an agent reports that the app is running, confirm it by actually reaching the address it reports, such as a localhost URL on a specific port, before treating the claim as true."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: install-build-run-005
+    page: capabilities/install-build-run.md
+    claim: "Each of the install, build, and run steps can succeed or fail independently, and if a step fails, the steps after it likely never ran."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: license-files-001
+    page: capabilities/license-files.md
+    claim: "The SPDX License List is a catalog of common license identifiers such as MIT, Apache-2.0, and GPL-3.0-only, and these short identifiers appear frequently in package metadata and license files."
+    source: https://spdx.org/licenses/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: license-files-002
+    page: capabilities/license-files.md
+    claim: "The Open Source Initiative maintains the list of licenses that meet the open source definition, and some source-available licenses do not appear there."
+    source: https://opensource.org/licenses
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: license-files-003
+    page: capabilities/license-files.md
+    claim: "Installing a package typically copies the license into the package's folder inside the dependency tree, and nothing on your machine enforces the license — compliance is the user's and organization's responsibility."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: license-files-004
+    page: capabilities/license-files.md
+    claim: "License obligations do not disappear because the code passed through an AI agent, a build pipeline, or a deployment step; the person approving the change remains responsible."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: localhost-and-ports-001
+    page: capabilities/localhost-and-ports.md
+    claim: "A URL consists of a scheme such as http:// or https://, a host such as localhost or a domain, an optional port, and a path."
+    source: https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: localhost-and-ports-002
+    page: capabilities/localhost-and-ports.md
+    claim: "Container port publishing explicitly decides which host ports map to which container ports, and how broadly they are bound."
+    source: https://docs.docker.com/get-started/docker-concepts/running-containers/publishing-ports/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: localhost-and-ports-003
+    page: capabilities/localhost-and-ports.md
+    claim: "A locally-available service is the safer default while developing; pause and ask who should be able to reach a service before approving exposure beyond localhost."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: localhost-and-ports-004
+    page: capabilities/localhost-and-ports.md
+    claim: "If the browser shows nothing at the printed address, check that you typed the exact host and port, since a wrong port is the most common reason a running app \"isn't there\"."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: logs-and-severity-levels-001
+    page: capabilities/logs-and-severity-levels.md
+    claim: "Severity levels are a standard concept with a defined data model in the OpenTelemetry Logs specification."
+    source: https://opentelemetry.io/docs/specs/otel/logs/data-model/#severity-fields
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: logs-and-severity-levels-002
+    page: capabilities/logs-and-severity-levels.md
+    claim: "OpenTelemetry defines a formal severity model with both a numeric scale and display names (TRACE, DEBUG, INFO, WARN, ERROR, FATAL and variants)."
+    source: https://opentelemetry.io/docs/specs/otel/logs/data-model/#severity-fields
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: logs-and-severity-levels-003
+    page: capabilities/logs-and-severity-levels.md
+    claim: "A typical log line contains, left to right, a timestamp, the severity level, an optional component or module name, and a human-readable message."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: logs-and-severity-levels-004
+    page: capabilities/logs-and-severity-levels.md
+    claim: "Judge log output by severity level and the final lines rather than by volume, since a long INFO stream is not a problem report."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manifests-vs-lockfiles-001
+    page: capabilities/manifests-vs-lockfiles.md
+    claim: "In npm projects, package.json is the manifest that records declared requirements, typically including a dependencies section listing package names with version ranges."
+    source: https://docs.npmjs.com/cli/v11/configuring-npm/package-json
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manifests-vs-lockfiles-002
+    page: capabilities/manifests-vs-lockfiles.md
+    claim: "A version range marker like ^4.2.1 in package.json expresses compatibility with 4.2.1 rather than exactly 4.2.1."
+    source: https://docs.npmjs.com/cli/v11/configuring-npm/package-json
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manifests-vs-lockfiles-003
+    page: capabilities/manifests-vs-lockfiles.md
+    claim: "package-lock.json pins exact resolved versions for the whole dependency tree and is generated and maintained by the package manager rather than edited manually."
+    source: https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: manifests-vs-lockfiles-004
+    page: capabilities/manifests-vs-lockfiles.md
+    claim: "When reviewing an agent's dependency work, check that both the manifest and the lockfile changed together, and ask the agent to explain the manifest change in plain language."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: processes-and-servers-001
+    page: capabilities/processes-and-servers.md
+    claim: "A dev server running in the foreground occupies the terminal, so the shell cannot accept other commands until the program ends or is stopped."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: processes-and-servers-002
+    page: capabilities/processes-and-servers.md
+    claim: "A process moved to the background keeps running without holding the terminal visible, freeing the terminal while the program continues."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: processes-and-servers-003
+    page: capabilities/processes-and-servers.md
+    claim: "The shell's job control is the facility for managing running programs, including starting them, moving them between foreground and background, and stopping them."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: processes-and-servers-004
+    page: capabilities/processes-and-servers.md
+    claim: "Before approving an agent's request to stop a process, recognize that stopping ends the running program; for a dev server it is routine but is an action with an effect, not a no-op."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reproducing-a-bug-001
+    page: capabilities/reproducing-a-bug.md
+    claim: "Chromium's public bug-reporting guidelines ask reporters to include concrete, repeatable steps rather than a general impression."
+    source: https://www.chromium.org/for-testers/bug-reporting-guidelines/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reproducing-a-bug-002
+    page: capabilities/reproducing-a-bug.md
+    claim: "A bug reproduction recipe has three parts: starting conditions, exact inputs and actions in order, and expected versus observed behavior."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reproducing-a-bug-003
+    page: capabilities/reproducing-a-bug.md
+    claim: "Recording how often a symptom occurred, such as 2 out of 5 tries, is valuable because it tells the agent whether the bug is intermittent."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: reproducing-a-bug-004
+    page: capabilities/reproducing-a-bug.md
+    claim: "You should omit passwords, tokens, or .env contents from a bug recipe and refer to configuration generically instead."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runtime-versions-lifecycle-001
+    page: capabilities/runtime-versions-lifecycle.md
+    claim: "npm's engines field in package.json records the runtime version a package is built for."
+    source: https://docs.npmjs.com/cli/v11/configuring-npm/package-json#engines
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runtime-versions-lifecycle-002
+    page: capabilities/runtime-versions-lifecycle.md
+    claim: "Node.js documents its release schedule and support phases publicly, naming active, maintenance, and end-of-life phases."
+    source: https://nodejs.org/en/about/previous-releases
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runtime-versions-lifecycle-003
+    page: capabilities/runtime-versions-lifecycle.md
+    claim: "A runtime version past its support window stops receiving fixes, which is worth questioning before committing to it."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: runtime-versions-lifecycle-004
+    page: capabilities/runtime-versions-lifecycle.md
+    claim: "Installing or updating project dependencies does not change the installed runtime, since the runtime and dependencies are two different layers."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: semantic-versioning-001
+    page: capabilities/semantic-versioning.md
+    claim: "Semantic versioning numbers releases as major.minor.patch, where major indicates changes that may break compatibility, minor indicates backward-compatible new functionality, and patch indicates fixes that should not change behavior."
+    source: https://semver.org/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: semantic-versioning-002
+    page: capabilities/semantic-versioning.md
+    claim: "The conventional format is three numbers separated by dots, and pre-release labels such as a hyphenated suffix like -beta may appear after the main three numbers to indicate versions not yet considered final."
+    source: https://semver.org/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: semantic-versioning-003
+    page: capabilities/semantic-versioning.md
+    claim: "There is no central authority enforcing the versioning convention; the maintainers of each dependency decide what their version numbers mean, so version numbers should be read as a strong signal rather than a guarantee."
+    source: https://semver.org/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: semantic-versioning-004
+    page: capabilities/semantic-versioning.md
+    claim: "When an AI coding agent proposes a dependency upgrade, the part of the version number that changed tells you how much scrutiny the change may deserve, and a major-version jump deserves extra attention with questions about what breaking changes it introduces."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: terminal-shell-commands-001
+    page: capabilities/terminal-shell-commands.md
+    claim: "The shell is the program that interprets what you type, figures out what it means, and arranges for the command to run."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: terminal-shell-commands-002
+    page: capabilities/terminal-shell-commands.md
+    claim: "The shell may expand things like file-name patterns before the program runs, so the program can receive text different from what was typed."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: terminal-shell-commands-003
+    page: capabilities/terminal-shell-commands.md
+    claim: "If the shell does not recognize a command name, you will typically see a 'command not found' message, which is a shell-level report rather than a program error."
+    source: https://www.gnu.org/software/bash/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: terminal-shell-commands-004
+    page: capabilities/terminal-shell-commands.md
+    claim: "Recognizing the parts of a command — program name, options, and arguments — is enough to review what an agent proposes, and no shell scripting is required at this level."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: virtual-environments-001
+    page: capabilities/virtual-environments.md
+    claim: "A virtual environment is a project-specific, isolated space for dependencies, keeping a project's packages in their own separate area instead of installing them globally onto the whole machine."
+    source: https://docs.python.org/3/library/venv.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: virtual-environments-002
+    page: capabilities/virtual-environments.md
+    claim: "Two projects can use different versions of the same package without conflicting with each other when each uses its own virtual environment."
+    source: https://docs.python.org/3/library/venv.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: virtual-environments-003
+    page: capabilities/virtual-environments.md
+    claim: "An environment must be active for installs to land inside it; installing without activating may place packages where the project does not look, causing an install to succeed while the project still cannot find the package."
+    source: https://docs.python.org/3/library/venv.html
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: virtual-environments-004
+    page: capabilities/virtual-environments.md
+    claim: "Environment activation is per-terminal and per-session, so opening a new terminal may mean the environment is no longer active, which is a frequent source of confusion."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: working-directories-and-paths-001
+    page: capabilities/working-directories-and-paths.md
+    claim: "The current working directory is the specific folder where every command a coding agent runs happens, and relative paths are resolved starting from that directory."
+    source: https://www.gnu.org/software/coreutils/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: working-directories-and-paths-002
+    page: capabilities/working-directories-and-paths.md
+    claim: "An absolute path is the full address from the root of the file system and points to one place no matter where the command is running."
+    source: https://www.gnu.org/software/coreutils/manual/
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: working-directories-and-paths-003
+    page: capabilities/working-directories-and-paths.md
+    claim: "When an agent cannot find a file or writes to an unexpected folder, the first question to ask is what directory it was working from, since 'file not found' usually means not found from there."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: working-directories-and-paths-004
+    page: capabilities/working-directories-and-paths.md
+    claim: "Watch for a directory change or ask the agent to confirm its working directory, because an agent may open a new session or reset to a default directory mid-task, silently changing how relative paths resolve."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

@@ -1,6 +1,7 @@
 ---
 title: Hooks as gates -- allowing and blocking agent actions
 module_id: agentic-automation
+level: 5
 capabilities:
   - hooks-as-gates
 context7_library: /websites/platform_claude_en

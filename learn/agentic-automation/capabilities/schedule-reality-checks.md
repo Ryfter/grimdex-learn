@@ -1,6 +1,7 @@
 ---
 title: Scheduled does not mean exactly on time
 module_id: agentic-automation
+level: 5
 capabilities:
   - schedule-reality-checks
 context7_library: /websites/github_en_actions

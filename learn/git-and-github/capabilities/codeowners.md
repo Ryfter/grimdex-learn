@@ -1,6 +1,7 @@
 ---
 title: CODEOWNERS and review routing
 module_id: git-and-github
+level: 3
 capabilities:
   - codeowners
 context7_library: /websites/github_en

@@ -1,6 +1,7 @@
 ---
 title: Merge commit, squash, and rebase
 module_id: git-and-github
+level: 3
 capabilities:
   - merge-commit-squash-and-rebase
 context7_library: /websites/git-scm

@@ -3,6 +3,8 @@ BeforeAll {
     . (Join-Path $PSScriptRoot '..' 'scripts' 'verify-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'stanza-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'lifecycle-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'learn-index-lib.ps1')
+    . (Join-Path $PSScriptRoot '..' 'scripts' 'surfacing-lib.ps1')
     . (Join-Path $PSScriptRoot '..' 'scripts' 'install-lib.ps1')
 
     $script:RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -192,7 +194,7 @@ Describe 'get-learn.ps1 is a bootstrapper, not a second installer' {
         $p | Should -Exist
         $text = [string](Get-Content -LiteralPath $p -Raw)
         $text | Should -Match 'https://github.com/Ryfter/grimdex-learn'
-        $text | Should -Match 'v0\.2\.0-fall2026-draft'
+        $text | Should -Match 'v0\.3\.0-fall2026-draft'
         $text | Should -Match 'Test-PathBTagReady'
         $text | Should -Match 'archive/refs/tags'
         $text | Should -Match 'Invoke-WebRequest'
@@ -209,7 +211,7 @@ Describe 'QUICKSTART Path B' {
     It 'documents the one-liner, the review command, and the trust hop' {
         $p = Join-Path $script:RepoRoot 'QUICKSTART.md'
         $text = [string](Get-Content -LiteralPath $p -Raw)
-        $text | Should -Match 'irm https://github.com/Ryfter/grimdex-learn/raw/v0\.2\.0-fall2026-draft/get-learn.ps1'
+        $text | Should -Match 'irm https://github.com/Ryfter/grimdex-learn/raw/v0\.3\.0-fall2026-draft/get-learn.ps1'
         $text | Should -Not -Match 'filled in when the first release is cut'
         $text | Should -Match 'relocates the clone'
         $text | Should -Match 'trust hop'

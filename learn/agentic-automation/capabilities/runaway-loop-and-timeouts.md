@@ -1,6 +1,7 @@
 ---
 title: Runaway-loop risk and timeouts
 module_id: agentic-automation
+level: 5
 capabilities:
   - runaway-loop-and-timeouts
 context7_library: /websites/github_en_actions

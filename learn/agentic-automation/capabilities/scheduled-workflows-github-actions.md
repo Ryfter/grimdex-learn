@@ -1,6 +1,7 @@
 ---
 title: Scheduled GitHub Actions (on.schedule)
 module_id: agentic-automation
+level: 5
 capabilities:
   - scheduled-workflows-github-actions
 context7_library: /websites/github_en_actions

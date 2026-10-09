@@ -1,6 +1,7 @@
 ---
 title: "One map: CLIs, MCP, Skills, and plugins"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - agent-ecosystem-map
 context7_library: /websites/platform_claude_en

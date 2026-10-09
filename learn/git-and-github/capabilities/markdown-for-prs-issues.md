@@ -1,6 +1,7 @@
 ---
 title: Markdown formatting for PRs and issues
 module_id: git-and-github
+level: 2
 capabilities:
   - markdown-for-prs-issues
 context7_library: /websites/github_en

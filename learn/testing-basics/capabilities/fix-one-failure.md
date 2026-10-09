@@ -1,6 +1,7 @@
 ---
 title: Fixing one failing test at a time
 module_id: testing-basics
+level: 3
 capabilities:
   - fix-one-failure
 context7_library:

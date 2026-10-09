@@ -1,6 +1,7 @@
 ---
 title: "MCP vs. shelling out: when each wins"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - mcp-vs-cli-tradeoffs
 context7_library: /websites/platform_claude_en

@@ -1,6 +1,7 @@
 ---
 title: "Virtual environments: keeping dependencies separate"
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - virtual-environments
 context7_library:

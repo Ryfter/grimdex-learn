@@ -1,6 +1,7 @@
 ---
 title: Background and autonomous agents in CI (issue-to-PR patterns)
 module_id: agentic-ai-development
+level: 7
 capabilities:
   - background-agents-and-ci
 context7_library: /websites/platform_claude_en

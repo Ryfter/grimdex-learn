@@ -1,6 +1,7 @@
 ---
 title: Cost and observability of unattended runs
 module_id: agentic-automation
+level: 5
 capabilities:
   - cost-and-observability
 context7_library: /websites/github_en_actions

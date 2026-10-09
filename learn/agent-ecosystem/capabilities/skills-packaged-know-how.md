@@ -1,6 +1,7 @@
 ---
 title: "Skills: packaged know-how the agent loads on demand"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - skills-packaged-know-how
 context7_library: /websites/platform_claude_en

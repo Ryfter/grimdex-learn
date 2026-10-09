@@ -1,6 +1,7 @@
 ---
 title: Shelving work in progress with git stash
 module_id: git-and-github
+level: 2
 capabilities:
   - git-stash
 context7_library: /websites/git-scm

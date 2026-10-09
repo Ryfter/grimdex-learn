@@ -1,6 +1,7 @@
 ---
 title: Git hooks 101 (client-side)
 module_id: agentic-automation
+level: 5
 capabilities:
   - git-hooks-101
 context7_library: /websites/git-scm

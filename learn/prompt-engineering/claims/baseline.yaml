@@ -1,7 +1,12 @@
 # Normalized claims baseline — prompt-engineering
 # One entry per claim: id, page, claim (complete sentence), source (direct official URL),
 # last_verified (YYYY-MM-DD). The future refresh pipeline compares fresh extractions
-# against this file; until then it is maintained manually alongside the pages.
+# against this file; until then it is maintained manually alongside the pages.#
+# Entries marked `verification: page-restatement` (added 2026-09-26) were extracted by a
+# non-Claude model from the already fact-checked page and mechanically checked: the
+# source must be one the page cites, and the claim's wording must be grounded in the
+# page text. The claim-to-source pairing was NOT individually confirmed against the
+# vendor page; a refresh pass should upgrade each entry to `verification: source`.
 claims:
   - id: context-and-working-memory-001
     page: capabilities/context-and-working-memory.md
@@ -60,3 +65,105 @@ claims:
     kind: craft-guidance
     source: none - craft guidance, not vendor-documented
     last_verified: 2026-08-02
+  - id: defining-goals-and-success-criteria-001
+    page: capabilities/defining-goals-and-success-criteria.md
+    claim: "The Claude platform's prompt-engineering overview says that before beginning you should have clearly defined success criteria, a way to empirically test against them, and an initial draft to refine."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: defining-goals-and-success-criteria-002
+    page: capabilities/defining-goals-and-success-criteria.md
+    claim: "The platform's testing docs list common success-criteria dimensions including task fidelity, consistency, relevance, coherence, tone, privacy preservation, context utilization, latency, and cost."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: defining-goals-and-success-criteria-003
+    page: capabilities/defining-goals-and-success-criteria.md
+    claim: "The platform's evaluation docs grade on a speed/cost tradeoff across three tiers: code-based grading, human grading, and LLM-based grading."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: defining-goals-and-success-criteria-004
+    page: capabilities/defining-goals-and-success-criteria.md
+    claim: "Write your success criteria before the first prompt, in three parts: a one-sentence goal, 2-5 checkable \"done\" statements, and a check method per criterion."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: defining-goals-and-success-criteria-005
+    page: capabilities/defining-goals-and-success-criteria.md
+    claim: "For each criterion, pick the cheapest grading tier that is reliable; for everyday coding tasks, code-based grading is usually the default."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: iterating-on-a-prompt-001
+    page: capabilities/iterating-on-a-prompt.md
+    claim: "The platform's prompt-engineering overview advises ensuring you have clearly defined success criteria, a method to empirically test against those criteria, and an initial draft prompt to refine before prompt engineering."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: iterating-on-a-prompt-002
+    page: capabilities/iterating-on-a-prompt.md
+    claim: "The platform's testing docs group success criteria into dimensions like task fidelity, consistency, relevance, coherence, tone, privacy preservation, context utilization, latency, and cost."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: iterating-on-a-prompt-003
+    page: capabilities/iterating-on-a-prompt.md
+    claim: "The platform's evaluation docs describe a grading-method tradeoff: code-based grading is fastest and cheapest, LLM-based grading is a scalable middle ground, and human grading is highest-quality but slow and expensive."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: iterating-on-a-prompt-004
+    page: capabilities/iterating-on-a-prompt.md
+    claim: "Change exactly one thing in the prompt per iteration so each improvement or regression is attributable to a specific edit."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-001
+    page: capabilities/vibe-coding-practices.md
+    claim: "The platform's prompt-engineering docs recommend defining clear success criteria and an initial draft prompt before you begin refining."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-002
+    page: capabilities/vibe-coding-practices.md
+    claim: "The recommended engineering loop is define success criteria, draft, empirically test, then refine."
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-003
+    page: capabilities/vibe-coding-practices.md
+    claim: "The platform's testing docs list common success-criteria dimensions including task fidelity, consistency, relevance, and coherence."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-004
+    page: capabilities/vibe-coding-practices.md
+    claim: "The testing docs describe a cost/speed spectrum of grading methods: code-based checks are fastest, human review is highest quality but slowest, and LLM-based grading is a scalable middle ground that needs its own rubric and testing."
+    source: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-005
+    page: capabilities/vibe-coding-practices.md
+    claim: "Start each agentic coding session from a clean branch or snapshot so a bad session can be discarded entirely rather than untangled."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-006
+    page: capabilities/vibe-coding-practices.md
+    claim: "Scope each task small before the agent starts, including the desired outcome, an explicit boundary, and a reason for the boundary."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement
+  - id: vibe-coding-practices-007
+    page: capabilities/vibe-coding-practices.md
+    claim: "Interrupt a drifted session early and redirect by naming the specific deviation and instructing the agent to revert or refocus, rather than letting it run to completion."
+    kind: craft-guidance
+    source: none - craft guidance, not vendor-documented
+    last_verified: 2026-09-20
+    verification: page-restatement

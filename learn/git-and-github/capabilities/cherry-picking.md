@@ -1,6 +1,7 @@
 ---
 title: Cherry-picking a single commit
 module_id: git-and-github
+level: 3
 capabilities:
   - cherry-picking
 context7_library: /websites/git-scm

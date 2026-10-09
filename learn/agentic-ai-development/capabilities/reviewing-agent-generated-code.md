@@ -1,6 +1,7 @@
 ---
 title: Reviewing agent-generated code and staying accountable
 module_id: agentic-ai-development
+level: 6
 capabilities:
   - reviewing-agent-generated-code
 context7_library: /websites/platform_claude_en

@@ -1,6 +1,7 @@
 ---
 title: In-browser edits and commits on GitHub.com
 module_id: git-and-github
+level: 2
 capabilities:
   - in-browser-commits
 context7_library: /websites/github_en

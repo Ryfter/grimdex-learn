@@ -1,6 +1,7 @@
 ---
 title: "Scopes: read before you click Allow"
 module_id: agent-ecosystem
+level: 4
 capabilities:
   - oauth-scopes-read-before-allow
 context7_library: /websites/platform_claude_en

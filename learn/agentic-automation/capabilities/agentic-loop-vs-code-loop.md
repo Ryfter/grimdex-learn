@@ -1,6 +1,7 @@
 ---
 title: An agentic "loop" is not a for/while loop
 module_id: agentic-automation
+level: 5
 capabilities:
   - agentic-loop-vs-code-loop
 context7_library: /websites/platform_claude_en

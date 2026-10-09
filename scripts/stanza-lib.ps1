@@ -59,7 +59,12 @@ function Remove-PointerStanza {
 
 function Get-LearnStanzaContent {
     [CmdletBinding()]
-    param([Parameter(Mandatory)]$Manifest)
+    param(
+        [Parameter(Mandatory)]$Manifest,
+        # A Get-SurfacingSummary result (surfacing-lib.ps1). Optional: without it
+        # the stanza carries the citation instruction but no level lines.
+        $Surfacing = $null
+    )
 
     $pagesPath = $null
     if ($Manifest -is [System.Collections.IDictionary]) {
@@ -94,6 +99,34 @@ function Get-LearnStanzaContent {
         $lines += '- Modules installed:'
         foreach ($mod in @($modules)) {
             $lines += "  - $($mod.title): $($mod.pagesPath)"
+        }
+    }
+    # Lesson surfacing (2026-09-26 design): the agent picks a lesson from the
+    # index and cites it with a marker line that learn-surfacing.ps1 counts post
+    # hoc. The marker text must stay in sync with surfacing-lib.ps1's pattern.
+    $lines += '- Lesson index: learn/index.json lists every lesson with its module, id, title, and level.'
+    $lines += '- When you explain something a Learn lesson covers, read that lesson first, explain it at'
+    $lines += '  essentials depth, then cite it: write the marker as plain text, one line per lesson, with'
+    $lines += '  nothing else on that line and no formatting (no bullet, no bold or italic, no backticks,'
+    $lines += '  no link). The exact text of that line is:'
+    $lines += '  Learn: <module-id>/<lesson-id>'
+    $lines += '  Citing more than one lesson: write each as its own plain line in that exact form.'
+    # Report first, lesson second (Kevin, 2026-10-05/06): teaching never
+    # interrupts the work. The Lesson section is where the citation markers go,
+    # so learn-surfacing.ps1 still counts them.
+    $lines += '- Teach after the work, not while working. When you finish a piece of work,'
+    $lines += '  report the work plainly first: what you did and the result, with no teaching mixed in.'
+    $lines += '  Then add a separate section headed Lesson: for the few key terms or concepts the work involved,'
+    $lines += '  give a one-line definition and how it showed up in this work, at essentials depth, and'
+    $lines += '  put the Learn: citation lines at the end of that section.'
+    $lines += '  When the explanation is itself the answer to a question, just answer it, still ending with the Learn: citation lines.'
+    $lines += '  Omit the Lesson section when no Learn lesson applies.'
+    if ($null -ne $Surfacing) {
+        $lines += "- Learner level: $($Surfacing.level) of $($Surfacing.maxLevel) ($($Surfacing.levelName))."
+        $weights = (@($Surfacing.weights) | ForEach-Object { "level $($_.level) $($_.percent)%" }) -join ', '
+        $lines += "- Lesson weighting when several lessons fit: $weights. Never surface lessons above level $($Surfacing.level)."
+        if (@($Surfacing.suppressed).Count -gt 0) {
+            $lines += "- Suppressed lessons (never surface these): $(@($Surfacing.suppressed) -join ', ')"
         }
     }
     # An unpinned pack claims no base version rather than printing a placeholder

@@ -1,6 +1,7 @@
 ---
 title: Creating and cloning repositories
 module_id: git-and-github
+level: 1
 capabilities:
   - creating-and-cloning-repositories
 context7_library: /websites/git-scm

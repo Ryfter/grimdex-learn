@@ -1,6 +1,7 @@
 ---
 title: Responding to secret-scanning and push-protection alerts
 module_id: git-and-github
+level: 3
 capabilities:
   - secret-scanning-push-protection
 context7_library: /websites/github_en

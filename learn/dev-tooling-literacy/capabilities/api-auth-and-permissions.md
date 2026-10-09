@@ -1,6 +1,7 @@
 ---
 title: API credentials, authentication, and permissions
 module_id: dev-tooling-literacy
+level: 3
 capabilities:
   - api-auth-and-permissions
 context7_library:

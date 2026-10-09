@@ -1,6 +1,7 @@
 ---
 title: Give every loop an exit condition
 module_id: agentic-automation
+level: 5
 capabilities:
   - give-every-loop-an-exit
 context7_library: /websites/platform_claude_en

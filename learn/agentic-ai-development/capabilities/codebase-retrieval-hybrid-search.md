@@ -1,6 +1,7 @@
 ---
 title: Codebase retrieval -- hybrid search vs. naive RAG
 module_id: agentic-ai-development
+level: 7
 capabilities:
   - codebase-retrieval-hybrid-search
 context7_library: /websites/platform_claude_en
