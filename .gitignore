@@ -1,0 +1,62 @@
+# Weekly repo-hygiene: keep local scratch and secrets out of git.
+# This repo is Markdown curriculum + PowerShell (Pester) scripts; patterns
+# below match that stack and common contributor environments.
+
+# --- Operating system ---
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editors and IDEs ---
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# --- Environment and secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Node.js (optional local tooling; not part of the shipped pack) ---
+node_modules/
+dist/
+.npm/
+*.tsbuildinfo
+
+# --- Python (optional local tooling; taught in curriculum) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- PowerShell / Pester ---
+ModuleAnalysisCache
+TestResults/
+coverage/
+*.trx
+
+# --- General build and cache ---
+*.log
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
